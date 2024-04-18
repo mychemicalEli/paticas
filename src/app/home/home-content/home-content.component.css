@@ -1,0 +1,161 @@
+/*Cards*/
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 50px;
+}
+
+.zoom-effect {
+    position: relative;
+    margin: 30px;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.zoom-effect:hover {
+    transform: scale(1.1);
+}
+
+.img-fluid {
+    width: 370px;
+    height: 370px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.text-center {
+    color: white;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 18px;
+}
+
+/* Media queries para ajustar el tamaño en pantallas más pequeñas */
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 20px;
+    }
+
+    .card-text {
+        font-size: 16px;
+    }
+
+    .zoom-effect,
+    .card-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+        flex-direction: row;
+        margin-left: 0px;
+    }
+
+    .content {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 14px;
+    }
+
+    .card-text {
+        font-size: 0px;
+    }
+
+    .zoom-effect,
+    .card-img {
+        width: 130px;
+        height: 130px;
+        border-radius: 20px;
+        flex-direction: row;
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+
+    .content {
+        padding: 5px;
+    }
+}
+
+
+/*About*/
+.container {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background-color: #E8C07D;
+    border-radius: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.featurette-heading {
+    font-size: 3em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+}
+
+.lead {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: justify;
+}
+
+.img-fluid-4 {
+    width: 400px;
+    height: auto;
+    margin-left: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        margin-top: 10px;
+        margin-bottom: 60px;
+        border-radius: 50px;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .featurette-heading {
+        font-size: 2em;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .lead {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+
+    .img-fluid-4 {
+        max-width: 0%;
+    }
+}
