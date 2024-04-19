@@ -6,10 +6,12 @@ import { SheltersComponent } from './shelters.component';
 import { ShelterListComponent } from './shelter-list/shelter-list.component';
 
 
+
 @NgModule({
   declarations: [
     SheltersComponent,
-    ShelterListComponent
+    ShelterListComponent,
+   
   ],
   imports: [
     CommonModule,

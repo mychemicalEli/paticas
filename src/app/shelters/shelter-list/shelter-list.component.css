@@ -42,3 +42,19 @@ img {
 .bi-heart-fill {
     cursor: pointer;
 }
+
+.form-control, .form-select {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 56px;
+    padding: 16px 12px;
+    width: 200px;
+    color: #757575;
+}
+
+.filters{
+    display: flex;
+    align-items:  center;
+    gap: 20px;
+}
+

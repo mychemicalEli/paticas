@@ -12,6 +12,7 @@ export class ShelterListComponent {
 
   response?: GetShelterListResponse;
   request: GetShelterListRequest = { page: 0, pageSize: 9 }
+  locations: string[] = []; 
 
   constructor(private shelterService: ShelterService) {}
 
@@ -24,13 +25,12 @@ export class ShelterListComponent {
       .subscribe({
         next: (response: GetShelterListResponse) => {
           this.response = response;
+          this.locations = response.shelters.map(shelter => shelter.location);
         }
       });
   }
 
-  toggleLiked(shelter: any): void {
-    shelter.liked = (shelter.liked === 'true') ? 'false' : 'true'; // Cambiar el estado de liked al contrario del estado actual
-  }
-  
-  
+  toggleLike(shelter: any) {
+    shelter.liked = !shelter.liked;
+  }  
 }

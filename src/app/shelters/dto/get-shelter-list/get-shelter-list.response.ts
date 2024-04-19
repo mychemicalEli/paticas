@@ -10,5 +10,5 @@ export interface GetShelterListItemResponse{
     image: string;
     name: string;
     location: string;
-    liked: string;
+    liked: boolean;
 }
