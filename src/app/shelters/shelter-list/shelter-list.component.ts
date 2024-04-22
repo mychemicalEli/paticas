@@ -3,6 +3,7 @@ import { GetShelterListResponse } from '../dto/get-shelter-list/get-shelter-list
 import { GetShelterListRequest } from '../dto/get-shelter-list/get-shelter-list.request';
 import { ShelterService } from '../shelters-service/shelter.service';
 
+
 @Component({
   selector: 'app-shelter-list',
   templateUrl: './shelter-list.component.html',

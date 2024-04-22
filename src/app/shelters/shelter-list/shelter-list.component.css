@@ -54,7 +54,18 @@ img {
 
 .filters{
     display: flex;
-    align-items:  center;
+    align-items:center;
     gap: 20px;
+}
+
+.btn-outline-primary{
+    color:#E8C07D;
+    border-color: #E8C07D;;
+}
+
+.btn-outline-primary:hover{
+    background-color:#E8C07D ;
+    color: white;
+ 
 }
 
