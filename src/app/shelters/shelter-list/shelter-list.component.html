@@ -1,0 +1,48 @@
+<main class="container-fluid">
+
+    <div class="filters">
+
+        <input class="form-control" type="text" name="search" autocomplete="off" placeholder="Nombre protectora">
+
+        <select ngModel name="option" class="form-select mb-3" aria-label=".form-select-lg example" id="selectAction">
+            <option value="" disabled selected style="display:none;">Localidad</option>
+            <option *ngFor="let location of locations" [value]="location">
+                {{ location }}
+            </option>
+        </select>
+        <button type="button" class="btn btn-outline-primary"><i class="bi bi-search" style="padding-right: 10px;"></i>Buscar</button>
+
+    </div>
+
+
+
+    <div *ngIf="response">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col-4" *ngFor="let shelter of response.shelters">
+                <div class="card h-100" style="height: 450px;">
+                    <img [src]="shelter.image" class="card-img-top" alt="imageShelter">
+                    <div class="card-body">
+                        <h5 class="card-title text-wrap text-truncate">{{ shelter.name }}</h5>
+
+                        <div class="card-content">
+                            <button type="button" class="btn btn-light disabled mb-2 mb-md-0">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                {{ shelter.location }}
+                            </button>
+
+                            <i class="bi"
+                                [ngClass]="{'bi-heart': !shelter.liked, 'bi-heart-fill': shelter.liked, 'fs-4': true}"
+                                (click)="toggleLike(shelter)">
+                            </i>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
