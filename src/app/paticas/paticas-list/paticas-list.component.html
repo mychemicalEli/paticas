@@ -1,0 +1,42 @@
+<main class="container-fluid">
+
+    <div class="filters">
+
+        <input class="form-control" type="text" name="search" autocomplete="off" placeholder="Nombre">
+
+        <select ngModel name="option" class="form-select mb-3" aria-label=".form-select-lg example" id="selectAction">
+            <option value="" disabled selected style="display:none;">Todos</option>
+            <option *ngFor="let species of species" [value]="species">
+                {{ species }}
+            </option>
+        </select>
+        <button type="button" class="btn btn-outline-primary">Filtrar</button>
+
+    </div>
+
+
+
+    <div *ngIf="response">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col-4" *ngFor="let paticas of response.paticas">
+                <div class="card h-100" style="height: 450px; position: relative;">
+
+                    <i class="badge" [ngClass]="{'bi-gender-male': paticas.gender === 'male', 'bi-gender-female': paticas.gender === 'female', 'fs-5':true}"></i>
+
+
+                    <img [src]="paticas.image" class="card-img-top" alt="imagePaticas">
+
+                    <div class="card-body">
+                        <h5 class="card-title text-wrap text-truncate">{{ paticas.name }}</h5>
+
+                        <i class="bi"
+                            [ngClass]="{'bi-heart': !paticas.liked, 'bi-heart-fill': paticas.liked, 'fs-4': true}"
+                            (click)="toggleLike(paticas)">
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

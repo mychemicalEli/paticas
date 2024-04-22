@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { GetShelterListResponse } from '../dto/get-shelter-list/get-shelter-list.response';
-import { GetShelterListRequest } from '../dto/get-shelter-list/get-shelter-list.request';
+import { GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response';
+import { GetShelterListRequest } from '../models/get-shelter-list/get-shelter-list.request';
 import { ShelterService } from '../shelters-service/shelter.service';
-
 
 @Component({
   selector: 'app-shelter-list',
@@ -12,10 +11,10 @@ import { ShelterService } from '../shelters-service/shelter.service';
 export class ShelterListComponent {
 
   response?: GetShelterListResponse;
-  request: GetShelterListRequest = { page: 0, pageSize: 9 }
-  locations: string[] = []; 
+  request: GetShelterListRequest = { page: 0, pageSize: 9 };
+  locations: Set<string> = new Set();
 
-  constructor(private shelterService: ShelterService) {}
+  constructor(private shelterService: ShelterService) { }
 
   ngOnInit(): void {
     this.getShelterList();
@@ -26,12 +25,19 @@ export class ShelterListComponent {
       .subscribe({
         next: (response: GetShelterListResponse) => {
           this.response = response;
-          this.locations = response.shelters.map(shelter => shelter.location);
+          this.updateLocationsList(response.shelters);
         }
       });
   }
 
+  private updateLocationsList(shelters: any[]) {
+    this.locations.clear(); // Limpiar el conjunto antes de actualizar
+    shelters.forEach(shelter => {
+      this.locations.add(shelter.location);
+    });
+  }
+
   toggleLike(shelter: any) {
     shelter.liked = !shelter.liked;
-  }  
+  }
 }

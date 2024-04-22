@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { PaticasRoutingModule } from './paticas-routing.module';
 import { PaticasComponent } from './paticas.component';
+import { PaticasListComponent } from './paticas-list/paticas-list.component';
 
 
 @NgModule({
   declarations: [
-    PaticasComponent
+    PaticasComponent,
+    PaticasListComponent
   ],
   imports: [
     CommonModule,

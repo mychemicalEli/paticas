@@ -1,0 +1,85 @@
+.container-fluid {
+    width: 90%;
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
+
+img {
+    object-fit: fill;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.card-title {
+  
+    max-width: 100%;
+}
+
+.card {
+    border-color: #EEEEEE;
+    box-shadow: 0px 1px 3px 0px rgba(68, 84, 92, 0.12),
+        0px 1px 1px 0px rgba(68, 84, 92, 0.14),
+        0px 2px 1px -1px rgba(68, 84, 92, 0.20);
+    overflow: auto;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.bi-heart-fill {
+    color: #ED525B;
+}
+
+.bi-heart,
+.bi-heart-fill {
+    cursor: pointer;
+}
+
+.form-control, .form-select {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 56px;
+    padding: 16px 12px;
+    width: 200px;
+    color: #757575;
+}
+
+.filters{
+    display: flex;
+    align-items:center;
+    gap: 20px;
+}
+
+.btn-outline-primary{
+    color:#E8C07D;
+    border-color: #E8C07D;;
+}
+
+.btn-outline-primary:hover{
+    background-color:#E8C07D ;
+    color: white;
+ 
+}
+
+.badge{
+    background-color:#E8C07D ;
+    position:absolute; 
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 30px;
+}
