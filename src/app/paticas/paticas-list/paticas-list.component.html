@@ -28,13 +28,22 @@
 
                     <div class="card-body">
                         <h5 class="card-title text-wrap text-truncate">{{ paticas.name }}</h5>
+                        <div class="icons">
+                        @if (paticas.isShelterAdmin) {
+                            <i class="bi bi-pencil-square fs-4"></i>
+                            <i class="bi bi-trash3-fill fs-4"></i>
+                            
+                          }
 
+                          @else {
                         <i class="bi"
                             [ngClass]="{'bi-heart': !paticas.liked, 'bi-heart-fill': paticas.liked, 'fs-4': true}"
                             (click)="toggleLike(paticas)">
                         </i>
+                    }
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

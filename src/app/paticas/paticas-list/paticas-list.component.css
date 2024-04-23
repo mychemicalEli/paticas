@@ -14,10 +14,18 @@ img {
     align-items: baseline;
     padding-right: 20px;
     padding-left: 20px;
+
+}
+
+.icons {
+    display: flex;
+}
+
+.icons .bi {
+    margin-left: 20px;
 }
 
 .card-title {
-  
     max-width: 100%;
 }
 
@@ -39,12 +47,12 @@ img {
     color: #ED525B;
 }
 
-.bi-heart,
-.bi-heart-fill {
+.bi {
     cursor: pointer;
 }
 
-.form-control, .form-select {
+.form-control,
+.form-select {
     margin-bottom: 20px;
     margin-top: 20px;
     height: 56px;
@@ -53,26 +61,27 @@ img {
     color: #757575;
 }
 
-.filters{
+.filters {
     display: flex;
-    align-items:center;
+    align-items: center;
     gap: 20px;
 }
 
-.btn-outline-primary{
-    color:#E8C07D;
-    border-color: #E8C07D;;
+.btn-outline-primary {
+    color: #E8C07D;
+    border-color: #E8C07D;
+    ;
 }
 
-.btn-outline-primary:hover{
-    background-color:#E8C07D ;
+.btn-outline-primary:hover {
+    background-color: #E8C07D;
     color: white;
- 
+
 }
 
-.badge{
-    background-color:#E8C07D ;
-    position:absolute; 
+.badge {
+    background-color: #f5f5f5;
+    position: absolute;
     margin-top: 15px;
     margin-left: 15px;
     width: 36px;
@@ -82,4 +91,9 @@ img {
     justify-content: center;
     padding: 5px;
     border-radius: 30px;
+    color: #212121 ;
+    box-shadow: 0px 2px 4px 0px rgba(68, 84, 92, 0.25),
+        0px 2px 2px 0px rgba(68, 84, 92, 0.3),
+        0px 3px 1px -2px rgba(68, 84, 92, 0.4);
+    /* border: 2px solid #212121  ; */
 }

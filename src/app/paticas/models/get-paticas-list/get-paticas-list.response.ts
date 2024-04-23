@@ -12,4 +12,5 @@ export interface GetPaticasListItemResponse{
     gender: string;
     liked: boolean;
     species: string;
+    isShelterAdmin: boolean;
 }
