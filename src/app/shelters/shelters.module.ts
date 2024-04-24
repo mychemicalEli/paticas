@@ -5,6 +5,7 @@ import { SheltersRoutingModule } from './shelters-routing.module';
 import { SheltersComponent } from './shelters.component';
 import { ShelterListComponent } from './shelter-list/shelter-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ShelterDetailComponent } from './shelter-detail/shelter-detail.component';
 
 
 
@@ -12,6 +13,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   declarations: [
     SheltersComponent,
     ShelterListComponent,
+    ShelterDetailComponent,
    
   ],
   imports: [
