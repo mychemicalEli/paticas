@@ -27,10 +27,10 @@
                         [ngClass]="{'bi-gender-male': paticas.gender === 'male', 'bi-gender-female': paticas.gender === 'female', 'fs-5':true}"></i>
 
 
-                    <img [src]="paticas.image" class="card-img-top" alt="imagePaticas">
+                    <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" [routerLink]="['/paticas', paticas.id]" style="cursor:pointer" >
 
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate">{{ paticas.name }}</h5>
+                        <h5 class="card-title text-wrap text-truncate" [routerLink]="['/paticas', paticas.id]" style="cursor:pointer">{{ paticas.name }}</h5>
                         <div class="icons">
                             @if (paticas.isShelterAdmin) {
                             <i class="bi bi-pencil-square fs-4"></i>

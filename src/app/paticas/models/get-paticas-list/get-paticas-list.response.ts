@@ -7,7 +7,7 @@ export interface GetPaticasListResponse{
 
 export interface GetPaticasListItemResponse{
     id: number;
-    image: string;
+    profileImage: string;
     name: string;
     gender: string;
     liked: boolean;
