@@ -18,7 +18,7 @@
 
     <div *ngIf="response">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col-4" *ngFor="let shelter of response.shelters">
+            <div class="col-4" *ngFor="let shelter of (response?.shelters || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
                 <div class="card h-100" style="height: 450px;">
                     <img [src]="shelter.image" class="card-img-top" alt="imageShelter">
                     <div class="card-body">
@@ -44,5 +44,11 @@
             </div>
         </div>
     </div>
+    <pagination-controls class="custom-pagination"
+    (pageChange)="onPageChange($event)" 
+    previousLabel=" " 
+    nextLabel=" ">
+    </pagination-controls>
+
 
 </main>

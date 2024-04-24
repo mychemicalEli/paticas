@@ -5,21 +5,20 @@ import { GetPaticasListRequest } from "../models/get-paticas-list/get-paticas-li
 import { Observable } from "rxjs";
 import { GetPaticasListResponse } from "../models/get-paticas-list/get-paticas-list.response";
 
-@Injectable ({
-    providedIn: 'root'
+@Injectable({
+  providedIn: 'root'
 })
-
 export class PaticasService {
-    baseUrl = environment.baseApiUrl;
-    constructor (private httpClient : HttpClient){}
+  baseUrl = environment.baseApiUrl;
 
-    public get(request:GetPaticasListRequest) : Observable<GetPaticasListResponse>{
-        let queryParams = new HttpParams();
-        queryParams.set("page", request.page)
-        queryParams.set("pageSize", request.pageSize)
+  constructor(private httpClient: HttpClient) {}
 
-        return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, {params:queryParams})
+  public get(request: GetPaticasListRequest): Observable<GetPaticasListResponse> {
+    let params = new HttpParams()
+      .set("page", request.page.toString())
+      .set("pageSize", request.pageSize.toString());
+      console.log("Query Params:", params.toString());
 
-    }
+    return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, { params });
+  }
 }
-

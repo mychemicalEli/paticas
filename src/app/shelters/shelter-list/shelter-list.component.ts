@@ -11,7 +11,7 @@ import { ShelterService } from '../shelters-service/shelter.service';
 export class ShelterListComponent {
 
   response?: GetShelterListResponse;
-  request: GetShelterListRequest = { page: 0, pageSize: 9 };
+  request: GetShelterListRequest = { page: 0, pageSize: 12 };
   locations: Set<string> = new Set();
 
   constructor(private shelterService: ShelterService) { }
@@ -31,7 +31,7 @@ export class ShelterListComponent {
   }
 
   private updateLocationsList(shelters: any[]) {
-    this.locations.clear(); // Limpiar el conjunto antes de actualizar
+    this.locations.clear(); 
     shelters.forEach(shelter => {
       this.locations.add(shelter.location);
     });
@@ -39,5 +39,9 @@ export class ShelterListComponent {
 
   toggleLike(shelter: any) {
     shelter.liked = !shelter.liked;
+  }
+  onPageChange(pageSize: number) {
+    this.request.page = pageSize;
+    this.getShelterList();
   }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { SheltersRoutingModule } from './shelters-routing.module';
 import { SheltersComponent } from './shelters.component';
 import { ShelterListComponent } from './shelter-list/shelter-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -16,7 +17,8 @@ import { ShelterListComponent } from './shelter-list/shelter-list.component';
   imports: [
     CommonModule,
     SheltersRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class SheltersModule { }

@@ -14,6 +14,7 @@ export class PaticasListComponent {
   request: GetPaticasListRequest = { page: 0, pageSize: 12 };
   species: Set<string> = new Set();
 
+
   constructor(private paticasService: PaticasService) { }
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class PaticasListComponent {
 }
 
 private updateSpeciesList(paticas: any[]) {
-  this.species.clear(); // Limpiar el conjunto antes de actualizar
+  this.species.clear(); 
   paticas.forEach(patica => {
     this.species.add(patica.species);
   });
@@ -40,5 +41,9 @@ private updateSpeciesList(paticas: any[]) {
 
 toggleLike(paticas: any) {
   paticas.liked = !paticas.liked;
+}
+onPageChange(pageSize: number) {
+  this.request.page = pageSize;
+  this.getPaticasList();
 }
 }
