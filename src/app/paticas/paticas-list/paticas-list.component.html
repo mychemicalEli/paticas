@@ -1,48 +1,30 @@
 <main class="container-fluid">
 
     <div class="filters">
-
         <input class="form-control" type="text" name="search" autocomplete="off" placeholder="Nombre">
-
         <select ngModel name="option" class="form-select mb-3" aria-label=".form-select-lg example" id="selectAction">
             <option value="" disabled selected style="display:none;">Todos</option>
-            <option *ngFor="let species of species" [value]="species">
-                {{ species }}
-            </option>
+            <option *ngFor="let species of species" [value]="species">{{ species }}</option>
         </select>
         <button type="button" class="btn btn-outline-primary">Filtrar</button>
-
     </div>
-
-
 
     <div *ngIf="response">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col-4"
-                *ngFor="let paticas of (response?.paticas || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
-
-                <div class="card h-100" style="height: 450px; position: relative;">
-
-                    <i class="fa-solid"
-                        [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
-
-
-                    <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" [routerLink]="['/paticas', paticas.id]" style="cursor:pointer" >
-
+            <div class="col-4" *ngFor="let paticas of (response?.paticas || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
+                <div class="card h-100" style="height: 450px; position: relative;" (click)="onSelectPatica(paticas)">
+                    <i class="fa-solid" [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
+                    <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" [routerLink]="['/paticas', paticas.id]" style="cursor:pointer">{{ paticas.name }} {{paticas.id}}</h5>
+                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer">{{ paticas.name }} {{paticas.id}}</h5>
                         <div class="icons">
                             @if (paticas.isShelterAdmin) {
                             <i class="bi bi-pencil-square fs-4"></i>
                             <i class="bi bi-trash3-fill fs-4"></i>
-
                             }
 
                             @else {
-                            <i class="bi"
-                                [ngClass]="{'bi-heart': !paticas.liked, 'bi-heart-fill': paticas.liked, 'fs-4': true}"
-                                (click)="toggleLike(paticas)">
-                            </i>
+                            <i class="bi" [ngClass]="{'bi-heart': !paticas.liked, 'bi-heart-fill': paticas.liked, 'fs-4': true}" (click)="toggleLike(paticas)"></i>
                             }
                         </div>
                     </div>
@@ -50,13 +32,8 @@
             </div>
         </div>
     </div>
-    <pagination-controls class="custom-pagination"
-    (pageChange)="onPageChange($event)" 
-    previousLabel=" " 
-    nextLabel=" ">
-    </pagination-controls>
+    <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" " nextLabel=" "></pagination-controls>
 
-    
-
+    <app-patica-detail [patica]="selectedPatica"></app-patica-detail>
 
 </main>

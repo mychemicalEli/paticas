@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GetPaticasListResponse } from '../models/get-paticas-list/get-paticas-list.response';
+import { GetPaticasListItemResponse, GetPaticasListResponse } from '../models/get-paticas-list/get-paticas-list.response';
 import { GetPaticasListRequest } from '../models/get-paticas-list/get-paticas-list.request';
 import { PaticasService } from '../paticas-service/paticas.service';
 
@@ -13,6 +13,7 @@ export class PaticasListComponent {
   response?: GetPaticasListResponse;
   request: GetPaticasListRequest = { page: 0, pageSize: 12 };
   species: Set<string> = new Set();
+  selectedPatica!: GetPaticasListItemResponse;
 
 
   constructor(private paticasService: PaticasService) { }
@@ -45,6 +46,9 @@ toggleLike(paticas: any) {
 onPageChange(pageSize: number) {
   this.request.page = pageSize;
   this.getPaticasList();
+}
+onSelectPatica(patica: GetPaticasListItemResponse): void {
+  this.selectedPatica = patica;
 }
 
 }
