@@ -7,6 +7,7 @@ import { PaticaDetailComponent } from './patica-detail/patica-detail.component';
 const routes: Routes = [
   { path: '', component: PaticasListComponent },
   { path: ':id', component: PaticaDetailComponent }
+  
 ];
 
 @NgModule({

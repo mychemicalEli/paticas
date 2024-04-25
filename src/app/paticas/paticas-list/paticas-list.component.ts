@@ -22,7 +22,7 @@ export class PaticasListComponent {
   }
 
   private getPaticasList() {
-    this.paticasService.get(this.request)
+    this.paticasService.getList(this.request)
       .pipe()
       .subscribe({
         next: (response: GetPaticasListResponse) => {
@@ -46,4 +46,5 @@ onPageChange(pageSize: number) {
   this.request.page = pageSize;
   this.getPaticasList();
 }
+
 }
