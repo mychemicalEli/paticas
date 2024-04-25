@@ -3,9 +3,7 @@ import { environment } from "../../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { GetPaticasListRequest } from "../models/get-paticas-list/get-paticas-list.request";
 import { Observable } from "rxjs";
-import { GetPaticasListResponse } from "../models/get-paticas-list/get-paticas-list.response";
-import { GetPaticaDetailResponse } from "../models/get-patica-by-id/get-patica-detail.response";
-
+import { GetPaticasListItemResponse, GetPaticasListResponse } from "../models/get-paticas-list/get-paticas-list.response";
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +20,7 @@ export class PaticasService {
 
     return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, { params });
   }
-  public getDetail(paticaId: number): Observable<GetPaticaDetailResponse> {
-    return this.httpClient.get<GetPaticaDetailResponse>(`${this.baseUrl}paticas/${paticaId}`);
+  public getDetail(paticaId: number): Observable<GetPaticasListItemResponse> {
+    return this.httpClient.get<GetPaticasListItemResponse>(`${this.baseUrl}paticas/${paticaId}`);
   }
 }

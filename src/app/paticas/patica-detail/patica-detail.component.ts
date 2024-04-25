@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PaticasService } from '../paticas-service/paticas.service';
-import { GetPaticaDetailResponse } from '../models/get-patica-by-id/get-patica-detail.response';
 import { paticaSize } from '../models/paticas-size.enum';
+import { GetPaticasListItemResponse } from '../models/get-paticas-list/get-paticas-list.response';
 
 @Component({
   selector: 'app-patica-detail',
@@ -10,7 +10,7 @@ import { paticaSize } from '../models/paticas-size.enum';
   styleUrls: ['./patica-detail.component.css']
 })
 export class PaticaDetailComponent implements OnInit {
-  response?: GetPaticaDetailResponse;
+  response?: GetPaticasListItemResponse;
   paticaSizeEnum = paticaSize;
 
   constructor( private paticasService: PaticasService, private route: ActivatedRoute) { }
@@ -24,7 +24,7 @@ export class PaticaDetailComponent implements OnInit {
     if (paticaId !== null) {
       this.paticasService.getDetail(+paticaId)
         .subscribe({
-          next: (response: GetPaticaDetailResponse) => {
+          next: (response: GetPaticasListItemResponse) => {
             this.response = response;
           }
         });
