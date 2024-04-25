@@ -23,8 +23,8 @@
 
                 <div class="card h-100" style="height: 450px; position: relative;">
 
-                    <i class="badge"
-                        [ngClass]="{'bi-gender-male': paticas.gender === 'male', 'bi-gender-female': paticas.gender === 'female', 'fs-5':true}"></i>
+                    <i class="fa-solid"
+                        [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
 
 
                     <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" [routerLink]="['/paticas', paticas.id]" style="cursor:pointer" >
