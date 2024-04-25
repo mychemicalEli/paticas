@@ -9,6 +9,7 @@ import { paticaSize } from '../models/paticas-size.enum';
 })
 export class PaticaDetailComponent implements OnInit {
   @Input() patica!: GetPaticasListItemResponse;
+  paticaSizeEnum = paticaSize;
   
 
   constructor() { }
