@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GetPaticasListItemResponse, GetPaticasListResponse } from '../models/get-paticas-list/get-paticas-list.response';
 import { GetPaticasListRequest } from '../models/get-paticas-list/get-paticas-list.request';
 import { PaticasService } from '../paticas-service/paticas.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paticas-list',
@@ -16,7 +17,7 @@ export class PaticasListComponent {
   selectedPatica!: GetPaticasListItemResponse;
 
 
-  constructor(private paticasService: PaticasService) { }
+  constructor(private paticasService: PaticasService, private router: Router) { }
 
   ngOnInit(): void {
     this.getPaticasList();
@@ -48,7 +49,8 @@ onPageChange(pageSize: number) {
   this.getPaticasList();
 }
 onSelectPatica(patica: GetPaticasListItemResponse): void {
-  this.selectedPatica = patica;
+  this.router.navigate(['/paticas', patica.id]);
+
 }
 
 }
