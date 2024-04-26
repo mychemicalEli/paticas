@@ -4,22 +4,38 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { GetPaticasListRequest } from "../models/get-paticas-list/get-paticas-list.request";
 import { Observable } from "rxjs";
 import { GetPaticasListItemResponse, GetPaticasListResponse } from "../models/get-paticas-list/get-paticas-list.response";
-@Injectable({
-  providedIn: 'root'
+
+// Decorador Injectable para marcar esta clase como un servicio inyectable
+@Injectable({ 
+  providedIn: 'root' // Este servicio se proporciona en la raíz del módulo
 })
+
+
 export class PaticasService {
-  baseUrl = environment.baseApiUrl;
+  // URL base de la API, obtenida del entorno de desarrollo
+  baseUrl = environment.baseApiUrl; 
 
-  constructor(private httpClient: HttpClient) {}
+  // Constructor del servicio que inyecta HttpClient para realizar solicitudes HTTP
+  constructor(private httpClient: HttpClient) {} 
 
+  // Método para obtener una lista de "paticas"
+  // Recibe un objeto GetPaticasListRequest con información sobre la página y el tamaño de la página
+  // Devuelve un Observable de GetPaticasListResponse
   public getList(request: GetPaticasListRequest): Observable<GetPaticasListResponse> {
+    // Se construyen los parámetros para la solicitud HTTP
     let params = new HttpParams()
       .set("page", request.page.toString())
       .set("pageSize", request.pageSize.toString());
+      // Se imprime la cadena de consulta para verificación
       console.log("Query Params:", params.toString());
 
+      // Se realiza la solicitud HTTP GET con los parámetros construidos
     return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, { params });
   }
+
+  // Método para obtener los detalles de una "patica" específica
+  // Recibe el ID de la "patica" como parámetro
+  // Devuelve un Observable de GetPaticasListItemResponse
   public getDetail(paticaId: number): Observable<GetPaticasListItemResponse> {
     return this.httpClient.get<GetPaticasListItemResponse>(`${this.baseUrl}paticas/${paticaId}`);
   }

@@ -11,12 +11,12 @@
 
     <div *ngIf="response">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col-4" *ngFor="let paticas of (response?.paticas || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })" (click)="onSelectPatica(paticas)">
+            <div class="col-4" *ngFor="let paticas of (response?.paticas || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
                 <div class="card h-100" style="height: 450px; position: relative;" >
                     <i class="fa-solid" [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
-                    <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer">
+                    <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer" (click)="onSelectPatica(paticas)">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer">{{ paticas.name }} <!--{{paticas.id}}--></h5>
+                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(paticas)">{{ paticas.name }} <!--{{paticas.id}}--></h5>
                         <div class="icons">
                             @if (paticas.isShelterAdmin) {
                             <i class="bi bi-pencil-square fs-4"></i>
