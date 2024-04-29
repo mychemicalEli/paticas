@@ -15,12 +15,13 @@ import { FormulariosComponent } from '../formularios/formularios.component';
     PaticasComponent,
     PaticasListComponent,
     PaticaDetailComponent,
-  
+    
   ],
   imports: [
     CommonModule,
     PaticasRoutingModule,
     NgxPaginationModule,
+
   ]
 })
 export class PaticasModule { }
