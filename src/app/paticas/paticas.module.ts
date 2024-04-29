@@ -5,22 +5,22 @@ import { PaticasRoutingModule } from './paticas-routing.module';
 import { PaticasComponent } from './paticas.component';
 import { PaticasListComponent } from './paticas-list/paticas-list.component';
 import { PaticaDetailComponent } from './patica-detail/patica-detail.component';
-import { AdoptionFormComponent } from './adoption-form/adoption-form.component';
 
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormulariosComponent } from '../formularios/formularios.component';
 
 @NgModule({
   declarations: [
     PaticasComponent,
     PaticasListComponent,
     PaticaDetailComponent,
-    AdoptionFormComponent
+  
   ],
   imports: [
     CommonModule,
     PaticasRoutingModule,
     NgxPaginationModule,
-    
-    
   ]
 })
 export class PaticasModule { }

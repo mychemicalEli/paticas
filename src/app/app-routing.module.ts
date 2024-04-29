@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'paticas', loadChildren: () => import('./paticas/paticas.module').then(m => m.PaticasModule) },
   { path: 'colaborate', loadChildren: () => import('./colaborate/colaborate.module').then(m => m.ColaborateModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
-  { path: 'volunteers', loadChildren: () => import('./volunteers/volunteers.module').then(m => m.VolunteersModule) }];
+  { path: 'volunteers', loadChildren: () => import('./volunteers/volunteers.module').then(m => m.VolunteersModule) },
+  { path: 'formularios', loadChildren: () => import('./formularios/formularios.module').then(m => m.FormulariosModule) }];
 
 @NgModule({
   imports: [
