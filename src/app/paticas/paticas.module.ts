@@ -6,10 +6,6 @@ import { PaticasComponent } from './paticas.component';
 import { PaticasListComponent } from './paticas-list/paticas-list.component';
 import { PaticaDetailComponent } from './patica-detail/patica-detail.component';
 
-
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormulariosComponent } from '../formularios/formularios.component';
-
 @NgModule({
   declarations: [
     PaticasComponent,
@@ -22,6 +18,10 @@ import { FormulariosComponent } from '../formularios/formularios.component';
     PaticasRoutingModule,
     NgxPaginationModule,
 
+  ],
+  exports: [
+    PaticasListComponent,
+    // Otros componentes que quieras exportar
   ]
 })
 export class PaticasModule { }

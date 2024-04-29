@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { GetShelterListRequest } from '../models/get-shelter-list/get-shelter-list.request';
-import { GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response';
+import { GetShelterListItemResponse, GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response';
 
 @Injectable({
   providedIn: 'root' // Marca este servicio como proporcionado en la raíz del módulo
@@ -24,5 +24,10 @@ export class ShelterService {
     // Utiliza la URL base de la API más el endpoint "shelters"
     // y pasa los parámetros de consulta construidos
     return this.httpClient.get<GetShelterListResponse>(`${this.baseUrl}shelters`, { params: queryParams })
+  }
+
+  
+  public getDetail(shelterId: number): Observable<GetShelterListItemResponse> {
+    return this.httpClient.get<GetShelterListItemResponse>(`${this.baseUrl}shelters/${shelterId}`);
   }
 }
