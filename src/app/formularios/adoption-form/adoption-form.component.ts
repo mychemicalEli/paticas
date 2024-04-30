@@ -50,7 +50,7 @@ export class AdoptionFormComponent implements OnInit {
       fullName: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(18)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      phone: ['', [Validators.required, Validators.pattern('^[9|6|7][0-9]{8}$')]],
       address: ['', Validators.required],
       postalCode: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]],
       peopleCount: ['', Validators.required],
@@ -113,7 +113,6 @@ export class AdoptionFormComponent implements OnInit {
 
 
   submitForm() {
-    // Aquí puedes agregar la lógica para enviar el formulario
     this.currentStep = 10; // Cambia al paso de formulario enviado correctamente
   }
 

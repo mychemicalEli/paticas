@@ -110,14 +110,14 @@
                     <div *ngIf="peopleCountError" class="text-danger">Este es un campo obligatorio</div>
                 </div>
                 <div class="mb-3">
-                    <label for="jobSituation" class="form-label">* Situación Laboral</label>
-                    <input type="text" class="form-control" id="jobSituation" placeholder="Situación Laboral" formControlName="jobSituation" required>
+                    <label for="jobSituation" class="form-label">Situación Laboral</label>
+                    <input type="text" class="form-control" id="jobSituation" placeholder="Situación Laboral">
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="hobbies" class="form-label">¿A qué dedicas tu tiempo libre?</label>
-                <textarea class="form-control" id="hobbies" rows="4" placeholder="Escribe aquí" formControlName="hobbies"></textarea>
+                <textarea class="form-control" id="hobbies" rows="4" placeholder="Escribe aquí" ></textarea>
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -381,7 +381,7 @@
         <div class="mb-4 bg-orange" *ngIf="step8">
             <div class="mb-3">
                 <label for="opinionMoreInfo" class="form-label" style="font-weight: bold;">¿Hay algo más que crees que deberíamos saber?</label>
-                <textarea formControlName="opinionMoreInfo" class="form-control" id="opinionMoreInfo" rows="5" placeholder="Escribe aquí"></textarea>
+                <textarea class="form-control" id="opinionMoreInfo" rows="5" placeholder="Escribe aquí"></textarea>
             </div>
             
             <div class="mb-3">

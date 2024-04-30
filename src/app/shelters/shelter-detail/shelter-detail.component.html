@@ -1,14 +1,13 @@
 <main class="container-fluid" *ngIf="shelter">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn" type="button" [routerLink]="['/formularios/adoption']">Hazte voluntario</button>
+        <button class="btn" type="button" [routerLink]="['/formularios/volunteer']">Hazte voluntario</button>
     </div>
     <div class="card mb-3">
         <div class="row g-0">
-            <div class="col-md-4 d-flex justify-content-center align-items-center">
-                <div class="col-md-4 d-flex justify-content-center align-items-center" style="width: 400px; height: 400px;  padding:20px">
-                    <img [src]="shelter.image" class="img-fluid rounded-circle" style="width: 100%; height: 100%; object-fit: cover; overflow: hidden;" alt="image">
-                </div>
-                
+            <div class="col-md-4">
+                <!-- <div class="col-md-12 d-flex justify-content-center align-items-center"> -->
+                    <img [src]="shelter.image" class="img-fluid" alt="image" style="height: 100%; width: 100%; border-radius: 50px; border: 10px solid #E8C07D">
+                <!-- </div> -->
             </div>
             <div class="col-md-8">
                 <div class="card-body">

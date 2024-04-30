@@ -6,6 +6,7 @@ import { SheltersComponent } from './shelters.component';
 import { ShelterListComponent } from './shelter-list/shelter-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ShelterDetailComponent } from './shelter-detail/shelter-detail.component';
+import { PaticasListComponent } from '../paticas/paticas-list/paticas-list.component';
 
 
 
@@ -14,13 +15,15 @@ import { ShelterDetailComponent } from './shelter-detail/shelter-detail.componen
     SheltersComponent,
     ShelterListComponent,
     ShelterDetailComponent,
+  
    
   ],
   imports: [
     CommonModule,
     SheltersRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    
   ]
 })
 export class SheltersModule { }
