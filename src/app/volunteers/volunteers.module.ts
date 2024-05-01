@@ -3,15 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { VolunteersRoutingModule } from './volunteers-routing.module';
 import { VolunteersComponent } from './volunteers.component';
+import { VolunteersListComponent } from './volunteers-list/volunteers-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
   declarations: [
-    VolunteersComponent
+    VolunteersComponent,
+    VolunteersListComponent,
+    
   ],
   imports: [
     CommonModule,
-    VolunteersRoutingModule
+    VolunteersRoutingModule,
+    NgxPaginationModule
   ]
 })
 export class VolunteersModule { }

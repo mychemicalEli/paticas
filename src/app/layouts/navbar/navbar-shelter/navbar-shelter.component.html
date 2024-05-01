@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">PATICAS</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">VOLUNTARIOS</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/volunteers']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">VOLUNTARIOS</a></li>
             </ul>
 
             <div class="nav-item dropdown ms-auto">
