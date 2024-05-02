@@ -39,4 +39,6 @@ export class PaticasService {
   public getDetail(paticaId: number): Observable<GetPaticasListItemResponse> {
     return this.httpClient.get<GetPaticasListItemResponse>(`${this.baseUrl}paticas/${paticaId}`);
   }
+
+ 
 }

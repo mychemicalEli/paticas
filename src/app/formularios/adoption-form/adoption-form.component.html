@@ -31,7 +31,7 @@
         </ul>
 
         <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox" formControlName="acceptConditions">
+            <input class="form-check-input" type="checkbox" formControlName="acceptConditions" required>
             <label class="form-check-label" for="acceptConditions">
                 <span class="checkbox-icon"></span>
                 He leído y acepto las condiciones
@@ -110,14 +110,16 @@
                     <div *ngIf="peopleCountError" class="text-danger">Este es un campo obligatorio</div>
                 </div>
                 <div class="mb-3">
-                    <label for="jobSituation" class="form-label">Situación Laboral</label>
-                    <input type="text" class="form-control" id="jobSituation" placeholder="Situación Laboral">
+                    <label for="jobSituation" class="form-label">* Situación Laboral</label>
+                    <input type="text" class="form-control" id="jobSituation" placeholder="Situación Laboral" formControlName="jobSituation" required>
+                    <div *ngIf="jobSituationError" class="text-danger">Este es un campo obligatorio</div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="hobbies" class="form-label">¿A qué dedicas tu tiempo libre?</label>
-                <textarea class="form-control" id="hobbies" rows="4" placeholder="Escribe aquí" ></textarea>
+                <label for="hobbies" class="form-label">* ¿A qué dedicas tu tiempo libre?</label>
+                <textarea class="form-control" id="hobbies" rows="4" placeholder="Escribe aquí" formControlName="hobbies" required></textarea>
+                <div *ngIf="hobbiesError" class="text-danger">Este es un campo obligatorio</div>
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -136,11 +138,11 @@
                     <p class="form-label" style="font-weight: bold;">¿Has tenido mascotas con anterioridad?</p>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="previousPets" id="previousPetsYes"
-                            value="yes">
+                        formControlName="previousPets" [value]="true">
                         <label class="form-check-label" for="previousPetsYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="previousPets" id="previousPetsNo" value="no">
+                        <input class="form-check-input" type="radio" name="previousPets" id="previousPetsNo"  formControlName="previousPets" [value]="false">
                         <label class="form-check-label" for="previousPetsNo">No</label>
                     </div>
                 </div>
@@ -149,35 +151,35 @@
                         regularidad?</p>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="vaccinatedRegularly"
-                            id="vaccinatedRegularlyYes" value="yes">
+                            id="vaccinatedRegularlyYes" formControlName="vaccinatedRegularly" [value]="true">
                         <label class="form-check-label" for="vaccinatedRegularlyYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="vaccinatedRegularly"
-                            id="vaccinatedRegularlyNo" value="no">
+                            id="vaccinatedRegularlyNo" formControlName="vaccinatedRegularly" [value]="false">
                         <label class="form-check-label" for="vaccinatedRegularlyNo">No</label>
                     </div>
                 </div>
                 <div class="mb-3">
                     <p class="form-label" style="font-weight: bold;">¿Actualmente tienes animales en casa?</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="currentPets" id="currentPetsYes" value="yes">
+                    <div class="form-check form-check-inline" >
+                        <input class="form-check-input" type="radio" name="currentPets" id="currentPetsYes" formControlName="currentPets" [value]="true">
                         <label class="form-check-label" for="currentPetsYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="currentPets" id="currentPetsNo" value="no">
+                        <input class="form-check-input" type="radio" name="currentPets" id="currentPetsNo" formControlName="currentPets" [value]="false">
                         <label class="form-check-label" for="currentPetsNo">No</label>
                     </div>
                 </div>
                 <div class="mb-3">
                     <p class="form-label" style="font-weight: bold;">En caso de tener otros animales, ¿compartirían
                         espacio?</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shareSpace" id="shareSpaceYes" value="yes">
+                    <div class="form-check form-check-inline" >
+                        <input class="form-check-input" type="radio" name="shareSpace" id="shareSpaceYes" formControlName="shareSpace" [value]="true">
                         <label class="form-check-label" for="shareSpaceYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="shareSpace" id="shareSpaceNo" value="no">
+                        <input class="form-check-input" type="radio" name="shareSpace" id="shareSpaceNo" formControlName="shareSpace" [value]="false">
                         <label class="form-check-label" for="shareSpaceNo">No</label>
                     </div>
                 </div>
@@ -187,12 +189,12 @@
                     <p class="form-label" style="font-weight: bold;">¿Has esterilizado a tus anteriores mascotas?</p>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="sterilizedPets" id="sterilizedPetsYes"
-                            value="yes">
+                        formControlName="sterilizedPets" [value]="true">
                         <label class="form-check-label" for="sterilizedPetsYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="sterilizedPets" id="sterilizedPetsNo"
-                            value="no">
+                        formControlName="sterilizedPets" [value]="false">
                         <label class="form-check-label" for="sterilizedPetsNo">No</label>
                     </div>
                 </div>
@@ -202,7 +204,7 @@
                         al cumplir la edad recomendada por los especialistas? ¿Qué beneficios crees que tiene la
                         esterilización / castración?</label>
                     <textarea class="form-control" id="opinionSterilization" rows="6"
-                        placeholder="Escribe aquí"></textarea>
+                        placeholder="Escribe aquí" formControlName="opinionSterilization"></textarea>
                 </div>
             </div>
         </div>
@@ -220,23 +222,23 @@
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="whoAdoptedAndWhy" class="form-label">¿Quién decidió adoptar y por qué?</label>
-                    <textarea class="form-control" id="whoAdoptedAndWhy" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="whoAdoptedAndWhy" rows="4" placeholder="Escribe aquí" formControlName="whoAdoptedAndWhy" required></textarea>
                 </div>
                 
 
                 <div class="mb-3">
                     <label for="whoWillWalkTheDog" class="form-label">¿Quién saldrá a pasear con el perro? ¿Con qué frecuencia?</label>
-                    <textarea class="form-control" id="whoWillWalkTheDog" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="whoWillWalkTheDog" rows="4" placeholder="Escribe aquí" formControlName="whoWillWalkTheDog"></textarea>
                 </div>
                 
                 <div class="mb-0">
                     <p class="form-label" style="font-weight: bold;">¿Conoce los gastos que implica tener una mascota?</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="awareOfCosts" id="awareOfCostsYes" value="yes">
+                    <div class="form-check form-check-inline" >
+                        <input class="form-check-input" type="radio" name="awareOfCosts" id="awareOfCostsYes" formControlName="awareOfCosts" [value]="true">
                         <label class="form-check-label" for="awareOfCostsYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="awareOfCosts" id="awareOfCostsNo" value="no">
+                        <input class="form-check-input" type="radio" name="awareOfCosts" id="awareOfCostsNo" formControlName="awareOfCosts" [value]="false">
                         <label class="form-check-label" for="awareOfCostsNo">No</label>
                     </div>
                 </div>
@@ -246,18 +248,18 @@
                 <div class="mb-0">
                     <p class="form-label" style="font-weight: bold;">¿Existe alguna alergia a algún animal de algún habitante de la casa?</p>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="allergyToPets" id="allergyToPetsYes" value="yes">
+                        <input class="form-check-input" type="radio" name="allergyToPets" id="allergyToPetsYes"  formControlName="allergyToPets" [value]="true">
                         <label class="form-check-label" for="allergyToPetsYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="allergyToPets" id="allergyToPetsNo" value="no">
+                        <input class="form-check-input" type="radio" name="allergyToPets" id="allergyToPetsNo"  formControlName="allergyToPets" [value]="false">
                         <label class="form-check-label" for="allergyToPetsNo">No</label>
                     </div>
                 </div>
                 
                 <div class="mb-3">
                     <label for="pregnantSituation" class="form-label">Si hubiera un embarazo de algún miembro del hogar, ¿Qué ocurriría con el nuevo adoptado?¿Cree que es buena idea un bebé con un perro o gato en casa?</label>
-                    <textarea class="form-control" id="pregnantSituation" rows="6" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="pregnantSituation" rows="6" placeholder="Escribe aquí" formControlName="pregnantSituation"></textarea>
                 </div>
                 
             </div>
@@ -275,55 +277,55 @@
             <div class="col-md-6">
                 <div class="mb-0">
                     <p class="form-label" style="font-weight: bold;">¿Es usted consciente de cómo podría actuar el nuevo adoptado y está preparado para ello? Por ejemplo, romper cosas, hacer sus necesidades dentro de casa, ladrar sin motivo aparente, subirse a los sofás, arañar las puertas, subirse a la gente para saludar, tirar de la correa al pasear, gruñir a los demás perros, morder muebles, etc.</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="petBehaviorAwareness" id="petBehaviorAwarenessYes" value="yes">
+                    <div class="form-check form-check-inline" >
+                        <input class="form-check-input" type="radio" name="petBehaviorAwareness" id="petBehaviorAwarenessYes" formControlName="petBehaviorAwareness" [value]="true">
                         <label class="form-check-label" for="petBehaviorAwarenessYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="petBehaviorAwareness" id="petBehaviorAwarenessNo" value="no">
+                        <input class="form-check-input" type="radio" name="petBehaviorAwareness" id="petBehaviorAwarenessNo" formControlName="petBehaviorAwareness" [value]="false">
                         <label class="form-check-label" for="petBehaviorAwarenessNo">No</label>
                     </div>
                 </div>
                 
                 <div class="mb-3">
                     <label for="petReturnReason" class="form-label">¿Lo devolvería si ocurriera esto sin esperar a un periodo razonable de adaptación? ¿Por qué?</label>
-                    <textarea class="form-control" id="petReturnReason" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="petReturnReason" rows="4" placeholder="Escribe aquí" formControlName="petReturnReason" required></textarea>
                 </div>
                 
 
                 <div class="mb-3">
                     <label for="petSelectionReason" class="form-label">¿Por qué usted ha escogido un cachorro ó un adulto?</label>
-                    <textarea class="form-control" id="petSelectionReason" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="petSelectionReason" rows="4" placeholder="Escribe aquí" formControlName="petSelectionReason" required></textarea>
                 </div>
                 
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="petSizeSelectionReason" class="form-label">¿Por qué lo ha elegido de ese tamaño?</label>
-                    <textarea class="form-control" id="petSizeSelectionReason" rows="3" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="petSizeSelectionReason" rows="3" placeholder="Escribe aquí" formControlName="petSizeSelectionReason" required></textarea>
                 </div>
                 
                 <div class="mb-3">
                     <label for="vacationPlans" class="form-label">¿Qué hará con su perro en vacaciones en caso que viaje?</label>
-                    <textarea class="form-control" id="vacationPlans" rows="3" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="vacationPlans" rows="3" placeholder="Escribe aquí" formControlName="vacationPlans" required></textarea>
                 </div>
                 
 
                 <div class="mb-0">
                     <p class="form-label" style="font-weight: bold;">¿Ha visitado alguna vez un refugio, asociación o protectora de animales?</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="visitedShelter" id="visitedShelterYes" value="yes">
+                    <div class="form-check form-check-inline"  >
+                        <input class="form-check-input" type="radio" name="visitedShelter" id="visitedShelterYes" formControlName="visitedShelter" [value]="true">
                         <label class="form-check-label" for="visitedShelterYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="visitedShelter" id="visitedShelterNo" value="no">
+                        <input class="form-check-input" type="radio" name="visitedShelter" id="visitedShelterNo" formControlName="visitedShelter" [value]="false">
                         <label class="form-check-label" for="visitedShelterNo">No</label>
                     </div>
                 </div>
                 
                 <div class="mb-3">
                     <label for="adoptionReason" class="form-label">¿Por qué ha optado por adoptar y no comprar?</label>
-                    <textarea class="form-control" id="adoptionReason" rows="5" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="adoptionReason" rows="5" placeholder="Escribe aquí" formControlName="adoptionReason" required></textarea>
                 </div>
                 
             </div>
@@ -341,30 +343,30 @@
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="housingType" class="form-label">Tipo y tamaño de la vivienda (chalet, piso, apartamento, dúplex, finca, planta baja, etc.)</label>
-                    <textarea class="form-control" id="housingType" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="housingType" rows="4" placeholder="Escribe aquí" formControlName="housingType" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="garden" class="form-label">¿Tiene jardín o patio? En caso de tener jardín al exterior, ¿la valla es suficientemente alta para que no se escape?</label>
-                    <textarea class="form-control" id="garden" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="garden" rows="4" placeholder="Escribe aquí" formControlName="garden" required></textarea>
                 </div>
           
             </div>
             <div class="col-md-6">
                 <div class="mb-0">
                     <p class="form-label" style="font-weight: bold;">¿Tienes el permiso del dueño de la casa para poder tener una mascota? (Ya sea de alquiler o vivienda familiar)?</p>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="permission" id="permissionYes" value="yes">
+                    <div class="form-check form-check-inline"  >
+                        <input class="form-check-input" type="radio" name="permission" id="permissionYes" formControlName="permission" [value]="true">
                         <label class="form-check-label" for="permissionYes">Sí</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="permission" id="permissionNo" value="no">
+                        <input class="form-check-input" type="radio" name="permission" id="permissionNo" formControlName="permission" [value]="false">
                         <label class="form-check-label" for="permissionNo">No</label>
                     </div>
                 </div>
                 
                 <div class="mb-3">
                     <label for="opinionMove" class="form-label">¿Qué pasaría con el nuevo adoptado si en algún momento tuvieran que mudarse a otra vivienda y no admiten animales?</label>
-                    <textarea class="form-control" id="opinionMove" rows="5" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="opinionMove" rows="5" placeholder="Escribe aquí" formControlName="opinionMove" required></textarea>
                 </div>
                 
             </div>
@@ -381,7 +383,7 @@
         <div class="mb-4 bg-orange" *ngIf="step8">
             <div class="mb-3">
                 <label for="opinionMoreInfo" class="form-label" style="font-weight: bold;">¿Hay algo más que crees que deberíamos saber?</label>
-                <textarea class="form-control" id="opinionMoreInfo" rows="5" placeholder="Escribe aquí"></textarea>
+                <textarea class="form-control" id="opinionMoreInfo" rows="5" placeholder="Escribe aquí" formControlName="opinionMoreInfo" required></textarea>
             </div>
             
             <div class="mb-3">
