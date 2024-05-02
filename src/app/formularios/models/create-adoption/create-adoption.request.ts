@@ -1,4 +1,4 @@
-export interface CreateAdoptionRequest{
+export interface CreateAdoptionFormRequest{
     //step1
     acceptConditions: boolean;
     //step2

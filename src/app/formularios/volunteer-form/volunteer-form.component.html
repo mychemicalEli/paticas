@@ -43,7 +43,7 @@
         </ul>
 
         <div class="form-check mb-4">
-            <input class="form-check-input" type="checkbox" formControlName="acceptConditions">
+            <input class="form-check-input" type="checkbox" formControlName="acceptConditions" required>
             <label class="form-check-label" for="acceptConditions">
                 <span class="checkbox-icon"></span>
                 He leído y acepto las condiciones
@@ -68,53 +68,58 @@
                     <label for="fullName" class="form-label">* Nombre y apellidos</label>
                     <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellidos"
                         formControlName="fullName" required>
-                    <div *ngIf="nameError" class="text-danger">Nombre es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Nombre es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">* Correo Electrónico</label>
                     <input type="email" class="form-control" id="email" placeholder="Correo Electrónico"
                         formControlName="email" required>
-                    <div *ngIf="emailError" class="text-danger">Email es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Email es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="address" class="form-label">* Dirección</label>
                     <input type="text" class="form-control" id="address" placeholder="Dirección"
                         formControlName="address" required>
-                    <div *ngIf="addressError" class="text-danger">Dirección es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Dirección es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="reason" class="form-label">¿Por qué te gustaría ser voluntario en nuestra
                         protectora?</label>
-                    <textarea class="form-control" id="reason" rows="5" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="reason" rows="5" placeholder="Escribe aquí" formControlName="reason" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
 
                 <div class="mb-3">
                     <label for="availability" class="form-label">¿Cuál es tu disponibilidad horaria para ser voluntario?
                         (días de la semana, horas por día)</label>
-                    <textarea class="form-control" id="availability" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="availability" rows="4" placeholder="Escribe aquí" formControlName="availability" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
 
                 <div class="mb-3">
                     <label for="policies" class="form-label">¿Estás dispuesto a seguir las políticas y procedimientos
                         establecidos por la protectora?</label>
-                    <textarea class="form-control" id="policies" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="policies" rows="4" placeholder="Escribe aquí" formControlName="policies" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="vehicle" class="form-label">¿Tienes vehículo propio y estás dispuesto a utilizarlo para
                         tareas relacionadas con la protectora?</label>
-                    <textarea class="form-control" id="vehicle" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="vehicle" rows="4" placeholder="Escribe aquí" formControlName="vehicle" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="expectations" class="form-label">¿Cuál es tu expectativa principal como voluntario de
                         nuestra protectora?</label>
-                    <textarea class="form-control" id="expectations" rows="6" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="expectations" rows="6" placeholder="Escribe aquí" formControlName="expectations" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
 
@@ -126,7 +131,7 @@
                     <label for="age" class="form-label">* Edad</label>
                     <input type="number" class="form-control" id="age" placeholder="Edad" formControlName="age"
                         required>
-                    <div *ngIf="ageError" class="text-danger">Edad es un campo obligatorio y debe ser mayor de 18</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Edad es un campo obligatorio y debe ser mayor de 18</div>
 
                 </div>
 
@@ -134,7 +139,7 @@
                     <label for="phone" class="form-label">* Teléfono de Contacto</label>
                     <input type="tel" class="form-control" id="phone" placeholder="Teléfono de Contacto"
                         formControlName="phone" required>
-                    <div *ngIf="phoneError" class="text-danger">Teléfono es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Teléfono es un campo obligatorio</div>
                 </div>
 
 
@@ -142,54 +147,59 @@
                     <label for="postalCode" class="form-label">* Código Postal</label>
                     <input type="text" class="form-control" id="postalCode" placeholder="Código Postal"
                         formControlName="postalCode" required>
-                    <div *ngIf="postalCodeError" class="text-danger">Código postal es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Código postal es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="experience" class="form-label">¿Cuál es tu experiencia previa en trabajo voluntario o
                         cuidado de animales?</label>
-                    <textarea class="form-control" id="experience" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="experience" rows="4" placeholder="Escribe aquí" formControlName="experience" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="skills" class="form-label">¿Tienes alguna preferencia o habilidad específica que te
                         gustaría utilizar como voluntario? (por ejemplo, atención al público, cuidado de animales,
                         eventos de recaudación de fondos, redes sociales, etc.)</label>
-                    <textarea class="form-control" id="skills" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="skills" rows="4" placeholder="Escribe aquí" formControlName="skills" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="healthLimitations" class="form-label">¿Tienes algún tipo de alergia a los animales o
                         limitación de salud que pueda afectar tu capacidad para trabajar con ellos?</label>
                     <textarea class="form-control" id="healthLimitations" rows="4"
-                        placeholder="Escribe aquí"></textarea>
+                        placeholder="Escribe aquí" formControlName="healthLimitations" required></textarea>
+                        <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="trainingArea" class="form-label">¿Hay alguna área en particular en la que te gustaría
                         recibir capacitación adicional?</label>
-                    <textarea class="form-control" id="trainingArea" rows="4" placeholder="Escribe aquí"></textarea>
+                    <textarea class="form-control" id="trainingArea" rows="4" placeholder="Escribe aquí" formControlName="trainingArea" required></textarea>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="additionalQuestions" class="form-label">¿Hay alguna pregunta adicional que te gustaría
                         hacer o algún comentario que desees agregar?</label>
                     <textarea class="form-control" id="additionalQuestions" rows="4"
-                        placeholder="Escribe aquí"></textarea>
+                        placeholder="Escribe aquí" formControlName="additionalQuestions" required></textarea>
+                        <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
 
             </div>
             <div class="form-check mb-4">
-                <input class="form-check-input" type="checkbox" id="acceptConditions"
-                    formControlName="acceptConditions">
+                <input class="form-check-input" type="checkbox" id="acceptTerms"
+                    formControlName="acceptTerms" required>
 
-                <label class="form-check-label" for="acceptConditions">
+                <label class="form-check-label" for="acceptTerms">
 
                     <span class="checkbox-icon"></span>
                     Al marcar esta casilla, acepto que mis datos personales proporcionados en este formulario sean
                     tratados de acuerdo con la política de privacidad de la protectora de animales, con el fin de
                     gestionar mi participación como voluntario.
-                    <div *ngIf="checkError" class="text-danger">Debes aceptar los términos y condiciones</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Debes aceptar los términos y condiciones</div>
                 </label>
 
 

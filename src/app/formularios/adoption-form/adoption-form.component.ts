@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CreateAdoptionRequest } from '../models/create-adoption/create-adoption.request';
-import { AdoptionService } from '../service/adoption.service';
+import { CreateAdoptionFormRequest } from '../models/create-adoption/create-adoption.request';
+import { AdoptionFormService } from '../service/adoption-form.service';
 
 
 @Component({
@@ -15,42 +15,7 @@ export class AdoptionFormComponent implements OnInit {
   currentStep = 1;
 
   //declaramos la request para que no salga como undefined
-  request: CreateAdoptionRequest = { 
-    acceptConditions: false, 
-    petName: '', 
-    fullName: '', 
-    age: 0, 
-    email: '', 
-    phone: 0, 
-    address: '', 
-    postalCode: 0, 
-    peopleCount: 0, 
-    jobSituation: '', 
-    hobbies: '', 
-    previousPets: false, 
-    vaccinatedRegularly: false, 
-    currentPets: false, 
-    shareSpace: false, 
-    sterilizedPets: false, 
-    opinionSterilization: '', 
-    whoAdoptedAndWhy: '', 
-    whoWillWalkTheDog: '', 
-    awareOfCosts: false, 
-    allergyToPets: false, 
-    pregnantSituation: '', 
-    petBehaviorAwareness: false, 
-    petReturnReason: '', 
-    petSelectionReason: '', 
-    petSizeSelectionReason: '', 
-    vacationPlans: '', 
-    visitedShelter: false, 
-    adoptionReason: '', 
-    housingType: '', 
-    garden: '', 
-    permission: false, 
-    opinionMove: '', 
-    opinionMoreInfo: '', 
-    consentCheckbox: false };
+  request: CreateAdoptionFormRequest = {} as CreateAdoptionFormRequest;
 
   //steps
   step1!: FormGroup;
@@ -62,21 +27,22 @@ export class AdoptionFormComponent implements OnInit {
   step7!: FormGroup;
   step8!: FormGroup;
 
-  //errores del step 3 
-  nameError: boolean = false;
-  ageError: boolean = false;
-  emailError: boolean = false;
-  phoneError: boolean = false;
-  addressError: boolean = false;
-  postalCodeError: boolean = false;
-  peopleCountError: boolean = false;
-  jobSituationError: boolean = false;
-  hobbiesError: boolean = false;
-
+  // Errores del paso 3
+  fieldErrors: { [key: string]: boolean } = {
+  name: false,
+  age: false,
+  email: false,
+  phone: false,
+  address: false,
+  postalCode: false,
+  peopleCount: false,
+  jobSituation: false,
+  hobbies: false
+};
 
 
   //necesitamos el formbuilder para validar, el adoption service para hacer el post y la ruta para redirigirnos al acabar el formulario
-  constructor(private formBuilder: FormBuilder, private adoptionService: AdoptionService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private adoptionFormService: AdoptionFormService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -159,39 +125,28 @@ export class AdoptionFormComponent implements OnInit {
     this.currentStep += step;
   }
 
-  //method to validate fields in step 3
-  validateFields3() {
-    const fieldsToValidate = [
-      { name: 'fullName', errorProperty: 'nameError' },
-      { name: 'age', errorProperty: 'ageError' },
-      { name: 'email', errorProperty: 'emailError' },
-      { name: 'phone', errorProperty: 'phoneError' },
-      { name: 'address', errorProperty: 'addressError' },
-      { name: 'postalCode', errorProperty: 'postalCodeError' },
-      { name: 'peopleCount', errorProperty: 'peopleCountError' },
-      { name: 'jobSituation', errorProperty: 'jobSituationError' },
-      { name: 'hobbies', errorProperty: 'hobbiesError' }
-    ];
+  
+  // Método para verificar si hay errores
+checkErrors() {
+  return Object.values(this.fieldErrors).some(error => error);
+}
 
-    let allValid = true;
+// Método para establecer un error
+setFieldError(fieldName: string, hasError: boolean) {
+  this.fieldErrors[fieldName] = hasError;
+}
 
-    fieldsToValidate.forEach(field => {
-      const control = this.step3.get(field.name);
-      const error = !!control && control.invalid;
-      this.setProperty(field.errorProperty, error);
-      if (error) {
-        allValid = false;
+//validamos los campos antes de hacer el submit
+  validateFields() {
+    for (const controlName in this.step3.controls) {
+      if (Object.prototype.hasOwnProperty.call(this.step3.controls, controlName)) {
+        const control = this.step3.get(controlName);
+        this.setFieldError(controlName + 'Error', !!control && control.invalid);
       }
-    });
-
-    if (allValid) {
+    }
+    if (this.step3.valid) {
       this.nextPrev(1);
     }
-  }
-
-  // method to asign boolean value to validation property
-  setProperty(propertyName: string, value: boolean) {
-    (this as any)[propertyName] = value;
   }
 
   //recuperar los campos del formulario para hacer el submit
@@ -278,7 +233,7 @@ export class AdoptionFormComponent implements OnInit {
     console.log('Are all steps valid:', this.areAllStepsValid());
 
     this.stablishRequest();
-    this.adoptionService.createAdoption(this.request);
+    this.adoptionFormService.createAdoptionForm(this.request);
     this.currentStep = 10; // Cambia al paso de formulario enviado correctamente
   }
 

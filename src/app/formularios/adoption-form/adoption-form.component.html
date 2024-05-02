@@ -74,57 +74,57 @@
                 <div class="mb-3">
                     <label for="fullName" class="form-label">* Nombre y apellidos</label>
                     <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellidos" formControlName="fullName" required>
-                    <div *ngIf="nameError" class="text-danger">Nombre es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Nombre es un campo obligatorio</div>
                 </div>
                 <div class="mb-3">
                     <label for="age" class="form-label">* Edad</label>
                     <input type="number" class="form-control" id="age" placeholder="Edad" formControlName="age" required>
-                    <div *ngIf="ageError" class="text-danger">Edad es un campo obligatorio y debe ser mayor de 18</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Edad es un campo obligatorio y debe ser mayor de 18</div>
                     
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">* Correo Electrónico</label>
                     <input type="email" class="form-control" id="email" placeholder="Correo Electrónico" formControlName="email" required>
-                    <div *ngIf="emailError" class="text-danger">Email es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Email es un campo obligatorio</div>
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">* Teléfono de Contacto</label>
                     <input type="tel" class="form-control" id="phone" placeholder="Teléfono de Contacto" formControlName="phone" required>
-                    <div *ngIf="phoneError" class="text-danger">Teléfono es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Teléfono es un campo obligatorio</div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="address" class="form-label">* Dirección</label>
                     <input type="text" class="form-control" id="address" placeholder="Dirección" formControlName="address" required>
-                    <div *ngIf="addressError" class="text-danger">Dirección es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Dirección es un campo obligatorio</div>
                 </div>
                 <div class="mb-3">
                     <label for="postalCode" class="form-label">* Código Postal</label>
                     <input type="text" class="form-control" id="postalCode" placeholder="Código Postal" formControlName="postalCode" required>
-                    <div *ngIf="postalCodeError" class="text-danger">Código postal es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Código postal es un campo obligatorio</div>
                 </div>
                 <div class="mb-3">
                     <label for="peopleCount" class="form-label">* Número de Personas con las que Convives</label>
                     <input type="number" class="form-control" id="peopleCount" placeholder="0" formControlName="peopleCount" required>
-                    <div *ngIf="peopleCountError" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
                 <div class="mb-3">
                     <label for="jobSituation" class="form-label">* Situación Laboral</label>
                     <input type="text" class="form-control" id="jobSituation" placeholder="Situación Laboral" formControlName="jobSituation" required>
-                    <div *ngIf="jobSituationError" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="hobbies" class="form-label">* ¿A qué dedicas tu tiempo libre?</label>
                 <textarea class="form-control" id="hobbies" rows="4" placeholder="Escribe aquí" formControlName="hobbies" required></textarea>
-                <div *ngIf="hobbiesError" class="text-danger">Este es un campo obligatorio</div>
+                <div *ngIf="checkErrors()" class="text-danger">Este es un campo obligatorio</div>
             </div>
         </div>
         <div class="d-flex justify-content-center">
             <button class="btn" style="margin-right: 10px;" (click)="nextPrev(-1)">Anterior</button>
-            <button class="btn" style="margin-left: 10px;" (click)="validateFields3()">Siguiente</button>
+            <button class="btn" style="margin-left: 10px;" (click)="validateFields()">Siguiente</button>
         </div>
     </div>
 
