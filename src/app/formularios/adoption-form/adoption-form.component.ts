@@ -27,18 +27,8 @@ export class AdoptionFormComponent implements OnInit {
   step7!: FormGroup;
   step8!: FormGroup;
 
-  // Errores del paso 3
-  fieldErrors: { [key: string]: boolean } = {
-  name: false,
-  age: false,
-  email: false,
-  phone: false,
-  address: false,
-  postalCode: false,
-  peopleCount: false,
-  jobSituation: false,
-  hobbies: false
-};
+  // Errores
+  fieldErrors: { [key: string]: boolean } = {};
 
 
   //necesitamos el formbuilder para validar, el adoption service para hacer el post y la ruta para redirigirnos al acabar el formulario
@@ -141,10 +131,14 @@ setFieldError(fieldName: string, hasError: boolean) {
     for (const controlName in this.step3.controls) {
       if (Object.prototype.hasOwnProperty.call(this.step3.controls, controlName)) {
         const control = this.step3.get(controlName);
-        this.setFieldError(controlName + 'Error', !!control && control.invalid);
+        if (control?.invalid) {
+          this.setFieldError(controlName, true);
+        } else {
+          this.setFieldError(controlName, false);
+        }
       }
     }
-    if (this.step3.valid) {
+    if (!this.checkErrors()) {
       this.nextPrev(1);
     }
   }
@@ -217,8 +211,6 @@ setFieldError(fieldName: string, hasError: boolean) {
   }
 
 
-
-
   //hacer submit del formulario
   //primero comprueba que sean validos todos los steps
   //después recoge todos los datos
@@ -233,6 +225,7 @@ setFieldError(fieldName: string, hasError: boolean) {
     console.log('Are all steps valid:', this.areAllStepsValid());
 
     this.stablishRequest();
+    console.log('request is valid...');
     this.adoptionFormService.createAdoptionForm(this.request);
     this.currentStep = 10; // Cambia al paso de formulario enviado correctamente
   }

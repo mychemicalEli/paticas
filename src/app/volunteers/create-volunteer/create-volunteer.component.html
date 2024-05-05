@@ -1,0 +1,54 @@
+<main class="container-fluid">
+    <form class="row justify-content-center" [formGroup]="form">
+        <h3 class="title">AÑADIR VOLUNTARIO</h3>
+
+        <div class="col-lg-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellido"
+                    formControlName="fullName">
+                <label for="fullName">Nombre y apellido</label>
+                <div *ngIf="fieldErrors['fullName']" class="text-danger">Este es un campo obligatorio</div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" formControlName="availability">
+                    <option [ngValue]=1>Mañanas</option>
+                    <option [ngValue]=2>Tardes</option>
+                    <option [ngValue]=3>Completa</option>
+                </select>
+                <label for="floatingSelect">Disponibilidad</label>
+                <div *ngIf="fieldErrors['availability']" class="text-danger">Este es un campo obligatorio</div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="phone" class="form-control" id="phone" placeholder="Teléfono de contacto"
+                    formControlName="phone">
+                <label for="phone">Teléfono de contacto</label>
+                <div *ngIf="fieldErrors['phone']" class="text-danger">Este es un campo obligatorio</div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com"
+                    formControlName="email">
+                <label for="email">Email address</label>
+                <div *ngIf="fieldErrors['email']" class="text-danger">Este es un campo obligatorio</div>
+            </div>
+
+            <div class="mb-3">
+                <input #profileImage class="form-control" type="file" id="profileImage" formControlName="profileImage"
+                    accept="image/*" (change)="previewImage($event)">
+                <img #preview id="preview" src="#" alt="Vista previa de la imagen">
+                <button *ngIf="imageSelected" class="btn btn-erase" (click)="removeImage()">Eliminar</button>
+            </div>
+
+
+
+
+
+
+            <button type="submit" class="btn" (click)="validateFields()">AÑADIR</button>
+        </div>
+    </form>
+</main>
