@@ -1,6 +1,6 @@
 import { volunteerAvailability } from "../volunteer-availability.enum";
 
-export interface CreateVolunteerRequest {
+export interface UpdateVolunteerRequest {
     id: number;
     fullName: string;
     availability: volunteerAvailability;

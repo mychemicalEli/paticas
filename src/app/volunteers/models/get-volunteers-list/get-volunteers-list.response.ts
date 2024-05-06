@@ -9,10 +9,10 @@ export interface GetVolunteerListResponse{
 
 export interface GetVolunteerListItemResponse{
     id: number;
-    profileImage: string;
-    name: string;
-    surname: string;
+    profileImage: FormData;
+    fullName: string;
     phone: number;
     email: string;
     availability: volunteerAvailability;
+    
 }

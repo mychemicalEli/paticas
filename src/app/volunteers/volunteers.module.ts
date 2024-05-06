@@ -7,6 +7,7 @@ import { VolunteersListComponent } from './volunteers-list/volunteers-list.compo
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateVolunteerComponent } from './create-volunteer/create-volunteer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateVolunteerComponent } from './update-volunteer/update-volunteer.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     VolunteersComponent,
     VolunteersListComponent,
     CreateVolunteerComponent,
+    UpdateVolunteerComponent,
     
   ],
   imports: [

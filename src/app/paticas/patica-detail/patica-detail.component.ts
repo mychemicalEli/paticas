@@ -14,7 +14,7 @@ export class PaticaDetailComponent implements OnInit {
   @Input() paticaId!: number;
   
   // Almacenar detalles de la patica
-  patica!: GetPaticasListItemResponse;
+  @Input () patica!: GetPaticasListItemResponse;
 
   // Enumeración para el tamaño de la patica
   paticaSizeEnum = paticaSize;

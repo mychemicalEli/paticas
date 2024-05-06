@@ -1,0 +1,63 @@
+<main class="container-fluid" *ngIf="volunteer">
+    <form class="row justify-content-center" [formGroup]="form">
+        <h3 class="title">EDITAR VOLUNTARIO</h3>
+
+        <div class="col-lg-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellido"
+                    formControlName="fullName">
+                <label for="fullName">Nombre y apellido</label>
+            </div>
+        
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" formControlName="availability">
+                    <option [value]=1 [selected]="volunteer?.availability === 1">Mañanas</option>
+                    <option [value]=2 [selected]="volunteer?.availability === 2">Tardes</option>
+                    <option [value]=3 [selected]="volunteer?.availability === 3">Completa</option>
+                </select>
+                              
+                <label for="floatingSelect">Disponibilidad</label>
+            </div>
+            
+            
+            
+            
+        
+            <div class="form-floating mb-3">
+                <input type="phone" class="form-control" id="phone" placeholder="Teléfono de contacto"
+                    formControlName="phone">
+                <label for="phone">Teléfono de contacto</label>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com"
+                    formControlName="email">
+                <label for="email">Email address</label>
+            </div>
+        
+            <div class="containerForFile">
+                <div class="mb-3 image-container">
+                    <label class="hoverable" for="fileInput">
+                        <img [src]="imagePreview ? imagePreview : volunteer.profileImage" />
+                        <div class="hover-text">Selecciona una foto</div>
+                        <div class="background"></div>
+                    </label>
+                    <input
+                        id="fileInput"
+                        type="file"
+                        class="select-profile-picture"
+                        (change)="onSelectFile($event)"
+                        accept="image/*"
+                    />
+                </div>
+                <button class="btn btn-erase" (click)="delete()">Borrar</button>
+            </div>
+            
+        
+            <button type="submit" class="btn" (click)="submitForm()">GUARDAR CAMBIOS</button>
+        </div>
+        
+    </form>
+</main>

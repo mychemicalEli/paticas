@@ -22,7 +22,7 @@ export class VolunteersListComponent {
   }
 
   private getVolunteersList() {
-    this.volunteerService.get(this.request)
+    this.volunteerService.getList(this.request)
       .subscribe({
         next: (response: GetVolunteerListResponse) => {
           this.response = response;
