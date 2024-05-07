@@ -14,8 +14,10 @@ export class VolunteersListComponent {
   response?: GetVolunteerListResponse;
   availabilities: string[] = [];
   availability = volunteerAvailability;
+  currentVolunteerName: string = '';
+  currentVolunteerId: number = 0;
 
-  constructor(private volunteerService: VolunteerService) {}
+  constructor(private volunteerService: VolunteerService) { }
 
   ngOnInit(): void {
     this.getVolunteersList();
@@ -39,10 +41,28 @@ export class VolunteersListComponent {
     });
     this.availabilities = Array.from(availabilitiesSet);
   }
-  
+
 
   onPageChange(pageSize: number) {
     this.request.page = pageSize;
     this.getVolunteersList();
+  }
+
+  onDeleteClick(volunteerName: string, volunteerId: number) {
+    this.currentVolunteerName = volunteerName;
+    this.currentVolunteerId = volunteerId;
+  }
+
+  deleteVolunteer(volunteerId: number) {
+    this.volunteerService.deleteVolunteer(volunteerId).subscribe({
+      next: () => {
+        console.log('Voluntario eliminado exitosamente');
+        const closeButton = document.getElementById('x');
+        closeButton?.click();
+      },
+      error: (error) => {
+        console.error('Error al eliminar el voluntario:', error);
+      }
+    });
   }
 }

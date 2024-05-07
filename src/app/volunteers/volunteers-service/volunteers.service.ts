@@ -40,7 +40,7 @@ export class VolunteerService {
     }
 
     public deleteVolunteer(volunteerId: number): Observable<any> {
-        return this.httpClient.delete(`${this.baseUrl}/${volunteerId}`);
+        return this.httpClient.delete(`${this.baseUrl}volunteers/${volunteerId}`); // Una sola barra
       }
 
       
