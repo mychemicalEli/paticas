@@ -17,7 +17,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     NavbarComponent,
     NavbarUserComponent,
     NavbarShelterComponent,
-    FooterComponent,
+    FooterComponent
+    
   ],
   imports: [
     BrowserModule,

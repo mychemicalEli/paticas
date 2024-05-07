@@ -5,6 +5,7 @@ import { PaticasService } from '../paticas-service/paticas.service';
 import { Router } from '@angular/router';
 
 @Component({
+ 
   selector: 'app-paticas-list',
   templateUrl: './paticas-list.component.html',
   styleUrl: './paticas-list.component.css'

@@ -1,13 +1,13 @@
-import { paticaSize } from "../paticas-size.enum";
+import { paticaSize } from "../../../paticas/models/paticas-size.enum";
 
-export interface GetPaticasListResponse{
-    paticas: GetPaticasListItemResponse[];
+export interface GetShelterPaticasListResponse{
+    paticas: GetShelterPaticasListItemResponse[];
     totalElements: number;
     page: number;
     pageSize: number;
 }
 
-export interface GetPaticasListItemResponse{
+export interface GetShelterPaticasListItemResponse{
     id: number;
     profileImage: string;
     name: string;
@@ -27,5 +27,4 @@ export interface GetPaticasListItemResponse{
     goodWithDogs: boolean,
     goodWithCats: boolean,
     shelterId:number,
-   
 }

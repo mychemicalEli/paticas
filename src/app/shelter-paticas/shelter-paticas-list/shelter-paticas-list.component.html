@@ -1,12 +1,7 @@
 <main class="container-fluid">
 
     <div class="filters">
-        <input class="form-control" type="text" name="search" autocomplete="off" placeholder="Nombre">
-        <select ngModel name="option" class="form-select mb-3" aria-label=".form-select-lg example" id="selectAction">
-            <option value="" disabled selected style="display:none;">Todos</option>
-            <option *ngFor="let species of species" [value]="species">{{ species }}</option>
-        </select>
-        <button type="button" class="btn btn-outline-primary">Filtrar</button>
+        <button type="button" class="btn">+ AÑADIR</button>
     </div>
 
     <div *ngIf="response">
@@ -16,9 +11,12 @@
                     <i class="fa-solid" [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
                     <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer" (click)="onSelectPatica(paticas)">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(paticas)">{{ paticas.name }} <!--{{paticas.id}}--></h5>
+                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(paticas)">{{ paticas.name }} {{paticas.shelterId}}</h5>
                         <div class="icons">
-                            <i class="bi" [ngClass]="{'bi-heart': !paticas.liked, 'bi-heart-fill': paticas.liked, 'fs-4': true}" (click)="toggleLike(paticas)"></i>
+                
+                            <i class="bi bi-pencil-square fs-4"></i>
+                            <i class="bi bi-trash3-fill fs-4"></i>
+                        
                         </div>
                     </div>
                 </div>

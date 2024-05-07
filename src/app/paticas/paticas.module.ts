@@ -17,11 +17,9 @@ import { PaticaDetailComponent } from './patica-detail/patica-detail.component';
     CommonModule,
     PaticasRoutingModule,
     NgxPaginationModule,
-
   ],
-  exports: [
-    PaticasListComponent,
-    // Otros componentes que quieras exportar
-  ]
+
+  // exports: [PaticasListComponent]
+
 })
 export class PaticasModule { }

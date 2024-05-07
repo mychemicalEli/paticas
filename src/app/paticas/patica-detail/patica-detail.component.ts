@@ -18,12 +18,20 @@ export class PaticaDetailComponent implements OnInit {
 
   // Enumeración para el tamaño de la patica
   paticaSizeEnum = paticaSize;
+  isShelterAdmin = false;
   
   // Constructor para inyectar dependencias
   constructor(private route: ActivatedRoute, private paticasService: PaticasService) {}
   
   // Se ejecuta al inicializar el componente
   ngOnInit() {
+
+    //Esto es para saber si debe mostrar el botón de adoptar o no
+    this.route.paramMap.subscribe(params => {
+      const isShelterAdminParam = window.history.state.isShelterAdmin;
+      this.isShelterAdmin = isShelterAdminParam !== undefined ? isShelterAdminParam : false;
+    });
+  
     // Obtener el ID de la patica de la ruta si no se proporciona directamente
     if (!this.paticaId) {
       this.route.params.subscribe(params => {
