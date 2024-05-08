@@ -14,7 +14,7 @@ export class PaticasListComponent {
 
   // Propiedades para almacenar la respuesta, solicitud y especies de paticas
   response?: GetPaticasListResponse;
-  request: GetPaticasListRequest = { page: 0, pageSize: 12 };
+  request: GetPaticasListRequest = { page: 0, pageSize: 12, shelterId:0 };
   species: Set<string> = new Set();
   // Propiedad para almacenar la patica seleccionada
   selectedPatica!: GetPaticasListItemResponse;

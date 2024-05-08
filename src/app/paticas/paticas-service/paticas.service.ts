@@ -3,6 +3,8 @@ import { environment } from "../../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { GetPaticasListRequest } from "../models/get-paticas-list/get-paticas-list.request";
 import { Observable } from "rxjs";
+import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { GetPaticasListItemResponse, GetPaticasListResponse } from "../models/get-paticas-list/get-paticas-list.response";
 
 // Decorador Injectable para marcar esta clase como un servicio inyectable
@@ -40,5 +42,18 @@ export class PaticasService {
     return this.httpClient.get<GetPaticasListItemResponse>(`${this.baseUrl}paticas/${paticaId}`);
   }
 
+  public getListFilteredByShelter(request: GetPaticasListRequest, shelterId: number): Observable<GetPaticasListResponse> {
+    let params = new HttpParams()
+      .set("page", request.page.toString())
+      .set("pageSize", request.pageSize.toString())
+      .set("shelterId", shelterId.toString());
+    
+    console.log("Query Params:", params.toString());
+    
+    return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, { params });
+  }
  
-}
+  }
+  
+ 
+
