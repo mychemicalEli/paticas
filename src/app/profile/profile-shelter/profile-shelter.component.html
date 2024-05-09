@@ -1,0 +1,116 @@
+<main class="profile-container" id="profile-container" *ngIf="shelterProfile">
+    <div class="card shelter mb-3"
+    [ngStyle]="{ 'background': shelterProfile.backgroundImage ? 'rgba(232, 192, 125, 0.6) url(' + shelterProfile.backgroundImage + ') no-repeat' : '#E8C07D', 'background-size': 'cover'}">
+        <div class="row g-0">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="img-container">
+                    <img [src]="shelterProfile.image || '/assets/img/profile/defaultIconProfile.png'" class="img-fluid-shelter" alt="Shelter Image">
+                </div>
+            </div>
+
+            <div class="col-md-8 d-flex align-items-center">
+
+                <div class="card-body-shelter">
+                    <h1 class="card-title-shelter">{{ shelterProfile.name }}</h1>
+                    <h5 class="card-email-shelter">{{ shelterProfile.email }}</h5>
+                    <h5 class="card-location-shelter"><i class="bi bi-geo-alt-fill fs-5"></i>{{ shelterProfile.location
+                        }}</h5>
+                </div>
+                <button type="button" class="btn btn-dark" (click)="showForm = !showForm"><i
+                        class="bi bi-pencil-fill"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- Formulario -->
+    <div *ngIf="showForm" class="container">
+        <form class="row g-3" [formGroup]="profileForm">
+            <div class="col-md-6">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="floatingInputName"
+                        placeholder="Nombre de la protectora" formControlName="name">
+                    <label for="floatingInputName">Nombre de la protectora</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="floatingInputCIF" placeholder="CIF" formControlName="CIF">
+                    <label for="floatingInputCIF">CIF</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com" formControlName="email">
+                    <label for="floatingInputEmail">Email</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="phone" class="form-control" id="floatingInputPhone" placeholder="Teléfono de contacto" formControlName="phone">
+                    <label for="floatingInputPhone">Teléfono</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-floating mb-3">
+                    <input list="municipios" name="municipios" type="text" placeholder="Elige un municipio de la Región de Murcia" class="custom-input" formControlName="location">
+                    <datalist id="municipios">
+                        <option value="Abanilla">
+                        <option value="Abarán">
+                        <option value="Águilas">
+                        <option value="Albudeite">
+                        <option value="Alcantarilla">
+                        <option value="Los Alcázares">
+                        <option value="Aledo">
+                        <option value="Alguazas">
+                        <option value="Alhama de Murcia">
+                        <option value="Archena">
+                        <option value="Beniel">
+                        <option value="Blanca">
+                        <option value="Bullas">
+                        <option value="Calasparra">
+                        <option value="Campos del Río">
+                        <option value="Caravaca de la Cruz">
+                        <option value="Cartagena">
+                        <option value="Cehegín">
+                        <option value="Ceutí">
+                        <option value="Cieza">
+                        <option value="Fortuna">
+                        <option value="Fuente Álamo de Murcia">
+                        <option value="Jumilla">
+                        <option value="Librilla">
+                        <option value="Lorca">
+                        <option value="Lorquí">
+                        <option value="Mazarrón">
+                        <option value="Molina de Segura">
+                        <option value="Moratalla">
+                        <option value="Mula">
+                        <option value="Murcia">
+                        <option value="Ojós">
+                        <option value="Pliego">
+                        <option value="Puerto Lumbreras">
+                        <option value="Ricote">
+                        <option value="San Javier">
+                        <option value="San Pedro del Pinatar">
+                        <option value="Santomera">
+                        <option value="Torre-Pacheco">
+                        <option value="Las Torres de Cotillas">
+                        <option value="Totana">
+                        <option value="Ulea">
+                        <option value="La Unión">
+                        <option value="Villanueva del Río Segura">
+                        <option value="Yecla">
+                    </datalist>
+                </div>
+                
+                
+                <div class="form-group mb-4">
+                    <label for="profileImage">Imagen de perfil</label>
+                    <input type="file" class="form-control" id="profileImage" formControlName="profileImage">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="backgroundImage">Imagen de fondo</label>
+                    <input type="file" class="form-control" id="backgroundImage" formControlName="backgroundImage">
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-save">GUARDAR CAMBIOS</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</main>

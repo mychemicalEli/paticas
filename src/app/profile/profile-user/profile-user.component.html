@@ -1,0 +1,68 @@
+<main class="profile-container" id="profile-container" *ngIf="userProfile">
+    <div class="card shelter mb-3"
+    [ngStyle]="{ 'background': userProfile.backgroundImage ? 'rgba(232, 192, 125, 0.6) url(' + userProfile.backgroundImage + ') no-repeat' : '#E8C07D', 'background-size': 'cover'}">
+        <div class="row g-0">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="img-container">
+                    <img [src]="userProfile.image || '/assets/img/profile/defaultIconProfile.png'" class="img-fluid-shelter" alt="Shelter Image">
+                </div>
+            </div>
+
+            <div class="col-md-8 d-flex align-items-center">
+
+                <div class="card-body-shelter">
+                    <h1 class="card-title-shelter">{{ userProfile.name }}</h1>
+                    <h5 class="card-email-shelter">{{ userProfile.email }}</h5>
+                    <h5 class="card-location-shelter"><i class="bi bi-geo-alt-fill fs-5"></i>{{ userProfile.location
+                        }}</h5>
+                </div>
+                <button type="button" class="btn btn-dark" (click)="showForm = !showForm"><i
+                        class="bi bi-pencil-fill"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- Formulario -->
+    <div *ngIf="showForm" class="container">
+        <form class="row g-3" [formGroup]="profileForm">
+            <div class="col-md-6">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="floatingInputName"
+                        placeholder="Nombre de la protectora" formControlName="name">
+                    <label for="floatingInputName">Nombre y apellidos</label>
+                </div>
+            
+                <div class="form-floating mb-4">
+                    <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com" formControlName="email">
+                    <label for="floatingInputEmail">Email</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="phone" class="form-control" id="floatingInputPhone" placeholder="Teléfono de contacto" formControlName="phone">
+                    <label for="floatingInputPhone">Teléfono</label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-save">GUARDAR CAMBIOS</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputLocation" placeholder="Localización" formControlName="location">
+                    <label for="floatingInputPhone">Localización</label>
+                </div>
+                
+                
+                <div class="form-group mb-4">
+                    <label for="profileImage">Imagen de perfil</label>
+                    <input type="file" class="form-control" id="profileImage" formControlName="profileImage">
+                </div>
+                <div class="form-group mb-4">
+                    <label for="backgroundImage">Imagen de fondo</label>
+                    <input type="file" class="form-control" id="backgroundImage" formControlName="backgroundImage">
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+</main>
