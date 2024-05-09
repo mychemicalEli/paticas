@@ -1,19 +1,19 @@
-<main class="profile-container" id="profile-container" *ngIf="userProfile">
-    <div class="card shelter mb-3"
-    [ngStyle]="{ 'background': userProfile.backgroundImage ? 'rgba(232, 192, 125, 0.6) url(' + userProfile.backgroundImage + ') no-repeat' : '#E8C07D', 'background-size': 'cover'}">
+<main class="profile-container" id="profile-container" *ngIf="response">
+    <div class="card user mb-3"
+    [ngStyle]="{ 'background': response.backgroundImage ? 'rgba(232, 192, 125, 0.6) url(' + response.backgroundImage + ') no-repeat' : '#E8C07D', 'background-size': 'cover'}">
         <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <div class="img-container">
-                    <img [src]="userProfile.image || '/assets/img/profile/defaultIconProfile.png'" class="img-fluid-shelter" alt="Shelter Image">
+                    <img [src]="response.image || '/assets/img/profile/defaultIconProfile.png'" class="img-fluid-user" alt="Shelter Image">
                 </div>
             </div>
 
             <div class="col-md-8 d-flex align-items-center">
 
-                <div class="card-body-shelter">
-                    <h1 class="card-title-shelter">{{ userProfile.name }}</h1>
-                    <h5 class="card-email-shelter">{{ userProfile.email }}</h5>
-                    <h5 class="card-location-shelter"><i class="bi bi-geo-alt-fill fs-5"></i>{{ userProfile.location
+                <div class="card-body-user">
+                    <h1 class="card-title-user">{{ response.name }}</h1>
+                    <h5 class="card-email-user">{{ response.email }}</h5>
+                    <h5 class="card-location-user"><i class="bi bi-geo-alt-fill fs-5"></i>{{ response.location
                         }}</h5>
                 </div>
                 <button type="button" class="btn btn-dark" (click)="showForm = !showForm"><i
@@ -63,6 +63,28 @@
             </div>
         </form>
     </div>
-
+    <div class="likes">
+        <div class="tab-container">
+            <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active btn-tab" id="home-tab" data-bs-toggle="tab" href="#paticas" role="tab" aria-controls="home" aria-selected="true">Paticas</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link btn-tab" id="profile-tab" data-bs-toggle="tab" href="#shelters" role="tab" aria-controls="profile" aria-selected="false">Protectoras</a>
+                </li>
+            </ul>
+            <div class="tab-content mt-3" id="myTabContent">
+                <div class="tab-pane fade show active" id="paticas" role="tabpanel" aria-labelledby="paticas-tab">
+                    
+   <app-paticas-liked></app-paticas-liked>
+                
+                </div>
+                <div class="tab-pane fade" id="shelters" role="tabpanel" aria-labelledby="shelters-tab">
+                    <app-shelters-liked></app-shelters-liked>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 </main>

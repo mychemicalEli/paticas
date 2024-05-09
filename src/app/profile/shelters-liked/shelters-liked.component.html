@@ -1,0 +1,31 @@
+<div *ngIf="shelters">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col-4"
+            *ngFor="let shelter of shelters || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }">
+            <div class="card h-100" style="height: 450px;">
+                <img [src]="shelter.image" class="card-img-top" alt="imageShelter"
+                    [routerLink]="['/shelters', shelter.id]" style="cursor:pointer">
+                <div class="card-body">
+                    <h5 class="card-title text-wrap text-truncate" [routerLink]="['/shelters', shelter.id]"
+                        style="cursor:pointer">{{ shelter.name }}</h5>
+
+                    <div class="card-content">
+                        <button type="button" class="btn btn-light disabled mb-2 mb-md-0">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            {{ shelter.location }}
+                        </button>
+
+                        <i class="bi"
+                            [ngClass]="{'bi-heart': !shelter.liked, 'bi-heart-fill': shelter.liked, 'fs-4': true}"
+                            (click)="toggleLike(shelter)">
+                        </i>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" " nextLabel=" ">
+</pagination-controls>
