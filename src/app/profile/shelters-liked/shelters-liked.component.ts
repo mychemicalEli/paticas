@@ -34,9 +34,9 @@ export class SheltersLikedComponent implements OnInit {
 
   toggleLike(shelter: GetUserSheltersLikedItemResponse): void {
     shelter.liked = !shelter.liked;
-    this.profileService.updatePaticaLike(shelter.id, shelter.liked).subscribe({
+    this.profileService.updateShelterLike(shelter.id, shelter.liked).subscribe({
       next: () => {
-        console.log(`Patica ${shelter.id} updated: liked = ${shelter.liked}`);
+        console.log(`Shelter ${shelter.id} updated: liked = ${shelter.liked}`);
         // Actualizar la lista de shelter después de cambiar el estado de "liked"
         this.getSheltersLikedList();
       },

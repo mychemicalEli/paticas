@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { map } from 'rxjs/operators'; // Importar map desde rxjs/operators
 import { GetShelterPaticasListRequest } from "../models/get-shelter-paticas-list/get-shelter-paticas-list.request";
 import { GetShelterPaticasListResponse } from "../models/get-shelter-paticas-list/get-shelter-paticas-list.response";
+import { AddPaticaRequest } from "../models/add-patica/add-patica.request";
 
 @Injectable({ 
   providedIn: 'root'
@@ -30,4 +31,8 @@ export class ShelterPaticasService {
         })
       );
   }
+
+  public addPatica(request: AddPaticaRequest) {
+    return this.httpClient.post(`${this.baseUrl}/shelterPaticas/add`, request)
+}
 }

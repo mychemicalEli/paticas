@@ -97,7 +97,7 @@ export class UpdateVolunteerComponent implements OnInit {
 
   // Método para eliminar la imagen seleccionada
   public delete() {
-    this.imagePreview = '/assets/img/volunteer/avatar.jpg'; // Establece la imagen por defecto
+    this.imagePreview = '/assets/img/volunteer/defaultIconProfile.png'; // Establece la imagen por defecto
     this.form.get('profileImage')?.setValue(null); // Establece el valor de la imagen en null
   }
 

@@ -64,7 +64,7 @@ export class ProfileService{
       }
 
       updateShelterLike(shelterId: number, liked: boolean): Observable<void> {
-        return this.httpClient.put<void>(`${this.baseUrl}/paticas/${shelterId}/like`, { liked });
+        return this.httpClient.put<void>(`${this.baseUrl}/shelters/${shelterId}/like`, { liked });
       }
       
 }

@@ -53,12 +53,14 @@ export class VolunteersListComponent {
     this.currentVolunteerId = volunteerId;
   }
 
+
   deleteVolunteer(volunteerId: number) {
     this.volunteerService.deleteVolunteer(volunteerId).subscribe({
       next: () => {
         console.log('Voluntario eliminado exitosamente');
         const closeButton = document.getElementById('x');
         closeButton?.click();
+        this.getVolunteersList();
       },
       error: (error) => {
         console.error('Error al eliminar el voluntario:', error);

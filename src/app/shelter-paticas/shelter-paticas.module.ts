@@ -8,6 +8,8 @@ import { ShelterPaticasListComponent } from './shelter-paticas-list/shelter-pati
 import { PaticasListComponent } from '../paticas/paticas-list/paticas-list.component';
 import { PaticasModule } from '../paticas/paticas.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AddPaticaComponent } from './add-patica/add-patica.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,6 +17,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   declarations: [
     ShelterPaticasComponent,
     ShelterPaticasListComponent,
+    AddPaticaComponent,
     
 
   ],
@@ -22,7 +25,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CommonModule,
     ShelterPaticasRoutingModule,
     NgxPaginationModule,
-    // PaticasModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ShelterPaticasModule { }

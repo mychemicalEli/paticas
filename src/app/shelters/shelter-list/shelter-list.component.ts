@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response'; // Importa la interfaz de respuesta para la lista de refugios
+import { GetShelterListItemResponse, GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response'; // Importa la interfaz de respuesta para la lista de refugios
 import { GetShelterListRequest } from '../models/get-shelter-list/get-shelter-list.request'; // Importa la interfaz de solicitud para la lista de refugios
 import { ShelterService } from '../shelters-service/shelter.service'; // Importa el servicio de refugios
 
@@ -40,8 +40,18 @@ export class ShelterListComponent {
   }
 
   // Función para alternar el estado de "me gusta" de un refugio
-  toggleLike(shelter: any) {
-    shelter.liked = !shelter.liked; // Cambia el estado de "me gusta" del refugio
+  toggleLike(shelter: GetShelterListItemResponse): void {
+    shelter.liked = !shelter.liked;
+    this.shelterService.updateShelterLike(shelter.id, shelter.liked).subscribe({
+      next: () => {
+        console.log(`Shelter ${shelter.id} updated: liked = ${shelter.liked}`);
+      },
+      error: (error) => {
+        console.error(`Error updating like for Shelter ${shelter.id}:`, error);
+        // Revert the change if update fails
+        shelter.liked = !shelter.liked;
+      }
+    });
   }
 
   // Función para manejar el cambio de página

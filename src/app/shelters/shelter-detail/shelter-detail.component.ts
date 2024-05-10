@@ -58,7 +58,17 @@ export class ShelterDetailComponent implements OnInit {
   }
 
   toggleLike(patica: GetPaticasListItemResponse): void {
-    patica.liked = !patica.liked; 
+    patica.liked = !patica.liked;
+    this.shelterService.updateShelterLike(patica.id, patica.liked).subscribe({
+      next: () => {
+        console.log(`Patica ${patica.id} updated: liked = ${patica.liked}`);
+      },
+      error: (error) => {
+        console.error(`Error updating like for Shelter ${patica.id}:`, error);
+        // Revert the change if update fails
+        patica.liked = !patica.liked;
+      }
+    });
   }
 
   onPageChange(pageSize: number): void {

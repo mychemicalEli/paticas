@@ -25,9 +25,15 @@ export class ShelterService {
     // y pasa los parámetros de consulta construidos
     return this.httpClient.get<GetShelterListResponse>(`${this.baseUrl}shelters`, { params: queryParams })
   }
-
   
   public getDetail(shelterId: number): Observable<GetShelterListItemResponse> {
     return this.httpClient.get<GetShelterListItemResponse>(`${this.baseUrl}shelters/${shelterId}`);
+  }
+
+  updateShelterLike(shelterId: number, liked: boolean): Observable<void> {
+    return this.httpClient.put<void>(`${this.baseUrl}/shelters/${shelterId}/like`, { liked });
+  }
+  updatePaticaLike(paticaId: number, liked: boolean): Observable<void> {
+    return this.httpClient.put<void>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
   }
 }

@@ -51,8 +51,18 @@ export class PaticasListComponent {
   }
 
   // Método para cambiar el estado de "like" de una patica
-  toggleLike(patica: any) {
-    patica.liked = !patica.liked; 
+  toggleLike(patica: GetPaticasListItemResponse): void {
+    patica.liked = !patica.liked;
+    this.paticasService.updatePaticaLike(patica.id, patica.liked).subscribe({
+      next: () => {
+        console.log(`Patica ${patica.id} updated: liked = ${patica.liked}`);
+      },
+      error: (error) => {
+        console.error(`Error updating like for Patica ${patica.id}:`, error);
+        // Revert the change if update fails
+        patica.liked = !patica.liked;
+      }
+    });
   }
 
   // Método para cambiar la página de la lista de paticas
