@@ -4,13 +4,6 @@
         <button class="btn" type="button" [routerLink]="['/formularios/adoption']" *ngIf="!isShelterAdmin">
             Quiero adoptar a <b>{{patica.name}}</b>
         </button>
-        <button class="btn btn-edit" type="button"  *ngIf="isShelterAdmin">
-            Editar
-        </button>
-        <button class="btn btn-erase" type="button"  *ngIf="isShelterAdmin">
-            Eliminar
-        </button>
-        
       </div>
     <div class="card mb-3">
         <div class="row g-0">

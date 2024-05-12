@@ -36,7 +36,7 @@ export class VolunteerService {
     }
 
     public updateVolunteer(volunteerId: number, request: UpdateVolunteerRequest): Observable<GetVolunteerListItemResponse> {
-        return this.httpClient.put<GetVolunteerListItemResponse>(`${this.baseUrl}volunteers/${volunteerId}/edit`, request);
+        return this.httpClient.put<GetVolunteerListItemResponse>(`${this.baseUrl}volunteers/edit`, request);
     }
 
     public deleteVolunteer(volunteerId: number): Observable<any> {

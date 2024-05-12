@@ -34,7 +34,9 @@ export class ShelterDetailComponent implements OnInit {
   }
 
   private getShelterDetails(id: number): void {
-    this.shelterService.getDetail(id).subscribe({
+    this.shelterService.getDetail(id)
+    .pipe()
+    .subscribe({
       next: (response: GetShelterListItemResponse) => {
         this.shelter = response;
       },
@@ -46,6 +48,7 @@ export class ShelterDetailComponent implements OnInit {
 
   private getPaticasList(): void {
     this.paticasService.getListFilteredByShelter(this.request, this.request.shelterId)
+    .pipe()
       .subscribe({
         next: (response: GetPaticasListResponse) => {
           // Filtrar las paticas con el shelterId proporcionado
@@ -59,7 +62,9 @@ export class ShelterDetailComponent implements OnInit {
 
   toggleLike(patica: GetPaticasListItemResponse): void {
     patica.liked = !patica.liked;
-    this.shelterService.updateShelterLike(patica.id, patica.liked).subscribe({
+    this.shelterService.updateShelterLike(patica.id, patica.liked)
+    .pipe()
+    .subscribe({
       next: () => {
         console.log(`Patica ${patica.id} updated: liked = ${patica.liked}`);
       },

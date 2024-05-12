@@ -85,7 +85,7 @@ export class CreateVolunteerComponent {
     this.request.fullName = this.form.get('fullName')?.value; // Establece el nombre completo
     this.request.email = this.form.get('email')?.value; // Establece el correo electrónico
     this.request.phone = this.form.get('phone')?.value; // Establece el teléfono
-    this.request.availability = this.form.get('availability')?.value; // Establece la disponibilidad
+    this.request.availability = parseInt(this.form.get('availability')?.value); // Establece la disponibilidad
 
     // Si se ha seleccionado una imagen, se recoge su valor
     const file = this.form.get('profileImage')?.value;
@@ -112,7 +112,10 @@ export class CreateVolunteerComponent {
     this.stablishRequest(); // Establece la solicitud de creación con los datos del formulario
     console.log('Request stablished...');
     console.log('Request object:', this.request); // Muestra la solicitud en la consola
-    this.volunteerService.createVolunteer(this.request); // Envía la solicitud de creación al servicio
+    this.volunteerService.createVolunteer(this.request)
+    .pipe()
+    .subscribe()
+   
     console.log('volunteer created...');
     this.router.navigate(['/volunteers']); // Navega a la lista de voluntarios
   }

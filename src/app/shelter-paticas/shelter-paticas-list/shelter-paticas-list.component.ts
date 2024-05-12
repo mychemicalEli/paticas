@@ -14,6 +14,8 @@ export class ShelterPaticasListComponent {
   isShelterAdmin =true;
   response?: GetShelterPaticasListResponse;
   request: GetShelterPaticasListRequest = { page: 0, pageSize: 12, shelterId: 10 };
+  currentPaticaName: string = '';
+  currentPaticaId: number = 0;
   
   constructor(private shelterPaticasService: ShelterPaticasService, private router: Router) { }
 
@@ -23,6 +25,7 @@ export class ShelterPaticasListComponent {
 
   private getShelterPaticasList() {
     this.shelterPaticasService.getList(this.request)
+    .pipe()
       .subscribe({
         next: (response: GetShelterPaticasListResponse) => {
           this.response = response;
@@ -34,6 +37,28 @@ export class ShelterPaticasListComponent {
   onPageChange(pageSize: number) {
     this.request.page = pageSize;
     this.getShelterPaticasList();
+  }
+
+  onDeleteClick(paticaName: string, paticaId: number) {
+    this.currentPaticaName = paticaName;
+    this.currentPaticaId = paticaId;
+  }
+
+
+  deletePatica(paticaId: number) {
+    this.shelterPaticasService.deletePatica(paticaId)
+    .pipe()
+    .subscribe({
+      next: () => {
+        console.log('Patica eliminada exitosamente');
+        const closeButton = document.getElementById('x');
+        closeButton?.click();
+        this.getShelterPaticasList();
+      },
+      error: (error) => {
+        console.error('Error al eliminar patica:', error);
+      }
+    });
   }
 
   onSelectPatica(patica: any): void {

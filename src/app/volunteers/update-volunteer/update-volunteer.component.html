@@ -11,13 +11,15 @@
         
             <div class="form-floating mb-3">
                 <select class="form-select" id="floatingSelect" formControlName="availability">
-                    <option [value]=1 [selected]="volunteer?.availability === 1">Mañanas</option>
-                    <option [value]=2 [selected]="volunteer?.availability === 2">Tardes</option>
-                    <option [value]=3 [selected]="volunteer?.availability === 3">Completa</option>
+                    <option value="" disabled selected>Selecciona disponibilidad</option>
+                    <option value=1>Mañanas</option>
+                    <option value=2>Tardes</option>
+                    <option value=3>Completa</option>
                 </select>
-                              
                 <label for="floatingSelect">Disponibilidad</label>
             </div>
+
+            
             
             
             

@@ -32,6 +32,7 @@ export class PaticasListComponent {
   private getPaticasList() {
     // Llamada al servicio para obtener la lista de paticas
     this.paticasService.getList(this.request)
+    .pipe()
       .subscribe({
         // En caso de éxito, asignar la respuesta y actualizar la lista de especies
         next: (response: GetPaticasListResponse) => {
@@ -53,7 +54,9 @@ export class PaticasListComponent {
   // Método para cambiar el estado de "like" de una patica
   toggleLike(patica: GetPaticasListItemResponse): void {
     patica.liked = !patica.liked;
-    this.paticasService.updatePaticaLike(patica.id, patica.liked).subscribe({
+    this.paticasService.updatePaticaLike(patica.id, patica.liked)
+    .pipe()
+    .subscribe({
       next: () => {
         console.log(`Patica ${patica.id} updated: liked = ${patica.liked}`);
       },

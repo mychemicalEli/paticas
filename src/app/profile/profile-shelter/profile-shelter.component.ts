@@ -23,7 +23,9 @@ export class ProfileShelterComponent implements OnInit {
 
 
   private getShelterProfile(): void {
-    this.profileService.getShelterProfile().subscribe({
+    this.profileService.getShelterProfile()
+    .pipe()
+    .subscribe({
       next: (response: GetShelterProfileResponse) => {
         this.shelterProfile = response;
       },

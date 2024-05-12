@@ -45,7 +45,7 @@ img {
 }
 
 
-.btn {
+.btn.add {
     max-width: 200px;
     padding: 10px;
     margin-top: 30px;
@@ -60,7 +60,7 @@ img {
     transition: transform 0.3s ease-in;
 }
 
-.btn:hover {
+.btn.add:hover {
     transform: scale(1.1);
 }
 

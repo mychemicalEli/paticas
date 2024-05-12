@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { GetShelterListRequest } from '../models/get-shelter-list/get-shelter-list.request';
 import { GetShelterListItemResponse, GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response';
+import { GetPaticasListItemResponse } from '../../paticas/models/get-paticas-list/get-paticas-list.response';
 
 @Injectable({
   providedIn: 'root' // Marca este servicio como proporcionado en la raíz del módulo
@@ -30,10 +31,10 @@ export class ShelterService {
     return this.httpClient.get<GetShelterListItemResponse>(`${this.baseUrl}shelters/${shelterId}`);
   }
 
-  updateShelterLike(shelterId: number, liked: boolean): Observable<void> {
-    return this.httpClient.put<void>(`${this.baseUrl}/shelters/${shelterId}/like`, { liked });
+  updateShelterLike(shelterId: number, liked: boolean): Observable<GetShelterListItemResponse> {
+    return this.httpClient.put<GetShelterListItemResponse>(`${this.baseUrl}/shelters/${shelterId}/like`, { liked });
   }
-  updatePaticaLike(paticaId: number, liked: boolean): Observable<void> {
-    return this.httpClient.put<void>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
+  updatePaticaLike(paticaId: number, liked: boolean): Observable<GetPaticasListItemResponse> {
+    return this.httpClient.put<GetPaticasListItemResponse>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
   }
 }

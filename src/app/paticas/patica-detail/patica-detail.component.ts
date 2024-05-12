@@ -47,7 +47,9 @@ export class PaticaDetailComponent implements OnInit {
   // Método para cargar los detalles de la patica
   private getPaticaDetails(id: number) {
     // Llamada al servicio para obtener los detalles de la patica con el ID proporcionado
-    this.paticasService.getDetail(id).subscribe({
+    this.paticasService.getDetail(id)
+    .pipe()
+    .subscribe({
       // En caso de éxito, asignar la respuesta a la propiedad patica
       next: (response: GetPaticasListItemResponse) => {
         this.patica = response;

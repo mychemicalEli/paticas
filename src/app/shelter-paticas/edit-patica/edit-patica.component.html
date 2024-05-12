@@ -1,40 +1,36 @@
-<main class="container-fluid">
+<main class="container-fluid" *ngIf="patica">
     <form class="row justify-content-center" [formGroup]="form">
-        <h3 class="title">AÑADIR PATICA</h3>
+        <h3 class="title">EDITAR PATICA</h3>
 
         <!--Primera columna-->
         <div class="col-lg-5">
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="name" placeholder="Nombre"
-                    formControlName="name">
-                <label for="fullName">Nombre</label>
-                <div *ngIf="fieldErrors['name']" class="text-danger">Este es un campo obligatorio</div>
-              
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <label for="name">Nombre</label>
             </div>
 
             <div class="form-floating mb-3">
                 <select class="form-select" id="floatingSelect" formControlName="gender">
                     <option value="" disabled selected>Selecciona un género</option>
-                    <option value="Hembra">Hembra</option>
-                    <option value="Macho">Macho</option>
+                    <option value="female">Hembra</option>
+                    <option value="male">Macho</option>
                 </select>
                 <label for="floatingSelect">Género</label>
-                <div *ngIf="fieldErrors['gender']" class="text-danger">Este es un campo obligatorio</div>
-    
             </div>
-            
+
 
             <div class="form-floating mb-3">
-                <input type="date" class="form-control" id="birthDate" placeholder="05/06/2023"
+                <input type="date" class="form-control" id="birthDate" placeholder="birthDate"
                     formControlName="birthDate" max="{{ getMaxDate() }}">
                 <label for="birthDate">Fecha de nacimiento</label>
-                <div *ngIf="fieldErrors['birthDate']" class="text-danger">Este es un campo obligatorio</div>
+
             </div>
-          
+
 
             <div class="form-floating mb-3">
-               
-                <input list="municipios" name="municipios" type="text" placeholder="Ubicación: elige un municipio de Murcia" class="custom-input" formControlName="location">
+
+                <input list="municipios" name="municipios" type="text" placeholder="{{patica.location}}"
+                    class="custom-input" formControlName="location">
                 <datalist id="municipios">
                     <option value="Abanilla">
                     <option value="Abarán">
@@ -82,8 +78,9 @@
                     <option value="Villanueva del Río Segura">
                     <option value="Yecla">
                 </datalist>
-                <div *ngIf="fieldErrors['location']" class="text-danger">Este es un campo obligatorio y solo admite municipios de la Región de Murcia</div>
-                
+                <div *ngIf="fieldErrors.locationError" class="text-danger">La ubicación introducida debe estar en la lista de municipios de la Región de Murcia</div>
+
+
             </div>
         </div>
 
@@ -91,10 +88,8 @@
 
         <div class="col-lg-5">
             <div class="form-floating mb-3">
-                <input type="species" class="form-control" id="species" placeholder="Especie"
-                    formControlName="species">
-                <label for="species">Especie (perro, gato, etc)</label>
-                <div *ngIf="fieldErrors['species']" class="text-danger">Este es un campo obligatorio</div>
+                <input type="species" class="form-control" id="species" placeholder="Especie" formControlName="species">
+                <label for="species">Raza</label>
             </div>
 
             <div class="form-floating mb-3">
@@ -105,102 +100,135 @@
                     <option value=3>Grande</option>
                 </select>
                 <label for="floatingSelect">Tamaño</label>
-                <div *ngIf="fieldErrors['size']" class="text-danger">Este es un campo obligatorio</div>
             </div>
 
             <div class="form-floating mb-2">
-                <input type="shelter" class="form-control" id="shelter" placeholder="Protectora"
-                    formControlName="shelter">
-                <label for="shelter">Nombre de la protectora</label>
-                <div *ngIf="fieldErrors['shelter']" class="text-danger">Este es un campo obligatorio</div>
+                <input type="shelter" class="form-control" id="shelter" placeholder="shelter" formControlName="shelter">
+                <label for="shelter">Protectora</label>
             </div>
 
+            <!--imagen-->
             <div class="form-group mb-3">
                 <label for="profileImage">Imagen de perfil</label>
-                <input type="file" class="form-control" id="profileImage" formControlName="profileImage" accept="image/*">
-                <div *ngIf="fieldErrors['profileImage']" class="text-danger">Este es un campo obligatorio</div>
-                
-            </div>
-        </div>
-            <div class="col-lg-10">
-
-                <div class="form-floating mb-4">
-                    <textarea class="form-control" placeholder="Descripción" id="description" style="height: 100px" formControlName="description"></textarea>
-                    <label for="description">Descripción</label>
-                    <div *ngIf="fieldErrors['description']" class="text-danger">Este es un campo obligatorio</div>
+                <div class="containerForFile mb-3 mt-2">
+                    <div class="mb-3 image-container">
+                        <label class="hoverable" for="fileInput">
+                            <img [src]="imagePreview ? imagePreview : patica.profileImage" />
+                            <div class="background"></div>
+                        </label>
+                        <input
+                            id="fileInput"
+                            type="file"
+                            class="select-profile-picture"
+                            (change)="onSelectFile($event)"
+                            accept="image/*"
+                        />
+                    </div>
+                    <button class="btn btn-erase" (click)="delete()">Borrar</button>
                 </div>
-                
-
-              <div class="form-group mb-3">
-                <label for="carouselImages">Sube más imágenes para completar la descripción (máx. 3)</label>
-                <input type="file" class="form-control" id="carouselImages" formControlName="carouselImages" multiple accept="image/*" (change)="onFileChange($event)">
-                <div *ngIf="fieldErrors['carouselImages']" class="text-danger">Este es un campo obligatorio</div>
             </div>
             
-            <div class="row mb-5" id="imagePreview"></div>
+            <!--hasta aqui-->
+
+        </div>
+
+
+
+        <div class="col-lg-10">
+
+
+            
+            <div class="form-floating mb-4">
+                <textarea class="form-control" placeholder="Descripción" id="description" style="height: 120px"
+                    formControlName="description"></textarea>
+                <label for="description">Descripción</label>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label for="carouselImages">Imágenes de la descripción (máx. 3)</label>
+                <div class="containerForFile mb-3 mt-2">
+                    <ng-container *ngIf="carouselImagePreviews.length > 0">
+                        <div *ngFor="let preview of carouselImagePreviews; let i = index" class="mb-3 image-container">
+                            <label class="hoverable" [for]="'fileInput' + i">
+                                <img [src]="preview ? preview : defaultCarouselImage" />
+                                <div class="background"></div>
+                            </label>
+                            <input
+                                [id]="'fileInput' + i"
+                                type="file"
+                                class="select-profile-picture"
+                                (change)="onSelectCarouselFile($event, i)"
+                                accept="image/*"
+                            />
+                        </div>
+                        <button class="btn btn-erase" (click)="deleteAllCarousel()">Borrar</button>
+                    </ng-container>
+                </div>
+            </div>
             
 
-              <div class="row justify-content-center">
+        
+
+
+            <div class="row justify-content-center">
                 <div class="col-md-4 mb-3 text-center">
                     <div class="form-floating">
-                        <div *ngIf="fieldErrors['goodWithKids']" class="text-danger">Este es un campo obligatorio</div>
                         <p class="form-label" style="font-weight: bold;">¿Buena relación con niños?</p>
-                        
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="goodWithKids" id="goodWithKidsYes"
-                            formControlName="goodWithKids" [value]="true">
+                                formControlName="goodWithKids" [value]="true">
                             <label class="form-check-label" for="goodWithKidsYes">Sí</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="goodWithKids" id="goodWithKidsNo"  formControlName="goodWithKids" [value]="false">
+                            <input class="form-check-input" type="radio" name="goodWithKids" id="goodWithKidsNo"
+                                formControlName="goodWithKids" [value]="false">
                             <label class="form-check-label" for="goodWithKidsNo">No</label>
                         </div>
                     </div>
-                   
-                
                 </div>
 
                 <div class="col-md-4 mb-3 text-center">
                     <div class="form-floating">
-                        <div *ngIf="fieldErrors['goodWithDogs']" class="text-danger">Este es un campo obligatorio</div>
                         <p class="form-label" style="font-weight: bold;">¿Buena relación con perros?</p>
-            
+
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="goodWithDogs" id="goodWithDogsYes"
-                            formControlName="goodWithDogs" [value]="true">
+                                formControlName="goodWithDogs" [value]="true">
                             <label class="form-check-label" for="goodWithDogsYes">Sí</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="goodWithDogs" id="goodWithDogsNo"  formControlName="goodWithDogs" [value]="false">
-                            <label class="form-check-label" for="goodWithDogsNo">No</label>
+                            <input class="form-check-input" type="radio" name="goodWithDogs" id="goodWithDogsNo"
+                            formControlName="goodWithDogs" [value]="false">
+                        <label class="form-check-label" for="goodWithDogsNo">No</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4 mb-3 text-center">
                     <div class="form-floating">
-                        <div *ngIf="fieldErrors['goodWithCats']" class="text-danger">Este es un campo obligatorio</div>
                         <p class="form-label" style="font-weight: bold; ">¿Buena relación con gatos?</p>
 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="goodWithCats" id="goodWithCatsYes"
                             formControlName="goodWithCats" [value]="true">
-                            <label class="form-check-label" for="goodWithCatsYes">Sí</label>
+                        <label class="form-check-label" for="goodWithCatsYes">Sí</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="goodWithCats" id="goodWithCatsNo"  formControlName="goodWithCats" [value]="false">
-                            <label class="form-check-label" for="goodWithCatsNo">No</label>
+                            <input class="form-check-input" type="radio" name="goodWithCats" id="goodWithCatsNo"
+                            formControlName="goodWithCats" [value]="false">
+                        <label class="form-check-label" for="goodWithCatsNo">No</label>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
-          
-        
-        
+
         <div class="col-lg-12 text-center mt-3">
-            <button type="submit" class="btn" (click)="validateFields()">AÑADIR</button>
+            <button type="submit" class="btn" (click)="validateLocation()">GUARDAR CAMBIOS</button>
         </div>
-       
+
     </form>
 </main>

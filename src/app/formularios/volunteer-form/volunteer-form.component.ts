@@ -87,7 +87,9 @@ export class VolunteerFormComponent implements OnInit {
     console.log('Submitting form...');
     this.stablishRequest();
     console.log('Request is valid...');
-    this.volunteerFormService.createVolunteerForm(this.request);
+    this.volunteerFormService.createVolunteerForm(this.request)
+    .pipe()
+    .subscribe()
     this.currentStep = 4;
   }
 

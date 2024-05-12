@@ -25,6 +25,7 @@ export class VolunteersListComponent {
 
   private getVolunteersList() {
     this.volunteerService.getList(this.request)
+    .pipe()
       .subscribe({
         next: (response: GetVolunteerListResponse) => {
           this.response = response;
@@ -55,7 +56,9 @@ export class VolunteersListComponent {
 
 
   deleteVolunteer(volunteerId: number) {
-    this.volunteerService.deleteVolunteer(volunteerId).subscribe({
+    this.volunteerService.deleteVolunteer(volunteerId)
+    .pipe()
+    .subscribe({
       next: () => {
         console.log('Voluntario eliminado exitosamente');
         const closeButton = document.getElementById('x');

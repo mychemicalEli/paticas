@@ -10,6 +10,7 @@ import { PaticasModule } from '../paticas/paticas.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddPaticaComponent } from './add-patica/add-patica.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditPaticaComponent } from './edit-patica/edit-patica.component';
 
 
 
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ShelterPaticasComponent,
     ShelterPaticasListComponent,
     AddPaticaComponent,
+    EditPaticaComponent,
     
 
   ],

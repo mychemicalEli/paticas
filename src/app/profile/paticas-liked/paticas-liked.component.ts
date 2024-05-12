@@ -21,6 +21,7 @@ export class PaticasLikedComponent implements OnInit {
 
   private getPaticasLikedList() {
     this.profileService.getLikedPaticas(this.request)
+    .pipe()
       .subscribe({
         next: (response: GetUserPaticasLikedResponse) => {
           this.paticas = response.paticas;
@@ -35,7 +36,9 @@ export class PaticasLikedComponent implements OnInit {
 
   toggleLike(patica: GetUserPaticasLikedItemResponse): void {
     patica.liked = !patica.liked;
-    this.profileService.updatePaticaLike(patica.id, patica.liked).subscribe({
+    this.profileService.updatePaticaLike(patica.id, patica.liked)
+    .pipe()
+    .subscribe({
       next: () => {
         console.log(`Patica ${patica.id} updated: liked = ${patica.liked}`);
         // Actualizar la lista de paticas después de cambiar el estado de "liked"

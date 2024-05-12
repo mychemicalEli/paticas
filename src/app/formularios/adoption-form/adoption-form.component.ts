@@ -226,7 +226,9 @@ setFieldError(fieldName: string, hasError: boolean) {
 
     this.stablishRequest();
     console.log('request is valid...');
-    this.adoptionFormService.createAdoptionForm(this.request);
+    this.adoptionFormService.createAdoptionForm(this.request)
+    .pipe()
+    .subscribe()
     this.currentStep = 10; // Cambia al paso de formulario enviado correctamente
   }
 

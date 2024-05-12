@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ShelterPaticasService } from '../shelter-paticas-service/shelter-paticas.service';
 import { Router } from '@angular/router';
 import { AddPaticaRequest } from '../models/add-patica/add-patica.request';
+import { auto } from '@popperjs/core';
+
 
 @Component({
   selector: 'app-add-patica',
@@ -11,7 +13,7 @@ import { AddPaticaRequest } from '../models/add-patica/add-patica.request';
 })
 export class AddPaticaComponent implements OnInit {
   maxImages = 3;
-  request: AddPaticaRequest= {}  as AddPaticaRequest;
+  request: AddPaticaRequest = {} as AddPaticaRequest;
   fieldErrors: { [key: string]: boolean } = {};
   form!: FormGroup;
   municipios: string[] = []; // Lista de municipios
@@ -53,8 +55,6 @@ export class AddPaticaComponent implements OnInit {
   }
 
   getMunicipios() {
-    // Aquí deberías obtener la lista de municipios desde tu servicio o de otra fuente de datos
-    // Por simplicidad, la inicializaré directamente aquí
     this.municipios = [
       "Abanilla", "Abarán", "Águilas", "Albudeite", "Alcantarilla", "Los Alcázares", "Aledo", "Alguazas", "Alhama de Murcia",
       "Archena", "Beniel", "Blanca", "Bullas", "Calasparra", "Campos del Río", "Caravaca de la Cruz", "Cartagena", "Cehegín",
@@ -83,19 +83,71 @@ export class AddPaticaComponent implements OnInit {
     this.fieldErrors[fieldName] = hasError;
   }
 
+  areAllStepsValid(): boolean {
+    return this.form.valid;
+  }
+
+  stablishRequest(){
+    const imagesData: FormData[] = [];
+    // Obtener los archivos de la propiedad files del input file
+    const files = (document.getElementById('carouselImages') as HTMLInputElement).files;
+    if (files) {
+      // Convertir los archivos a FormData
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
+        formData.append('image', files[i]);
+        imagesData.push(formData);
+      }
+    }
+  
+    this.request = {
+      profileImage: this.form.get('profileImage')?.value,
+      name: this.form.get('name')?.value,
+      gender: this.form.get('gender')?.value,
+      species: this.form.get('species')?.value,
+      imageCarousel1: imagesData[0] || null,
+      imageCarousel2: imagesData[1] || null,
+      imageCarousel3: imagesData[2] || null,
+      shelter: this.form.get('shelter')?.value,
+      location: this.form.get('location')?.value,
+      size: parseInt(this.form.get('size')?.value),
+      birthDate: this.form.get('birthDate')?.value,
+      description: this.form.get('description')?.value,
+      goodWithKids: this.form.get('goodWithKids')?.value,
+      goodWithDogs: this.form.get('goodWithDogs')?.value,
+      goodWithCats: this.form.get('goodWithCats')?.value,
+    };
+  }
+
+
   submitForm() {
-    if (this.form.invalid) {
-      console.log('Form is invalid');
+    if (!this.areAllStepsValid()) {
+      console.log('Not all steps are valid');
       return;
     }
     console.log('Submitting form...');
-    console.log('Form value:', this.form.value);
-    // Continue with form submission
-
-    this.shelterPaticasService.addPatica(this.request); // Envía la solicitud de creación al servicio
-    console.log('patica created...');
-    this.router.navigate(['/shelterPaticas']);
+    console.log('Are all steps valid:', this.areAllStepsValid());
+    this.stablishRequest(); 
+    console.log('Request stablished...');
+    console.log('Request object:', this.request); 
+    this.shelterPaticasService.addPatica(this.request)
+    .pipe()
+      .subscribe({
+        next: () => {
+          console.log('Patica created...');
+          this.router.navigate(['/shelterPaticas']);
+        },
+        error: (error) => {
+          console.error('Error occurred while adding patica:', error);
+        },
+        complete: () => {
+          console.log('Patica added successfully');
+        }
+      });
   }
+  
+
+  
 
   getMaxDate(): string {
     const today = new Date();
@@ -118,12 +170,9 @@ export class AddPaticaComponent implements OnInit {
         return;
       }
   
-      const imagesArray = this.form.get('carouselImages') as any;
-      imagesArray.setValue(files); // Setea el valor del campo con el arreglo de archivos
-  
       const preview = document.getElementById('imagePreview');
       if (preview) {
-        preview.innerHTML = '';
+        preview.innerHTML = ''; // Limpiamos cualquier previsualización anterior
       }
   
       for (let i = 0; i < files.length; i++) {
@@ -131,7 +180,10 @@ export class AddPaticaComponent implements OnInit {
         const reader = new FileReader();
   
         reader.onload = (e: any) => {
-          const img = document.createElement('img');
+          const img = new Image();
+          img.onload = () => {
+            URL.revokeObjectURL(img.src); // Liberamos la URL de objeto
+          };
           img.src = e.target.result;
           img.classList.add('img-thumbnail', 'm-1');
           img.style.width = '200px';
@@ -146,4 +198,5 @@ export class AddPaticaComponent implements OnInit {
     }
   }
   
+
 }

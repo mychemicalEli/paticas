@@ -20,6 +20,7 @@ export class SheltersLikedComponent implements OnInit {
 
   private getSheltersLikedList() {
     this.profileService.getLikedShelters(this.request)
+    .pipe()
       .subscribe({
         next: (response: GetUserSheltersLikedResponse) => {
           this.shelters = response.shelters;
@@ -34,7 +35,9 @@ export class SheltersLikedComponent implements OnInit {
 
   toggleLike(shelter: GetUserSheltersLikedItemResponse): void {
     shelter.liked = !shelter.liked;
-    this.profileService.updateShelterLike(shelter.id, shelter.liked).subscribe({
+    this.profileService.updateShelterLike(shelter.id, shelter.liked)
+    .pipe()
+    .subscribe({
       next: () => {
         console.log(`Shelter ${shelter.id} updated: liked = ${shelter.liked}`);
         // Actualizar la lista de shelter después de cambiar el estado de "liked"

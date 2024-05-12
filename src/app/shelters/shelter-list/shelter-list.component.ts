@@ -22,7 +22,8 @@ export class ShelterListComponent {
 
   // Función para obtener la lista de refugios
   private getShelterList() {
-    this.shelterService.get(this.request) // Llama al método get del servicio de refugios con la solicitud actual
+    this.shelterService.get(this.request)
+    .pipe() 
       .subscribe({
         next: (response: GetShelterListResponse) => { // Maneja la respuesta exitosa
           this.response = response; // Asigna la respuesta a la variable response
@@ -42,7 +43,9 @@ export class ShelterListComponent {
   // Función para alternar el estado de "me gusta" de un refugio
   toggleLike(shelter: GetShelterListItemResponse): void {
     shelter.liked = !shelter.liked;
-    this.shelterService.updateShelterLike(shelter.id, shelter.liked).subscribe({
+    this.shelterService.updateShelterLike(shelter.id, shelter.liked)
+    .pipe()
+    .subscribe({
       next: () => {
         console.log(`Shelter ${shelter.id} updated: liked = ${shelter.liked}`);
       },

@@ -1,7 +1,7 @@
 <main class="container-fluid">
 
     <div class="filters">
-        <button type="button" class="btn" [routerLink]="['add']">+ AÑADIR</button>
+        <button type="button" class="btn add" [routerLink]="['add']">+ AÑADIR</button>
     </div>
 
     <div *ngIf="response">
@@ -14,8 +14,12 @@
                         <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(paticas)">{{ paticas.name }} {{paticas.shelterId}}</h5>
                         <div class="icons">
                 
-                            <i class="bi bi-pencil-square fs-4"></i>
-                            <i class="bi bi-trash3-fill fs-4"></i>
+                            <div class="edit">
+                                <a [routerLink]="['/shelterPaticas', paticas.id, 'edit']" style="color: #212121; text-decoration: none;"><i class="bi bi-pencil-square fs-4"></i></a>
+                            </div>
+                            <div class="erase">
+                                <a (click)="onDeleteClick(paticas.name, paticas.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash3 fs-4"></i></a>
+                            </div>
                         
                         </div>
                     </div>
@@ -27,3 +31,22 @@
 
 
 </main>
+
+<!-- modal para eliminar voluntario -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar Patica</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="x"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro que deseas eliminar a <b>{{ currentPaticaName }}</b>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="deletePatica(currentPaticaId)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

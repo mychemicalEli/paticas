@@ -4,8 +4,9 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators'; // Importar map desde rxjs/operators
 import { GetShelterPaticasListRequest } from "../models/get-shelter-paticas-list/get-shelter-paticas-list.request";
-import { GetShelterPaticasListResponse } from "../models/get-shelter-paticas-list/get-shelter-paticas-list.response";
+import { GetShelterPaticasListItemResponse, GetShelterPaticasListResponse } from "../models/get-shelter-paticas-list/get-shelter-paticas-list.response";
 import { AddPaticaRequest } from "../models/add-patica/add-patica.request";
+import { UpdatePaticaRequest } from "../models/update-patica/update-patica.request";
 
 @Injectable({ 
   providedIn: 'root'
@@ -32,7 +33,15 @@ export class ShelterPaticasService {
       );
   }
 
-  public addPatica(request: AddPaticaRequest) {
-    return this.httpClient.post(`${this.baseUrl}/shelterPaticas/add`, request)
+public addPatica(request: AddPaticaRequest) {
+    return this.httpClient.post(`${this.baseUrl}paticas`, request)
+}
+
+public updatePatica(paticaId: number, request: UpdatePaticaRequest): Observable<GetShelterPaticasListItemResponse> {
+  return this.httpClient.put<GetShelterPaticasListItemResponse>(`${this.baseUrl}paticas/edit`, request);
+}
+
+public deletePatica(paticaId: number): Observable<any> {
+  return this.httpClient.delete(`${this.baseUrl}paticas/${paticaId}`); 
 }
 }

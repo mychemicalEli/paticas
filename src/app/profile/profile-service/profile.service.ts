@@ -8,6 +8,8 @@ import { GetUserProfileResponse } from "../models/get-user-profile/get-user-prof
 import { GetUserProfileRequest } from "../models/get-user-profile/get-user-profile-paticas.request";
 import { GetUserPaticasLikedResponse } from "../models/get-user-profile/get-user-paticas-liked.response";
 import { GetUserSheltersLikedResponse } from "../models/get-user-profile/get-user-shelters-liked.response";
+import { GetPaticasListItemResponse } from "../../paticas/models/get-paticas-list/get-paticas-list.response";
+import { GetShelterListItemResponse } from "../../shelters/models/get-shelter-list/get-shelter-list.response";
 
 @Injectable({
     providedIn: 'root'
@@ -59,12 +61,12 @@ export class ProfileService{
           );
       }
 
-      updatePaticaLike(paticaId: number, liked: boolean): Observable<void> {
-        return this.httpClient.put<void>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
+      updatePaticaLike(paticaId: number, liked: boolean): Observable<GetPaticasListItemResponse> {
+        return this.httpClient.put<GetPaticasListItemResponse>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
       }
 
-      updateShelterLike(shelterId: number, liked: boolean): Observable<void> {
-        return this.httpClient.put<void>(`${this.baseUrl}/shelters/${shelterId}/like`, { liked });
+      updateShelterLike(shelterId: number, liked: boolean): Observable<GetShelterListItemResponse> {
+        return this.httpClient.put<GetShelterListItemResponse>(`${this.baseUrl}/shelters/${shelterId}/like`, { liked });
       }
       
 }

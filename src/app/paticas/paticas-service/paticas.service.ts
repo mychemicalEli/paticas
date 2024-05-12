@@ -53,9 +53,10 @@ export class PaticasService {
     return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, { params });
   }
 
-  updatePaticaLike(paticaId: number, liked: boolean): Observable<void> {
-    return this.httpClient.put<void>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
-  }
+  updatePaticaLike(paticaId: number, liked: boolean): Observable<GetPaticasListItemResponse> {
+    return this.httpClient.put<GetPaticasListItemResponse>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
+}
+
  
   }
   

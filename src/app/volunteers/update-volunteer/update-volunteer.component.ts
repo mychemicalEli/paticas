@@ -16,7 +16,6 @@ export class UpdateVolunteerComponent implements OnInit {
   volunteer?: GetVolunteerListItemResponse; // Almacena la información del voluntario
   imagePreview: string | FormData | null = null; // Almacena la vista previa de la imagen
   form!: FormGroup; // Representa el formulario de actualización de voluntarios
-  availability = volunteerAvailability; // Contiene los valores del enum de disponibilidad
   request: UpdateVolunteerRequest = {} as UpdateVolunteerRequest; // Almacena la información para la solicitud de actualización
 
   constructor(
@@ -67,15 +66,9 @@ export class UpdateVolunteerComponent implements OnInit {
         fullName: this.volunteer.fullName, // Actualiza el control del nombre completo
         phone: this.volunteer.phone, // Actualiza el control del teléfono
         email: this.volunteer.email, // Actualiza el control del correo electrónico
-        profileImage: this.volunteer.profileImage // Actualiza el control de la imagen de perfil
+        profileImage: this.volunteer.profileImage, // Actualiza el control de la imagen de perfil
+        availability: this.volunteer.availability
       });
-
-      // Verifica si volunteer.availability está definido antes de asignarlo al formulario
-      if (this.volunteer.availability) {
-        this.form.patchValue({
-          availability: this.volunteer.availability // Actualiza el control de disponibilidad
-        });
-      }
 
       this.imagePreview = this.volunteer.profileImage; // Actualiza la vista previa de la imagen con la imagen del voluntario
     }
@@ -101,10 +94,12 @@ export class UpdateVolunteerComponent implements OnInit {
     this.form.get('profileImage')?.setValue(null); // Establece el valor de la imagen en null
   }
 
+
+
   // Método para establecer la solicitud de actualización con los datos del formulario
   stablishRequest(){
     this.request.fullName = this.form.get('fullName')?.value; // Establece el nombre completo
-    this.request.availability = this.form.get('availability')?.value; // Establece la disponibilidad
+    this.request.availability = parseInt(this.form.get('availability')?.value); // Establece la disponibilidad
     this.request.phone = this.form.get('phone')?.value; // Establece el teléfono
     this.request.email = this.form.get('email')?.value; // Establece el correo electrónico
     this.request.profileImage = this.form.get('profileImage')?.value; // Establece la imagen de perfil
@@ -116,7 +111,10 @@ export class UpdateVolunteerComponent implements OnInit {
 
     console.log('Request object:', this.request); // Muestra la solicitud en la consola
 
-    this.volunteerService.updateVolunteer(this.volunteerId, this.request); // Envía la solicitud de actualización al servicio
+    this.volunteerService.updateVolunteer(this.volunteerId, this.request)
+    .pipe()
+    .subscribe()
+    
     console.log("Update made"); // Muestra un mensaje en la consola indicando que se realizó la actualización
     this.router.navigate(['/volunteers']); // Navega de regreso a la lista de voluntarios
   }
