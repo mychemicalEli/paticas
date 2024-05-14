@@ -19,7 +19,7 @@ export class EditPaticaComponent {
   request: UpdatePaticaRequest = {} as UpdatePaticaRequest;
   carouselImagePreviews: (string | FormData | null)[] = [];
   defaultCarouselImage = '/assets/img/paticas/defaultIcon.png';
-  fieldErrors = { locationError: false }
+
 
   constructor(
     private router: Router,
@@ -52,8 +52,7 @@ export class EditPaticaComponent {
       goodWithDogs: [''],
       goodWithCats: ['']
     });
-    this.fieldErrors.locationError = false;
-
+  
     // Si no se proporciona el ID de la patica, recupera el ID de la ruta
     if (!this.paticaId) {
       this.route.params
@@ -64,27 +63,6 @@ export class EditPaticaComponent {
         });
     }
   }
-
-  //-------------------------------------------
-  //controles para los errores de localización
-  checkLocationError() {
-    return this.fieldErrors.locationError;
-  }
-  setLocationError(hasError: boolean) {
-    this.fieldErrors.locationError = hasError;
-  }
-  validateLocation() {
-    const locationControl = this.form.get('location');
-    if (locationControl) {
-      const enteredLocation = locationControl.value;
-      const options = Array.from(document.getElementById('municipios')!.getElementsByTagName('option')).map(option => option.value);
-      this.setLocationError(!options.includes(enteredLocation));
-    }
-    this.submitForm();
-  }
-  //-------------------------------------------
-
-
 
   //Obtener los detalles de la patica que vamos a editar
   private getPaticaDetail(id: number) {
@@ -141,7 +119,7 @@ export class EditPaticaComponent {
 
   //comprobar que son válidos los campos (la location)
   areAllStepsValid(): boolean {
-    return !this.checkLocationError() && this.form.valid;
+    return this.form.valid;
   }
 
   //formateo de fecha para mostrarla en el formulario

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -7,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './navbar-user.component.css',
 })
 export class NavbarUserComponent {
-
+  constructor(private cookies: CookieService, private router: Router){}
+logOut(){
+  this.cookies.delete("token");
+  this.router.navigate(['/auth/login']);
+}
 }

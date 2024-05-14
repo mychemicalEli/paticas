@@ -12,7 +12,7 @@ export class ProfileShelterComponent implements OnInit {
   showForm: boolean = false;
   shelterProfile?: GetShelterProfileResponse ;
 
-  profileForm!: FormGroup;
+  
 
 
   constructor(private profileService: ProfileService, private formBuilder: FormBuilder) {}

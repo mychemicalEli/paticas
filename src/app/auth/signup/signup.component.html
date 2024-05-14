@@ -2,10 +2,10 @@
     <div class="main">
         <div class="col-md-10">
             <div class="login-form">
-                <form>
+                <form method="post">
                     <div class="d-flex align-items-end mb-3">
-                        <select class="form-select form-select-lg" aria-label="Large select example" (change)="onUserTypeChange($event)" formControlName="role">
-                            <option selected>Selecciona tu tipo de usuario</option>
+                        <select class="form-select form-select-lg" [(ngModel)]="role" aria-label="Large select example" (change)="onUserTypeChange($event)" name="role" required> 
+                            <option value="" selected>Selecciona tu tipo de usuario</option>
                             <option value="user">Quiero adoptar</option>
                             <option value="shelterAdmin">Soy protectora</option>
                         </select>
@@ -14,102 +14,102 @@
                     <!-- Campos para usuario -->
                     <div *ngIf="showUserFields">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Nombre">
+                            <input type="text"  [(ngModel)]="name" class="form-control" placeholder="Nombre" name="name" required>
                             <label for="floatingInput">Nombre</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Apellidos">
+                            <input type="text"  [(ngModel)]="lastName" class="form-control" placeholder="Apellidos" name="lastName" required>
                             <label for="floatingInput">Apellidos</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email"  [(ngModel)]="email" class="form-control" placeholder="Email" name="email" required>
                             <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" placeholder="Contraseña">
+                            <input type="password"   [(ngModel)]="password" class="form-control" placeholder="Contraseña" name="password" required>
                             <label for="floatingInput">Contraseña</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" placeholder="Repetir contraseña">
+                            <input type="password"  [(ngModel)]="confirmPassword" class="form-control" placeholder="Repetir contraseña" name="password" required>
                             <label for="floatingInput">Repite la contraseña</label>
                         </div>
                         <div class="text-center"> <!-- Añade la clase text-center aquí -->
-                            <button type="submit" class="btn btn-dark">Regístrate</button>
+                            <button type="submit" class="btn btn-dark"  (click)="register()" >Regístrate</button>
                         </div>
                     </div>
                     
                     <!-- Campos para protectora -->
                     <div *ngIf="showShelterFields">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Nombre protectora">
+                            <input type="text" [(ngModel)]="name" class="form-control" placeholder="Nombre protectora" name="name" required>
                             <label for="floatingInput">Nombre de la protectora</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="CIF">
+                            <input type="text" [(ngModel)]="cif" class="form-control" placeholder="CIF" name="cif" required>
                             <label for="floatingInput">CIF</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" aria-label="Ubicación">
-                                <option selected>Selecciona una ubicación</option>
-                                <option>Abanilla</option>
-                                <option>Abarán</option>
-                                <option>Águilas</option>
-                                <option>Albudeite</option>
-                                <option>Alcantarilla</option>
-                                <option>Los Alcázares</option>
-                                <option>Aledo</option>
-                                <option>Alguazas</option>
-                                <option>Alhama de Murcia</option>
-                                <option>Archena</option>
-                                <option>Beniel</option>
-                                <option>Blanca</option>
-                                <option>Bullas</option>
-                                <option>Calasparra</option>
-                                <option>Campos del Río</option>
-                                <option>Caravaca de la Cruz</option>
-                                <option>Cartagena</option>
-                                <option>Cehegín</option>
-                                <option>Ceutí</option>
-                                <option>Cieza</option>
-                                <option>Fortuna</option>
-                                <option>Fuente Álamo de Murcia</option>
-                                <option>Jumilla</option>
-                                <option>Librilla</option>
-                                <option>Lorca</option>
-                                <option>Lorquí</option>
-                                <option>Mazarrón</option>
-                                <option>Molina de Segura</option>
-                                <option>Moratalla</option>
-                                <option>Mula</option>
-                                <option>Murcia</option>
-                                <option>Ojós</option>
-                                <option>Pliego</option>
-                                <option>Puerto Lumbreras</option>
-                                <option>Ricote</option>
-                                <option>San Javier</option>
-                                <option>San Pedro del Pinatar</option>
-                                <option>Santomera</option>
-                                <option>Torre-Pacheco</option>
-                                <option>Las Torres de Cotillas</option>
-                                <option>Totana</option>
-                                <option>Ulea</option>
-                                <option>La Unión</option>
-                                <option>Villanueva del Río Segura</option>
-                                <option>Yecla</option>
+                            <select class="form-select" [(ngModel)]="location" aria-label="Ubicación" name="location" required>
+                                <option value="" selected>Selecciona una ubicación</option>
+                                <option value="Abanilla">Abanilla</option>
+                        <option value="Abarán">Abarán</option>
+                        <option value="Águilas">Águilas</option>
+                        <option value="Albudeite">Albudeite</option>
+                        <option value="Alcantarilla">Alcantarilla</option>
+                        <option value="Los Alcázares">Los Alcázares</option>
+                        <option value="Aledo">Aledo</option>
+                        <option value="Alguazas">Alguazas</option>
+                        <option value="Alhama de Murcia">Alhama de Murcia</option>
+                        <option value="Archena">Archena</option>
+                        <option value="Beniel">Beniel</option>
+                        <option value="Blanca">Blanca</option>
+                        <option value="Bullas">Bullas</option>
+                        <option value="Calasparra">Calasparra</option>
+                        <option value="Campos del Río">Campos del Río</option>
+                        <option value="Caravaca de la Cruz">Caravaca de la Cruz</option>
+                        <option value="Cartagena">Cartagena</option>
+                        <option value="Cehegín">Cehegín</option>
+                        <option value="Ceutí">Ceutí</option>
+                        <option value="Cieza">Cieza</option>
+                        <option value="Fortuna">Fortuna</option>
+                        <option value="Fuente Álamo de Murcia">Fuente Álamo de Murcia</option>
+                        <option value="Jumilla">Jumilla</option>
+                        <option value="Librilla">Librilla</option>
+                        <option value="Lorca">Lorca</option>
+                        <option value="Lorquí">Lorquí</option>
+                        <option value="Mazarrón">Mazarrón</option>
+                        <option value="Molina de Segura">Molina de Segura</option>
+                        <option value="Moratalla">Moratalla</option>
+                        <option value="Mula">Mula</option>
+                        <option value="Murcia">Murcia</option>
+                        <option value="Ojós">Ojós</option>
+                        <option value="Pliego">Pliego</option>
+                        <option value="Puerto Lumbreras">Puerto Lumbreras</option>
+                        <option value="Ricote">Ricote</option>
+                        <option value="San Javier">San Javier</option>
+                        <option value="San Pedro del Pinatar">San Pedro del Pinatar</option>
+                        <option value="Santomera">Santomera</option>
+                        <option value="Torre-Pacheco">Torre-Pacheco</option>
+                        <option value="Las Torres de Cotillas">Las Torres de Cotillas</option>
+                        <option value="Totana">Totana</option>
+                        <option value="Ulea">Ulea</option>
+                        <option value="La Unión">La Unión</option>
+                        <option value="Villanueva del Río Segura">Villanueva del Río Segura</option>
+                        <option value="Yecla">Yecla</option>
                             </select>
                             <label for="floatingInput">Ubicación</label>
                         </div>
                         
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" [(ngModel)]="email" class="form-control" placeholder="Email" name="email" required>
                             <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" placeholder="Contraseña">
+                            <input type="password" [(ngModel)]="password" class="form-control" placeholder="Contraseña" name="password" required>
                             <label for="floatingInput">Contraseña</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" placeholder="Repetir contraseña">
+                            <input type="password" [(ngModel)]="confirmPassword" class="form-control" placeholder="Repetir contraseña" name="password" required>
                             <label for="floatingInput">Repite la contraseña</label>
                         </div>
                         <div class="text-center"> <!-- Añade la clase text-center aquí -->

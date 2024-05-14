@@ -9,16 +9,16 @@
             <div class="login-form">
                 <form>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="email" [(ngModel)]="email" class="form-control" name="username" id="username" placeholder="name@example.com" required>
                         <label for="floatingInput">Email</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input type="password" [(ngModel)]="password" class="form-control" name="password" id="password" placeholder="Password" required>
                         <label for="floatingPassword">Password</label>
                     </div>
-                    <p class="account mt-3">¿No tienes cuenta? <a [routerLink]="['signup']">Regístrate</a></p>
+                    <p class="account mt-3">¿No tienes cuenta? <a [routerLink]="['../signup']">Regístrate</a></p>
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-dark">Login</button>
+                        <button type="submit" (click)="login()" class="btn btn-dark">Login</button>
                     </div>
                 </form>
             </div>

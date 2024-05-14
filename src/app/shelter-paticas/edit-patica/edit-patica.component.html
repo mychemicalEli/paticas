@@ -28,59 +28,55 @@
 
 
             <div class="form-floating mb-3">
-
-                <input list="municipios" name="municipios" type="text" placeholder="{{patica.location}}"
-                    class="custom-input" formControlName="location">
-                <datalist id="municipios">
-                    <option value="Abanilla">
-                    <option value="Abarán">
-                    <option value="Águilas">
-                    <option value="Albudeite">
-                    <option value="Alcantarilla">
-                    <option value="Los Alcázares">
-                    <option value="Aledo">
-                    <option value="Alguazas">
-                    <option value="Alhama de Murcia">
-                    <option value="Archena">
-                    <option value="Beniel">
-                    <option value="Blanca">
-                    <option value="Bullas">
-                    <option value="Calasparra">
-                    <option value="Campos del Río">
-                    <option value="Caravaca de la Cruz">
-                    <option value="Cartagena">
-                    <option value="Cehegín">
-                    <option value="Ceutí">
-                    <option value="Cieza">
-                    <option value="Fortuna">
-                    <option value="Fuente Álamo de Murcia">
-                    <option value="Jumilla">
-                    <option value="Librilla">
-                    <option value="Lorca">
-                    <option value="Lorquí">
-                    <option value="Mazarrón">
-                    <option value="Molina de Segura">
-                    <option value="Moratalla">
-                    <option value="Mula">
-                    <option value="Murcia">
-                    <option value="Ojós">
-                    <option value="Pliego">
-                    <option value="Puerto Lumbreras">
-                    <option value="Ricote">
-                    <option value="San Javier">
-                    <option value="San Pedro del Pinatar">
-                    <option value="Santomera">
-                    <option value="Torre-Pacheco">
-                    <option value="Las Torres de Cotillas">
-                    <option value="Totana">
-                    <option value="Ulea">
-                    <option value="La Unión">
-                    <option value="Villanueva del Río Segura">
-                    <option value="Yecla">
-                </datalist>
-                <div *ngIf="fieldErrors.locationError" class="text-danger">La ubicación introducida debe estar en la lista de municipios de la Región de Murcia</div>
-
-
+                <select class="form-select" aria-label="Ubicación" formControlName="location">
+                    <option value="{{patica.location}}" selected>{{patica.location}}</option>
+                    <option value="Abanilla">Abanilla</option>
+                    <option value="Abarán">Abarán</option>
+                    <option value="Águilas">Águilas</option>
+                    <option value="Albudeite">Albudeite</option>
+                    <option value="Alcantarilla">Alcantarilla</option>
+                    <option value="Los Alcázares">Los Alcázares</option>
+                    <option value="Aledo">Aledo</option>
+                    <option value="Alguazas">Alguazas</option>
+                    <option value="Alhama de Murcia">Alhama de Murcia</option>
+                    <option value="Archena">Archena</option>
+                    <option value="Beniel">Beniel</option>
+                    <option value="Blanca">Blanca</option>
+                    <option value="Bullas">Bullas</option>
+                    <option value="Calasparra">Calasparra</option>
+                    <option value="Campos del Río">Campos del Río</option>
+                    <option value="Caravaca de la Cruz">Caravaca de la Cruz</option>
+                    <option value="Cartagena">Cartagena</option>
+                    <option value="Cehegín">Cehegín</option>
+                    <option value="Ceutí">Ceutí</option>
+                    <option value="Cieza">Cieza</option>
+                    <option value="Fortuna">Fortuna</option>
+                    <option value="Fuente Álamo de Murcia">Fuente Álamo de Murcia</option>
+                    <option value="Jumilla">Jumilla</option>
+                    <option value="Librilla">Librilla</option>
+                    <option value="Lorca">Lorca</option>
+                    <option value="Lorquí">Lorquí</option>
+                    <option value="Mazarrón">Mazarrón</option>
+                    <option value="Molina de Segura">Molina de Segura</option>
+                    <option value="Moratalla">Moratalla</option>
+                    <option value="Mula">Mula</option>
+                    <option value="Murcia">Murcia</option>
+                    <option value="Ojós">Ojós</option>
+                    <option value="Pliego">Pliego</option>
+                    <option value="Puerto Lumbreras">Puerto Lumbreras</option>
+                    <option value="Ricote">Ricote</option>
+                    <option value="San Javier">San Javier</option>
+                    <option value="San Pedro del Pinatar">San Pedro del Pinatar</option>
+                    <option value="Santomera">Santomera</option>
+                    <option value="Torre-Pacheco">Torre-Pacheco</option>
+                    <option value="Las Torres de Cotillas">Las Torres de Cotillas</option>
+                    <option value="Totana">Totana</option>
+                    <option value="Ulea">Ulea</option>
+                    <option value="La Unión">La Unión</option>
+                    <option value="Villanueva del Río Segura">Villanueva del Río Segura</option>
+                    <option value="Yecla">Yecla</option>
+                </select>
+                <label for="floatingInput">Ubicación</label>
             </div>
         </div>
 
@@ -227,7 +223,7 @@
         </div>
 
         <div class="col-lg-12 text-center mt-3">
-            <button type="submit" class="btn" (click)="validateLocation()">GUARDAR CAMBIOS</button>
+            <button type="submit" class="btn" (click)="submitForm()">GUARDAR CAMBIOS</button>
         </div>
 
     </form>

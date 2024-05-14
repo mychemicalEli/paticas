@@ -16,7 +16,6 @@ export class AddPaticaComponent implements OnInit {
   request: AddPaticaRequest = {} as AddPaticaRequest;
   fieldErrors: { [key: string]: boolean } = {};
   form!: FormGroup;
-  municipios: string[] = []; // Lista de municipios
 
   constructor(
     private shelterPaticasService: ShelterPaticasService,
@@ -26,7 +25,6 @@ export class AddPaticaComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.getMunicipios();
   }
 
   createForm(): void {
@@ -34,7 +32,7 @@ export class AddPaticaComponent implements OnInit {
       name: ['', Validators.required],
       gender: ['', Validators.required],
       birthDate: ['', Validators.required],
-      location: ['', [Validators.required, this.validateLocation.bind(this)]], // Validador personalizado
+      location: ['', Validators.required], 
       species: ['', Validators.required],
       size: ['', Validators.required],
       shelter: ['', Validators.required],
@@ -47,23 +45,7 @@ export class AddPaticaComponent implements OnInit {
     });
   }
 
-  validateLocation(control: any) {
-    if (this.municipios.indexOf(control.value) === -1) {
-      return { invalidLocation: true };
-    }
-    return null;
-  }
 
-  getMunicipios() {
-    this.municipios = [
-      "Abanilla", "Abarán", "Águilas", "Albudeite", "Alcantarilla", "Los Alcázares", "Aledo", "Alguazas", "Alhama de Murcia",
-      "Archena", "Beniel", "Blanca", "Bullas", "Calasparra", "Campos del Río", "Caravaca de la Cruz", "Cartagena", "Cehegín",
-      "Ceutí", "Cieza", "Fortuna", "Fuente Álamo de Murcia", "Jumilla", "Librilla", "Lorca", "Lorquí", "Mazarrón",
-      "Molina de Segura", "Moratalla", "Mula", "Murcia", "Ojós", "Pliego", "Puerto Lumbreras", "Ricote", "San Javier",
-      "San Pedro del Pinatar", "Santomera", "Torre-Pacheco", "Las Torres de Cotillas", "Totana", "Ulea", "La Unión",
-      "Villanueva del Río Segura", "Yecla"
-    ];
-  }
 
   validateFields() {
     Object.keys(this.form.controls).forEach((controlName) => {
