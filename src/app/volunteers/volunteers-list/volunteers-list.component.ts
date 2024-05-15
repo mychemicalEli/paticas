@@ -3,6 +3,7 @@ import { GetVolunteerListRequest } from '../models/get-volunteers-list/get-volun
 import { GetVolunteerListResponse } from '../models/get-volunteers-list/get-volunteers-list.response';
 import { VolunteerService } from '../volunteers-service/volunteers.service';
 import { volunteerAvailability } from '../models/volunteer-availability.enum';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-volunteers-list',
@@ -10,6 +11,7 @@ import { volunteerAvailability } from '../models/volunteer-availability.enum';
   styleUrls: ['./volunteers-list.component.css']
 })
 export class VolunteersListComponent {
+  userRole!: string;
   request: GetVolunteerListRequest = { page: 0, pageSize: 6 };
   response?: GetVolunteerListResponse;
   availabilities: string[] = [];
@@ -17,9 +19,10 @@ export class VolunteersListComponent {
   currentVolunteerName: string = '';
   currentVolunteerId: number = 0;
 
-  constructor(private volunteerService: VolunteerService) { }
+  constructor(private volunteerService: VolunteerService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.getVolunteersList();
   }
 

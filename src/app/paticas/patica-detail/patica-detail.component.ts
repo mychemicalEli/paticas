@@ -3,6 +3,7 @@ import { GetPaticasListItemResponse } from '../models/get-paticas-list/get-patic
 import { paticaSize } from '../models/paticas-size.enum';
 import { ActivatedRoute } from '@angular/router';
 import { PaticasService } from '../paticas-service/paticas.service';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-patica-detail',
@@ -16,21 +17,17 @@ export class PaticaDetailComponent implements OnInit {
   // Almacenar detalles de la patica
   @Input () patica!: GetPaticasListItemResponse;
 
+  userRole!: string;
   // Enumeración para el tamaño de la patica
   paticaSizeEnum = paticaSize;
-  isShelterAdmin = false;
   
   // Constructor para inyectar dependencias
-  constructor(private route: ActivatedRoute, private paticasService: PaticasService) {}
+  constructor(private route: ActivatedRoute, private paticasService: PaticasService, public userService: UserService) {}
   
   // Se ejecuta al inicializar el componente
   ngOnInit() {
 
-    //Esto es para saber si debe mostrar el botón de adoptar o no
-    this.route.paramMap.subscribe(params => {
-      const isShelterAdminParam = window.history.state.isShelterAdmin;
-      this.isShelterAdmin = isShelterAdminParam !== undefined ? isShelterAdminParam : false;
-    });
+    this.userRole = this.userService.getUserRole();
   
     // Obtener el ID de la patica de la ruta si no se proporciona directamente
     if (!this.paticaId) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../auth/user-service/user.service';
 
 @Component({
   selector: 'app-formularios',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './formularios.component.css'
 })
 export class FormulariosComponent {
-
+ 
 }

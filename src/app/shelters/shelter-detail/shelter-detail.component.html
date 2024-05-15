@@ -1,4 +1,4 @@
-<main class="container-fluid" id="shelter-container" *ngIf="shelter">
+<main class="container-fluid" id="shelter-container" *ngIf="shelter && userRole === 'user'">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn" type="button" [routerLink]="['/formularios/volunteer']">Hazte voluntario</button>
     </div>

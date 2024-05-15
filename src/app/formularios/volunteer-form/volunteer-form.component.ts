@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateVolunteerFormRequest } from '../models/create-volunteer/create-volunteer.request';
 import { VolunteerFormService } from '../service/volunteer-form.service';
+import { UserService } from '../../auth/user-service/user.service';
+
 
 @Component({
   selector: 'app-volunteer-form',
@@ -11,6 +13,7 @@ import { VolunteerFormService } from '../service/volunteer-form.service';
 })
 export class VolunteerFormComponent implements OnInit {
 
+  userRole!: string;
   currentStep = 1;
   request: CreateVolunteerFormRequest = {} as CreateVolunteerFormRequest;
   step2!: FormGroup;
@@ -20,10 +23,12 @@ export class VolunteerFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private volunteerFormService: VolunteerFormService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.step2 = this.formBuilder.group({
       acceptConditions: [false, Validators.requiredTrue],
     });

@@ -1,4 +1,4 @@
-<main class="container-fluid">
+<main class="container-fluid" *ngIf="userRole === 'user'">
 
     <div class="filters">
         <input class="form-control" type="text" name="search" autocomplete="off" placeholder="Nombre">

@@ -1,4 +1,4 @@
-<main class="profile-container" id="profile-container" *ngIf="shelterProfile">
+<main class="profile-container" id="profile-container" *ngIf="shelterProfile && userRole === 'shelterAdmin'">
     <div class="card shelter mb-3"
     [ngStyle]="{ 'background': shelterProfile.backgroundImage ? 'rgba(232, 192, 125, 0.6) url(' + shelterProfile.backgroundImage + ') no-repeat' : '#E8C07D', 'background-size': 'cover'}">
         <div class="row g-0">

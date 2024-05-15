@@ -5,6 +5,7 @@ import { ShelterService } from '../shelters-service/shelter.service';
 import { GetPaticasListItemResponse, GetPaticasListResponse } from '../../paticas/models/get-paticas-list/get-paticas-list.response';
 import { GetPaticasListRequest } from '../../paticas/models/get-paticas-list/get-paticas-list.request';
 import { PaticasService } from '../../paticas/paticas-service/paticas.service';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-shelter-detail',
@@ -14,6 +15,7 @@ import { PaticasService } from '../../paticas/paticas-service/paticas.service';
 export class ShelterDetailComponent implements OnInit {
   @Input() shelterId!: number;
 
+  userRole!: string;
   shelter!: GetShelterListItemResponse;
   paticas: GetPaticasListItemResponse[] = [];
   request: GetPaticasListRequest = { page: 0, pageSize: 9, shelterId: 0 }; // Inicializar shelterId en 0
@@ -22,10 +24,12 @@ export class ShelterDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private shelterService: ShelterService,
     private paticasService: PaticasService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.route.params.subscribe(params => {
       this.request.shelterId = +params['id']; // Obtener shelterId de los parámetros de la ruta
       this.getPaticasList();

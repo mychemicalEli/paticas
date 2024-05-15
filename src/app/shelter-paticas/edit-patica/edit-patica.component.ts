@@ -5,6 +5,7 @@ import { UpdatePaticaRequest } from '../models/update-patica/update-patica.reque
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShelterPaticasService } from '../shelter-paticas-service/shelter-paticas.service';
 import { PaticasService } from '../../paticas/paticas-service/paticas.service';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-edit-patica',
@@ -13,6 +14,7 @@ import { PaticasService } from '../../paticas/paticas-service/paticas.service';
 })
 export class EditPaticaComponent {
   @Input() paticaId!: number;
+  userRole!: string;
   patica?: GetShelterPaticasListItemResponse;
   imagePreview: string | FormData | null = null;
   form!: FormGroup;
@@ -26,10 +28,12 @@ export class EditPaticaComponent {
     private route: ActivatedRoute,
     private shelterPaticasService: ShelterPaticasService,
     private formBuilder: FormBuilder,
-    private paticasService: PaticasService
+    private paticasService: PaticasService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.userRole = this.userService.getUserRole();
     this.createForm();
   }
 

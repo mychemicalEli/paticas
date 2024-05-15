@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateVolunteerRequest } from '../models/create-volunteer/create-volunteer.request';
 import { Router } from '@angular/router';
 import { VolunteerService } from '../volunteers-service/volunteers.service';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-create-volunteer',
@@ -13,6 +14,7 @@ import { VolunteerService } from '../volunteers-service/volunteers.service';
 export class CreateVolunteerComponent {
   @ViewChild('profileImage') profileImage!: ElementRef; // Referencia al input file para obtener la imagen seleccionada
 
+  userRole!:string;
   imageSelected = false; // Indica si se ha seleccionado una imagen
   url: any = ''; // Almacena la URL de la imagen seleccionada
   fieldErrors: { [key: string]: boolean } = {}; // Almacena los errores de los campos del formulario
@@ -23,10 +25,12 @@ export class CreateVolunteerComponent {
   constructor(
     private volunteerService: VolunteerService, // Servicio de voluntarios
     private formBuilder: FormBuilder, // Constructor de formularios
-    private router: Router // Enrutador
+    private router: Router, // Enrutador
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.createForm(); // Inicialización del formulario
   }
 

@@ -6,6 +6,7 @@ import { GetUserProfileRequest } from '../models/get-user-profile/get-user-profi
 import { Router } from '@angular/router';
 import { GetUserPaticasLikedResponse, GetUserPaticasLikedItemResponse } from '../models/get-user-profile/get-user-paticas-liked.response';
 import { GetUserSheltersLikedResponse, GetUserSheltersLikedItemResponse } from '../models/get-user-profile/get-user-shelters-liked.response'; // Importa las definiciones necesarias
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-profile-user',
@@ -13,14 +14,16 @@ import { GetUserSheltersLikedResponse, GetUserSheltersLikedItemResponse } from '
   styleUrls: ['./profile-user.component.css']
 })
 export class ProfileUserComponent implements OnInit {
+  userRole!: string;
   showForm: boolean = false;
   response!: GetUserProfileResponse;
   request: GetUserProfileRequest = { page: 0, pageSize: 12, isLiked: false };
   profileForm!: FormGroup;
 
-  constructor(private profileService: ProfileService, private router: Router) { }
+  constructor(private profileService: ProfileService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.getUserProfile();
   }
 

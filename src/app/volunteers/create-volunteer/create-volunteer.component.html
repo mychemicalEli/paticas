@@ -1,4 +1,4 @@
-<main class="container-fluid">
+<main class="container-fluid" *ngIf="userRole === 'shelterAdmin'">
     <form class="row justify-content-center" [formGroup]="form">
         <h3 class="title">AÑADIR VOLUNTARIO</h3>
 

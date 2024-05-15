@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile-service/profile.service';
 import { GetShelterProfileResponse } from '../models/get-shelter-profile/get-shelter-profile.response';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-profile-shelter',
@@ -9,15 +10,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./profile-shelter.component.css']
 })
 export class ProfileShelterComponent implements OnInit {
+
+  userRole!: string;
   showForm: boolean = false;
   shelterProfile?: GetShelterProfileResponse ;
 
   
 
 
-  constructor(private profileService: ProfileService, private formBuilder: FormBuilder) {}
+  constructor(private profileService: ProfileService, private formBuilder: FormBuilder, private userService:UserService) {}
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.getShelterProfile();
   }
 

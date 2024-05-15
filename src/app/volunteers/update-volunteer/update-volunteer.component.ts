@@ -5,6 +5,7 @@ import { VolunteerService } from '../volunteers-service/volunteers.service'; // 
 import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRoute y Router para manejar la navegación y los parámetros de ruta
 import { volunteerAvailability } from '../models/volunteer-availability.enum'; // Importa el enum de disponibilidad de voluntarios
 import { UpdateVolunteerRequest } from '../models/update-volunteer/update-volunteer.request'; // Importa la interfaz de solicitud de actualización de voluntarios
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-update-volunteer',
@@ -13,6 +14,7 @@ import { UpdateVolunteerRequest } from '../models/update-volunteer/update-volunt
 })
 export class UpdateVolunteerComponent implements OnInit {
   @Input() volunteerId!: number; // Recibe el ID del voluntario como entrada
+  userRole!: string;
   volunteer?: GetVolunteerListItemResponse; // Almacena la información del voluntario
   imagePreview: string | FormData | null = null; // Almacena la vista previa de la imagen
   form!: FormGroup; // Representa el formulario de actualización de voluntarios
@@ -22,10 +24,12 @@ export class UpdateVolunteerComponent implements OnInit {
     private router: Router, // Inyecta el enrutador
     private route: ActivatedRoute, // Inyecta la ruta activada
     private volunteerService: VolunteerService, // Inyecta el servicio de voluntarios
-    private formBuilder: FormBuilder // Inyecta el constructor de formularios
+    private formBuilder: FormBuilder, // Inyecta el constructor de formularios
+    private userService: UserService
   ) {}
 
   ngOnInit() {
+    this.userRole = this.userService.getUserRole();
     // Inicializa el formulario y sus controles
     this.form = this.formBuilder.group({
       fullName: [''], // Control para el nombre completo

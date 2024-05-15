@@ -1,7 +1,7 @@
 <main class="container-fluid" *ngIf="patica">
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn" type="button" [routerLink]="['/formularios/adoption']" *ngIf="!isShelterAdmin">
+        <button class="btn" type="button" [routerLink]="['/formularios/adoption']" *ngIf="userRole === 'user'">
             Quiero adoptar a <b>{{patica.name}}</b>
         </button>
       </div>

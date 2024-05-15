@@ -3,6 +3,7 @@ import { GetPaticasListItemResponse, GetPaticasListResponse } from '../models/ge
 import { GetPaticasListRequest } from '../models/get-paticas-list/get-paticas-list.request';
 import { PaticasService } from '../paticas-service/paticas.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
  
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './paticas-list.component.css'
 })
 export class PaticasListComponent {
-
+  userRole!: string;
   // Propiedades para almacenar la respuesta, solicitud y especies de paticas
   response?: GetPaticasListResponse;
   request: GetPaticasListRequest = { page: 0, pageSize: 12, shelterId:0 };
@@ -20,10 +21,11 @@ export class PaticasListComponent {
   selectedPatica!: GetPaticasListItemResponse;
 
   // Constructor para inyectar dependencias
-  constructor(private paticasService: PaticasService, private router: Router) { }
+  constructor(private paticasService: PaticasService, private router: Router, public userService: UserService) { }
 
   // Se ejecuta al inicializar el componente
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     // Obtener la lista de paticas al iniciar
     this.getPaticasList();
   }

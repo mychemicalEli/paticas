@@ -1,4 +1,4 @@
-<main class="container-fluid">
+<main class="container-fluid" *ngIf="userRole === 'shelterAdmin'">
 
     <div class="filters">
         <button type="button" class="btn add" [routerLink]="['add']">+ AÑADIR</button>

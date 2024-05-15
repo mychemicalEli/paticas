@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GetShelterListItemResponse, GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response'; // Importa la interfaz de respuesta para la lista de refugios
 import { GetShelterListRequest } from '../models/get-shelter-list/get-shelter-list.request'; // Importa la interfaz de solicitud para la lista de refugios
 import { ShelterService } from '../shelters-service/shelter.service'; // Importa el servicio de refugios
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-shelter-list', 
@@ -10,13 +11,15 @@ import { ShelterService } from '../shelters-service/shelter.service'; // Importa
 })
 export class ShelterListComponent {
 
+  userRole!:string;
   response?: GetShelterListResponse; // Variable para almacenar la respuesta de la solicitud de lista de refugios
   request: GetShelterListRequest = { page: 0, pageSize: 12 }; // Objeto de solicitud de lista de refugios con valores predeterminados
   locations: Set<string> = new Set(); // Conjunto para almacenar ubicaciones únicas de refugios
 
-  constructor(private shelterService: ShelterService) { } // Constructor que inyecta el servicio de refugios
+  constructor(private shelterService: ShelterService, private userService:UserService) { } // Constructor que inyecta el servicio de refugios
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.getShelterList(); // Al inicializarse el componente, se llama a la función para obtener la lista de refugios
   }
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateAdoptionFormRequest } from '../models/create-adoption/create-adoption.request';
 import { AdoptionFormService } from '../service/adoption-form.service';
+import { UserService } from '../../auth/user-service/user.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { AdoptionFormService } from '../service/adoption-form.service';
 })
 export class AdoptionFormComponent implements OnInit {
 
+  userRole!: string;
   currentStep = 1;
 
   //declaramos la request para que no salga como undefined
@@ -32,10 +34,11 @@ export class AdoptionFormComponent implements OnInit {
 
 
   //necesitamos el formbuilder para validar, el adoption service para hacer el post y la ruta para redirigirnos al acabar el formulario
-  constructor(private formBuilder: FormBuilder, private adoptionFormService: AdoptionFormService, private router: Router) {
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private adoptionFormService: AdoptionFormService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     //step 1 validate checkbox with terms and conditions
     this.step1 = this.formBuilder.group({
       acceptConditions: [false, Validators.requiredTrue],

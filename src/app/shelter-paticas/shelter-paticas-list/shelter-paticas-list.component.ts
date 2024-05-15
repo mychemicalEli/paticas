@@ -4,6 +4,7 @@ import { GetShelterPaticasListRequest } from '../models/get-shelter-paticas-list
 import { ShelterPaticasService } from '../shelter-paticas-service/shelter-paticas.service';
 import { Router } from '@angular/router';
 import { PaticasListComponent } from '../../paticas/paticas-list/paticas-list.component';
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
   selector: 'app-shelter-paticas-list',
@@ -11,15 +12,16 @@ import { PaticasListComponent } from '../../paticas/paticas-list/paticas-list.co
   styleUrls: ['./shelter-paticas-list.component.css']
 })
 export class ShelterPaticasListComponent {
-  isShelterAdmin =true;
+  userRole!: string;
   response?: GetShelterPaticasListResponse;
   request: GetShelterPaticasListRequest = { page: 0, pageSize: 12, shelterId: 10 };
   currentPaticaName: string = '';
   currentPaticaId: number = 0;
   
-  constructor(private shelterPaticasService: ShelterPaticasService, private router: Router) { }
+  constructor(private userService: UserService, private shelterPaticasService: ShelterPaticasService, private router: Router) { }
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.getShelterPaticasList();
   }
 
@@ -62,7 +64,7 @@ export class ShelterPaticasListComponent {
   }
 
   onSelectPatica(patica: any): void {
-    this.router.navigate(['/paticas', patica.id], { state: { isShelterAdmin: this.isShelterAdmin } });
+    this.router.navigate(['/paticas', patica.id]);
 }
 
 }

@@ -4,6 +4,7 @@ import { ShelterPaticasService } from '../shelter-paticas-service/shelter-patica
 import { Router } from '@angular/router';
 import { AddPaticaRequest } from '../models/add-patica/add-patica.request';
 import { auto } from '@popperjs/core';
+import { UserService } from '../../auth/user-service/user.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { auto } from '@popperjs/core';
   styleUrls: ['./add-patica.component.css']
 })
 export class AddPaticaComponent implements OnInit {
+  userRole!: string;
   maxImages = 3;
   request: AddPaticaRequest = {} as AddPaticaRequest;
   fieldErrors: { [key: string]: boolean } = {};
@@ -20,10 +22,12 @@ export class AddPaticaComponent implements OnInit {
   constructor(
     private shelterPaticasService: ShelterPaticasService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.userRole = this.userService.getUserRole();
     this.createForm();
   }
 
