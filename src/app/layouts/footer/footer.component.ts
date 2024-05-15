@@ -10,8 +10,11 @@ import { UserService } from '../../auth/user-service/user.service';
 
 export class FooterComponent {
   userRole!: string;
+  isLoggedIn: boolean = false;
   constructor(private userService: UserService) { }
   ngOnInit(): void {
-  this.userRole = this.userService.getUserRole();
+    
+    this.userRole = this.userService.getUserRole();
+    this.isLoggedIn = this.userService.isLoggedIn();
   }
 }
