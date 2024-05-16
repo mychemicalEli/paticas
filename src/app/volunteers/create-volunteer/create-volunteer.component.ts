@@ -119,6 +119,7 @@ export class CreateVolunteerComponent {
     this.volunteerService.createVolunteer(this.request)
     .pipe()
     .subscribe()
+    alert("Voluntario creado correctamente!");
    
     console.log('volunteer created...');
     this.router.navigate(['/volunteers']); // Navega a la lista de voluntarios

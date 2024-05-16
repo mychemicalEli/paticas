@@ -34,7 +34,7 @@
                     <i class="fa-solid" [ngClass]="{'fa-mars': patica.gender === 'male', 'fa-venus': patica.gender === 'female', 'fs-5':true}"></i> 
                     <img [src]="patica.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer" (click)="onSelectPatica(patica)">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(patica)">{{ patica.name }} {{patica.shelterId}}</h5> 
+                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(patica)">{{ patica.name }}</h5> 
                         <div class="icons">
                             <i class="bi" [ngClass]="{'bi-heart': !patica.liked, 'bi-heart-fill': patica.liked, 'fs-4': true}" (click)="toggleLike(patica)"></i> 
                         </div>

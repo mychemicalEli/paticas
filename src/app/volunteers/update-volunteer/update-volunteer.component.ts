@@ -118,6 +118,7 @@ export class UpdateVolunteerComponent implements OnInit {
     this.volunteerService.updateVolunteer(this.volunteerId, this.request)
     .pipe()
     .subscribe()
+    alert("Voluntario actualizado correctamente!");
     
     console.log("Update made"); // Muestra un mensaje en la consola indicando que se realizó la actualización
     this.router.navigate(['/volunteers']); // Navega de regreso a la lista de voluntarios

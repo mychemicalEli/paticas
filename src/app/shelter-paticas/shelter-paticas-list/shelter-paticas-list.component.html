@@ -11,7 +11,7 @@
                     <i class="fa-solid" [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
                     <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer" (click)="onSelectPatica(paticas)">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(paticas)">{{ paticas.name }} {{paticas.shelterId}}</h5>
+                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(paticas)">{{ paticas.name }}</h5>
                         <div class="icons">
                 
                             <div class="edit">
