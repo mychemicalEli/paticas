@@ -13,7 +13,7 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class AdoptionFormComponent implements OnInit {
 
-  userRole!: string;
+  userRole: string= '';
   currentStep = 1;
 
   //declaramos la request para que no salga como undefined
@@ -38,7 +38,7 @@ export class AdoptionFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     //step 1 validate checkbox with terms and conditions
     this.step1 = this.formBuilder.group({
       acceptConditions: [false, Validators.requiredTrue],

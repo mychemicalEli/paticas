@@ -14,7 +14,7 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class UpdateVolunteerComponent implements OnInit {
   @Input() volunteerId!: number; // Recibe el ID del voluntario como entrada
-  userRole!: string;
+  userRole: string='';
   volunteer?: GetVolunteerListItemResponse; // Almacena la información del voluntario
   imagePreview: string | FormData | null = null; // Almacena la vista previa de la imagen
   form!: FormGroup; // Representa el formulario de actualización de voluntarios
@@ -29,7 +29,7 @@ export class UpdateVolunteerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     // Inicializa el formulario y sus controles
     this.form = this.formBuilder.group({
       fullName: [''], // Control para el nombre completo

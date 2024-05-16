@@ -14,7 +14,7 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class EditPaticaComponent {
   @Input() paticaId!: number;
-  userRole!: string;
+  userRole: string='';
   patica?: GetShelterPaticasListItemResponse;
   imagePreview: string | FormData | null = null;
   form!: FormGroup;
@@ -33,7 +33,7 @@ export class EditPaticaComponent {
   ) { }
 
   ngOnInit() {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.createForm();
   }
 

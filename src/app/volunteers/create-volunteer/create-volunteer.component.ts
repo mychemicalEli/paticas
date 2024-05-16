@@ -14,7 +14,7 @@ import { UserService } from '../../auth/user-service/user.service';
 export class CreateVolunteerComponent {
   @ViewChild('profileImage') profileImage!: ElementRef; // Referencia al input file para obtener la imagen seleccionada
 
-  userRole!:string;
+  userRole:string='';
   imageSelected = false; // Indica si se ha seleccionado una imagen
   url: any = ''; // Almacena la URL de la imagen seleccionada
   fieldErrors: { [key: string]: boolean } = {}; // Almacena los errores de los campos del formulario
@@ -30,7 +30,7 @@ export class CreateVolunteerComponent {
   ) { }
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.createForm(); // Inicialización del formulario
   }
 

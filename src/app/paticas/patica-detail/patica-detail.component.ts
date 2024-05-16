@@ -17,7 +17,7 @@ export class PaticaDetailComponent implements OnInit {
   // Almacenar detalles de la patica
   @Input () patica!: GetPaticasListItemResponse;
 
-  userRole!: string;
+  userRole: string ='';
   // Enumeración para el tamaño de la patica
   paticaSizeEnum = paticaSize;
   
@@ -27,7 +27,7 @@ export class PaticaDetailComponent implements OnInit {
   // Se ejecuta al inicializar el componente
   ngOnInit() {
 
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
   
     // Obtener el ID de la patica de la ruta si no se proporciona directamente
     if (!this.paticaId) {

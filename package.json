@@ -24,6 +24,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "jquery": "^3.7.1",
+    "js-sha256": "^0.11.0",
     "jwt-decode": "^4.0.0",
     "ngx-bootstrap": "^12.0.0",
     "ngx-cookie-service": "^17.1.0",

@@ -12,7 +12,7 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrls: ['./shelter-paticas-list.component.css']
 })
 export class ShelterPaticasListComponent {
-  userRole!: string;
+  userRole: string ='';
   response?: GetShelterPaticasListResponse;
   request: GetShelterPaticasListRequest = { page: 0, pageSize: 12, shelterId: 10 };
   currentPaticaName: string = '';
@@ -21,7 +21,7 @@ export class ShelterPaticasListComponent {
   constructor(private userService: UserService, private shelterPaticasService: ShelterPaticasService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.getShelterPaticasList();
   }
 

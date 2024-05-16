@@ -7,11 +7,11 @@ import { UserService } from '../auth/user-service/user.service';
   styleUrl: './colaborate.component.css'
 })
 export class ColaborateComponent {
-  userRole!: string;
+  userRole: string='';
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
   }
 }

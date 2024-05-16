@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user-service/user.service';
 import { Router } from '@angular/router';
 import { CreateUserRequest } from '../models/create-user.request';
+import { sha256 } from 'js-sha256';
+
 
 @Component({
   selector: 'app-signup',
@@ -69,10 +71,14 @@ export class SignupComponent implements OnInit {
     }
 
     this.stablishRequest();
+    const encryptedPassword = sha256(this.request.password);
+    this.request.password = encryptedPassword;
+    console.log('User role:', this.request.role);
     this.userService.register(this.request)
     .pipe()
     .subscribe(
       (data) => {
+        console.log('datos enviados:', this.request);
         // Maneja la respuesta del servidor aquí
         console.log(data); // Muestra la respuesta en la consola
         // Establece el rol y redirige a la página correspondiente
@@ -103,27 +109,29 @@ export class SignupComponent implements OnInit {
   }
 
   onUserTypeChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value;
-    this.showUserFields = value === 'user';
-    this.showShelterFields = value === 'shelterAdmin';
+  const value = (event.target as HTMLSelectElement).value;
+  this.showUserFields = value === 'user';
+  this.showShelterFields = value === 'shelterAdmin';
+  this.signupForm.get('role')?.setValue(value);
 
-    if (this.showUserFields) {
-      this.signupForm.get('name')?.setValidators(Validators.required);
-      this.signupForm.get('lastName')?.setValidators(Validators.required);
-      this.signupForm.get('cif')?.clearValidators();
-      this.signupForm.get('location')?.clearValidators();
-    } else if (this.showShelterFields) {
-      this.signupForm.get('cif')?.setValidators([Validators.required, Validators.pattern(/^(\d{8}[a-zA-Z]|\d{1}[a-zA-Z]\d{7}|[a-zA-Z]\d{8}|\d{8}-[a-zA-Z]|\d{1}-[a-zA-Z]\d{7}|[a-zA-Z]-\d{8})$/)]);
-      this.signupForm.get('location')?.setValidators(Validators.required);
-      this.signupForm.get('name')?.clearValidators();
-      this.signupForm.get('lastName')?.clearValidators();
-    }
-
-    this.signupForm.get('name')?.updateValueAndValidity();
-    this.signupForm.get('lastName')?.updateValueAndValidity();
-    this.signupForm.get('cif')?.updateValueAndValidity();
-    this.signupForm.get('location')?.updateValueAndValidity();
+  if (this.showUserFields) {
+    this.signupForm.get('name')?.setValidators(Validators.required);
+    this.signupForm.get('lastName')?.setValidators(Validators.required);
+    this.signupForm.get('cif')?.clearValidators();
+    this.signupForm.get('location')?.clearValidators();
+  } else if (this.showShelterFields) {
+    this.signupForm.get('cif')?.setValidators([Validators.required, Validators.pattern(/^(\d{8}[a-zA-Z]|\d{1}[a-zA-Z]\d{7}|[a-zA-Z]\d{8}|\d{8}-[a-zA-Z]|\d{1}-[a-zA-Z]\d{7}|[a-zA-Z]-\d{8})$/)]);
+    this.signupForm.get('location')?.setValidators(Validators.required);
+    this.signupForm.get('name')?.clearValidators();
+    this.signupForm.get('lastName')?.clearValidators();
   }
+
+  // Resetear las validaciones de los campos que no se muestran
+  this.signupForm.get('name')?.updateValueAndValidity();
+  this.signupForm.get('lastName')?.updateValueAndValidity();
+  this.signupForm.get('cif')?.updateValueAndValidity();
+  this.signupForm.get('location')?.updateValueAndValidity();
+}
 
 
   get form() { return this.signupForm.controls; }

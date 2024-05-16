@@ -12,7 +12,7 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrl: './paticas-list.component.css'
 })
 export class PaticasListComponent {
-  userRole!: string;
+  userRole: string = '';
   // Propiedades para almacenar la respuesta, solicitud y especies de paticas
   response?: GetPaticasListResponse;
   request: GetPaticasListRequest = { page: 0, pageSize: 12, shelterId:0 };
@@ -25,7 +25,7 @@ export class PaticasListComponent {
 
   // Se ejecuta al inicializar el componente
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     // Obtener la lista de paticas al iniciar
     this.getPaticasList();
   }

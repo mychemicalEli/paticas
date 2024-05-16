@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user-service/user.service';
 import { Router } from '@angular/router';
+import { sha256 } from 'js-sha256'; // Importa la función de hash SHA-256
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,10 @@ export class LoginComponent {
       return;
     }
 
-    const user = { email: emailLowerCase, password: this.password };
+    // Encriptar la contraseña con SHA-256
+    const hashedPassword = sha256(this.password);
+
+    const user = { email: emailLowerCase, password: hashedPassword }; // Envía la contraseña encriptada
     this.userService.login(user)
       .subscribe((data: any) => {
         const role = this.userService.getUserRole(emailLowerCase);

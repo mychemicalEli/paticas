@@ -11,7 +11,7 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class ProfileShelterComponent implements OnInit {
 
-  userRole!: string;
+  userRole: string='';
   showForm: boolean = false;
   shelterProfile?: GetShelterProfileResponse ;
 
@@ -21,7 +21,7 @@ export class ProfileShelterComponent implements OnInit {
   constructor(private profileService: ProfileService, private formBuilder: FormBuilder, private userService:UserService) {}
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.getShelterProfile();
   }
 

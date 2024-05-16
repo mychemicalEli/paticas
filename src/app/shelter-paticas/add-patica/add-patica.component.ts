@@ -13,7 +13,7 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrls: ['./add-patica.component.css']
 })
 export class AddPaticaComponent implements OnInit {
-  userRole!: string;
+  userRole: string='';
   maxImages = 3;
   request: AddPaticaRequest = {} as AddPaticaRequest;
   fieldErrors: { [key: string]: boolean } = {};
@@ -27,7 +27,7 @@ export class AddPaticaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.createForm();
   }
 

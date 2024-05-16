@@ -8,10 +8,10 @@ import { UserService } from '../auth/user-service/user.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  userRole!: string;
+  userRole: string = '';
   constructor(public userService: UserService) {}
   ngOnInit() {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
 
   }
 

@@ -11,7 +11,7 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class ShelterListComponent {
 
-  userRole!:string;
+  userRole:string='';
   response?: GetShelterListResponse; // Variable para almacenar la respuesta de la solicitud de lista de refugios
   request: GetShelterListRequest = { page: 0, pageSize: 12 }; // Objeto de solicitud de lista de refugios con valores predeterminados
   locations: Set<string> = new Set(); // Conjunto para almacenar ubicaciones únicas de refugios
@@ -19,7 +19,7 @@ export class ShelterListComponent {
   constructor(private shelterService: ShelterService, private userService:UserService) { } // Constructor que inyecta el servicio de refugios
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.getShelterList(); // Al inicializarse el componente, se llama a la función para obtener la lista de refugios
   }
 

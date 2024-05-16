@@ -3,6 +3,7 @@ import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
+import { sha256 } from 'js-sha256'; 
 
 @Injectable({
     providedIn: "root",
@@ -16,11 +17,17 @@ export class UserService {
     constructor(private httpClient: HttpClient, private cookies: CookieService) { }
 
     login(user: any): Observable<any> {
+        console.log('Datos enviados al backend:', user);
         return this.httpClient.post(`${this.baseUrl}auth/login`, user);
     }
 
     register(user: any): Observable<any> {
-        return this.httpClient.post(`${this.baseUrl}auth/signup`, user);
+         // Encriptar la contraseña antes de enviarla al servidor
+    const encryptedPassword = sha256(user.password);
+
+    // Crear una copia del usuario con la contraseña encriptada
+    const userWithEncryptedPassword = { ...user, password: encryptedPassword };
+        return this.httpClient.post(`${this.baseUrl}auth/signup`, userWithEncryptedPassword);
     }
 
     setToken(token: string) {

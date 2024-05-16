@@ -13,7 +13,7 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class VolunteerFormComponent implements OnInit {
 
-  userRole!: string;
+  userRole: string= '';
   currentStep = 1;
   request: CreateVolunteerFormRequest = {} as CreateVolunteerFormRequest;
   step2!: FormGroup;
@@ -28,7 +28,7 @@ export class VolunteerFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.step2 = this.formBuilder.group({
       acceptConditions: [false, Validators.requiredTrue],
     });

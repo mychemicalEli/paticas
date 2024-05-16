@@ -14,7 +14,7 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrls: ['./profile-user.component.css']
 })
 export class ProfileUserComponent implements OnInit {
-  userRole!: string;
+  userRole: string='';
   showForm: boolean = false;
   response!: GetUserProfileResponse;
   request: GetUserProfileRequest = { page: 0, pageSize: 12, isLiked: false };
@@ -23,7 +23,7 @@ export class ProfileUserComponent implements OnInit {
   constructor(private profileService: ProfileService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.getUserProfile();
   }
 

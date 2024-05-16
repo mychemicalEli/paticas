@@ -11,7 +11,7 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrls: ['./volunteers-list.component.css']
 })
 export class VolunteersListComponent {
-  userRole!: string;
+  userRole: string='';
   request: GetVolunteerListRequest = { page: 0, pageSize: 6 };
   response?: GetVolunteerListResponse;
   availabilities: string[] = [];
@@ -22,7 +22,7 @@ export class VolunteersListComponent {
   constructor(private volunteerService: VolunteerService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.getVolunteersList();
   }
 

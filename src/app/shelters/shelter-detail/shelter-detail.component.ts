@@ -15,7 +15,7 @@ import { UserService } from '../../auth/user-service/user.service';
 export class ShelterDetailComponent implements OnInit {
   @Input() shelterId!: number;
 
-  userRole!: string;
+  userRole: string='';
   shelter!: GetShelterListItemResponse;
   paticas: GetPaticasListItemResponse[] = [];
   request: GetPaticasListRequest = { page: 0, pageSize: 9, shelterId: 0 }; // Inicializar shelterId en 0
@@ -29,7 +29,7 @@ export class ShelterDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userRole = this.userService.getUserRole();
+    this.userRole = this.userService.getRole();
     this.route.params.subscribe(params => {
       this.request.shelterId = +params['id']; // Obtener shelterId de los parámetros de la ruta
       this.getPaticasList();
