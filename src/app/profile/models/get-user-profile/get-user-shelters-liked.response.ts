@@ -8,7 +8,8 @@ export interface GetUserSheltersLikedResponse{
 
 export interface GetUserSheltersLikedItemResponse{
     id: number;
-    image: string;
+    image: FormData;
+    backgroundImage: FormData;
     name: string;
     location: string;
     liked: boolean;

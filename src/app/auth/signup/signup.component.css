@@ -19,7 +19,6 @@ img{
     width: auto;
     height: 100vh;
     object-fit: cover;
-    margin: 0;
 }
 
 
@@ -27,7 +26,6 @@ img{
     flex: 1;
     border-radius: 0 10px 10px 0;
     padding: 50px;
-    transition: flex 0.5s;
     display: flex;
     justify-content: center;
     width: 100%;

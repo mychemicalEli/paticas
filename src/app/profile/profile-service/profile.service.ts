@@ -10,6 +10,8 @@ import { GetUserPaticasLikedResponse } from "../models/get-user-profile/get-user
 import { GetUserSheltersLikedResponse } from "../models/get-user-profile/get-user-shelters-liked.response";
 import { GetPaticasListItemResponse } from "../../paticas/models/get-paticas-list/get-paticas-list.response";
 import { GetShelterListItemResponse } from "../../shelters/models/get-shelter-list/get-shelter-list.response";
+import { UpdateUserRequest } from "../models/update-user-profile/update-user-profile.request";
+import { UpdateShelterUserRequest } from "../models/update-shelter-profile/update-shelter-profile.request";
 
 @Injectable({
     providedIn: 'root'
@@ -67,6 +69,14 @@ export class ProfileService{
 
       updateShelterLike(shelterId: number, liked: boolean): Observable<GetShelterListItemResponse> {
         return this.httpClient.put<GetShelterListItemResponse>(`${this.baseUrl}/shelters/${shelterId}/like`, { liked });
+      }
+
+      updateUser(request: UpdateUserRequest): Observable<GetUserProfileResponse> {
+        return this.httpClient.put<GetUserProfileResponse>(`${this.baseUrl}profile/user`, request);
+      }
+
+      updateShelter(request: UpdateShelterUserRequest): Observable<GetShelterProfileResponse> {
+        return this.httpClient.put<GetShelterProfileResponse>(`${this.baseUrl}profile/shelter`, request);
       }
       
 }

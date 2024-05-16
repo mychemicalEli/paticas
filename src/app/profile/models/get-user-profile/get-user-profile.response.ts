@@ -1,6 +1,6 @@
 export interface GetUserProfileResponse{
     id: number,
-    image: FormData,
+    profileImage: FormData,
     backgroundImage: FormData,
     name: string,
     email: string, 

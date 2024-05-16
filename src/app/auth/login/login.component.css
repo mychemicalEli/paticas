@@ -8,15 +8,15 @@
 
 .sidenav {
     flex: 1;
-    display: flex;
     justify-content: left;
-    transition: flex 0.5s;  
+    transition: flex 0.5s;
 }
 
-img{
+.img-fluid{
     width: auto;
     height: 100vh;
     object-fit: cover;
+
 }
 
 
@@ -24,7 +24,6 @@ img{
     flex: 1;
     border-radius: 0 10px 10px 0;
     padding: 50px;
-    transition: flex 0.5s;
     display: flex;
     justify-content: center;
     width: 100%;

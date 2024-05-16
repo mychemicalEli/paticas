@@ -53,9 +53,9 @@ export class LoginComponent {
           console.log("Rol no reconocido");
         }
       },
-      error => {
-        console.log(error);
-        this.error = "Correo electrónico o contraseña no válidos.";
-      });
+        error => {
+          console.log(error);
+          this.error = "Correo electrónico o contraseña no válidos.";
+        });
   }
 }
