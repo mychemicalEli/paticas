@@ -1,43 +1,68 @@
 import { Component } from '@angular/core';
-import { GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response';
-import { GetShelterListRequest } from '../models/get-shelter-list/get-shelter-list.request';
-import { ShelterService } from '../shelters-service/shelter.service';
+import { GetShelterListItemResponse, GetShelterListResponse } from '../models/get-shelter-list/get-shelter-list.response'; // Importa la interfaz de respuesta para la lista de refugios
+import { GetShelterListRequest } from '../models/get-shelter-list/get-shelter-list.request'; // Importa la interfaz de solicitud para la lista de refugios
+import { ShelterService } from '../shelters-service/shelter.service'; // Importa el servicio de refugios
+import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
-  selector: 'app-shelter-list',
-  templateUrl: './shelter-list.component.html',
-  styleUrls: ['./shelter-list.component.css']
+  selector: 'app-shelter-list', 
+  templateUrl: './shelter-list.component.html', 
+  styleUrls: ['./shelter-list.component.css'] 
 })
 export class ShelterListComponent {
 
-  response?: GetShelterListResponse;
-  request: GetShelterListRequest = { page: 0, pageSize: 9 };
-  locations: Set<string> = new Set();
+  userRole:string='';
+  response?: GetShelterListResponse; // Variable para almacenar la respuesta de la solicitud de lista de refugios
+  request: GetShelterListRequest = { page: 0, pageSize: 12 }; // Objeto de solicitud de lista de refugios con valores predeterminados
+  locations: Set<string> = new Set(); // Conjunto para almacenar ubicaciones únicas de refugios
 
-  constructor(private shelterService: ShelterService) { }
+  constructor(private shelterService: ShelterService, private userService:UserService) { } // Constructor que inyecta el servicio de refugios
 
   ngOnInit(): void {
-    this.getShelterList();
+    this.userRole = this.userService.getRole();
+    this.getShelterList(); // Al inicializarse el componente, se llama a la función para obtener la lista de refugios
   }
 
+  // Función para obtener la lista de refugios
   private getShelterList() {
     this.shelterService.get(this.request)
+    .pipe() 
       .subscribe({
-        next: (response: GetShelterListResponse) => {
-          this.response = response;
-          this.updateLocationsList(response.shelters);
+        next: (response: GetShelterListResponse) => { // Maneja la respuesta exitosa
+          this.response = response; // Asigna la respuesta a la variable response
+          this.updateLocationsList(response.shelters); // Actualiza la lista de ubicaciones de refugios
         }
       });
   }
 
+  // Función para actualizar la lista de ubicaciones de refugios
   private updateLocationsList(shelters: any[]) {
-    this.locations.clear(); // Limpiar el conjunto antes de actualizar
-    shelters.forEach(shelter => {
-      this.locations.add(shelter.location);
+    this.locations.clear(); // Limpia el conjunto de ubicaciones
+    shelters.forEach(shelter => { // Itera sobre cada refugio en la lista
+      this.locations.add(shelter.location); // Agrega la ubicación del refugio al conjunto
     });
   }
 
-  toggleLike(shelter: any) {
+  // Función para alternar el estado de "me gusta" de un refugio
+  toggleLike(shelter: GetShelterListItemResponse): void {
     shelter.liked = !shelter.liked;
+    this.shelterService.updateShelterLike(shelter.id, shelter.liked)
+    .pipe()
+    .subscribe({
+      next: () => {
+        console.log(`Shelter ${shelter.id} updated: liked = ${shelter.liked}`);
+      },
+      error: (error) => {
+        console.error(`Error updating like for Shelter ${shelter.id}:`, error);
+        // Revert the change if update fails
+        shelter.liked = !shelter.liked;
+      }
+    });
+  }
+
+  // Función para manejar el cambio de página
+  onPageChange(pageSize: number) {
+    this.request.page = pageSize; // Actualiza el número de página en la solicitud
+    this.getShelterList(); // Obtiene la lista de refugios con la nueva página
   }
 }

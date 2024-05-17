@@ -1,6 +1,4 @@
-@if (isLoggedIn == true) {
-    <app-navbar-user></app-navbar-user>
-  } @else {
-      <app-navbar-shelter></app-navbar-shelter>
-   }
-  
+<ng-container>
+  <app-navbar-user *ngIf="userRole === 'user' && isLoggedIn"></app-navbar-user>
+  <app-navbar-shelter *ngIf="userRole === 'shelterAdmin' && isLoggedIn"></app-navbar-shelter>
+</ng-container>

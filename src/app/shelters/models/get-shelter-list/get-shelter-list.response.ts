@@ -11,5 +11,6 @@ export interface GetShelterListItemResponse{
     name: string;
     location: string;
     liked: boolean;
+    description: string
    
 }

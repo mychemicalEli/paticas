@@ -1,1 +1,4 @@
-<p>profile works!</p>
+<ng-container>
+    <app-profile-user *ngIf="userRole === 'user'"></app-profile-user>
+    <app-profile-shelter *ngIf="userRole === 'shelterAdmin'"></app-profile-shelter>
+  </ng-container>

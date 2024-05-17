@@ -69,3 +69,15 @@ img {
  
 }
 
+pagination-controls{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    font-family: 'Roboto';
+    color: #212121; 
+    cursor: pointer;
+}
+.custom-pagination ::ng-deep .ngx-pagination .current {
+    background: #E8C07D;
+    border-radius: 5px;
+}

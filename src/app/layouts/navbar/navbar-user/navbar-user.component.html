@@ -20,21 +20,21 @@
             <a class="nav-link" [routerLink]="['/shelters']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">PROTECTORAS</a>
         </li>
             <li class="nav-item"><a class="nav-link" [routerLink]="['/paticas']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">ADOPTA</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">COLABORA</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/colaborate']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">COLABORA</a></li>
         </ul>
     
     
   
         <div class="nav-item dropdown ms-auto">
           <a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="assets/img/logos/iconProfile.png" alt="user" width="48" height="48" class="rounded-circle">
+            <img [src]="userProfileImage || 'assets/img/logos/iconProfile.png'" alt="user" width="48" height="48" class="rounded-circle">
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/profile/user']">Perfil</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+            <li><a class="dropdown-item" (click)="logOut()" style="cursor: pointer;">Cerrar Sesión</a></li>
           </ul>
         </div>
   

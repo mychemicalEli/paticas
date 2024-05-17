@@ -1,0 +1,90 @@
+<main class="container-fluid" *ngIf="patica">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn" type="button" [routerLink]="['/formularios/adoption']" *ngIf="userRole === 'user'">
+            Quiero adoptar a <b>{{patica.name}}</b>
+        </button>
+      </div>
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div id="carouselExampleControls" class="carousel slide h-100" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active h-100">
+                            <img [src]="patica.imageCarousel1" class="d-block w-100 h-100" alt="patica">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img [src]="patica.imageCarousel2" class="d-block w-100 h-100" alt="patica">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img [src]="patica.imageCarousel3" class="d-block w-100 h-100" alt="patica">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body h-100">
+                    <div class="header">
+                        <h1 class="card-title">{{patica.name}}</h1>
+                        <h5 class="card-subtitle mb-2"><i class="bi bi-geo-alt-fill fs-5"></i>{{patica.shelter}} ({{patica.location}})</h5>
+                    </div>
+                
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col">
+                            <span class="badge rounded-pill text-bg-dark d-block text-center">
+                                <i *ngIf="patica.gender === 'male'" class="fa-solid fa-mars fs-6"></i>
+                                <i *ngIf="patica.gender === 'female'" class="fa-solid fa-venus fs-6"></i>
+                                {{ patica.gender }}
+                            </span>
+                            
+                        </div>
+                        <div class="col">
+                            <span class="badge rounded-pill text-bg-dark d-block text-center"><i class="bi bi-arrows-angle-expand fs-6"></i> {{ paticaSizeEnum [patica.size] }}</span>
+                        </div>
+                        <div class="col">
+                            <span class="badge rounded-pill text-bg-dark d-block text-center"><i class="fa-solid fa-cake-candles fs-6"></i> {{patica.birthDate | date:'shortDate' }}</span>
+                        </div>
+                        <div class="col">
+                            <span class="badge rounded-pill text-bg-dark d-block text-center"> <i class="fa-solid fa-paw fs-6"></i> {{patica.species}}</span>
+                        </div>
+                    </div>
+                
+                    <p class="card-text">{{patica.description}}</p>
+                
+                        <div class="row mb-3 mt-3 justify-content-center">
+                            <div class="col">
+                                <span class="badge rounded-pill text-bg-light d-block text-center">
+                                    <i *ngIf="patica.goodWithKids" class="bi bi-check-lg fs-6"></i>
+                                    <i *ngIf="!patica.goodWithKids" class="bi bi-x-circle-fill fs-6"></i>
+                                    Niños
+                                </span>
+                            </div>
+                            <div class="col">
+                                <span class="badge rounded-pill text-bg-light d-block text-center">
+                                    <i *ngIf="patica.goodWithDogs" class="bi bi-check-lg fs-6"></i>
+                                    <i *ngIf="!patica.goodWithDogs" class="bi bi-x-circle-fill fs-6"></i>
+                                    Perros
+                                </span>
+                            </div>
+                            <div class="col">
+                                <span class="badge rounded-pill text-bg-light d-block text-center">
+                                    <i *ngIf="patica.goodWithCats" class="bi bi-check-lg fs-6"></i>
+                                    <i *ngIf="!patica.goodWithCats" class="bi bi-x-circle-fill fs-6"></i>
+                                    Gatos
+                                </span>
+                            </div>
+                        </div> 
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

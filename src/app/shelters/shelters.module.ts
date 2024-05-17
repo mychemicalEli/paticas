@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { SheltersRoutingModule } from './shelters-routing.module';
 import { SheltersComponent } from './shelters.component';
 import { ShelterListComponent } from './shelter-list/shelter-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ShelterDetailComponent } from './shelter-detail/shelter-detail.component';
+import { PaticasListComponent } from '../paticas/paticas-list/paticas-list.component';
 
 
 
@@ -11,12 +14,16 @@ import { ShelterListComponent } from './shelter-list/shelter-list.component';
   declarations: [
     SheltersComponent,
     ShelterListComponent,
+    ShelterDetailComponent,
+  
    
   ],
   imports: [
     CommonModule,
     SheltersRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule,
+    
   ]
 })
 export class SheltersModule { }
