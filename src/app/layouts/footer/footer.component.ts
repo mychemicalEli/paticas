@@ -13,13 +13,11 @@ export class FooterComponent {
   userRole: string = '';
   isLoggedIn: boolean = false;
   private userRoleSubscription: Subscription | undefined;
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
   ngOnInit(): void {
-    this.isLoggedIn = this.userService.isLoggedIn();
-    this.getUserRole();
-    this.userRoleSubscription = this.userService.getRoleSubject().subscribe(role => {
-      this.userRole = role;
-    });
+    this.userService.isLoggedIn().subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+  });
   }
 
   ngOnDestroy(): void {

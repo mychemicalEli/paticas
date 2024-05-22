@@ -1,4 +1,4 @@
 <ng-container>
-  <app-navbar-user *ngIf="userRole === 'user' && isLoggedIn"></app-navbar-user>
-  <app-navbar-shelter *ngIf="userRole === 'shelterAdmin' && isLoggedIn"></app-navbar-shelter>
+  <app-navbar-user *ngIf="userService.isLoggedIn() && userService.getRole() === 'user'"></app-navbar-user>
+  <app-navbar-shelter *ngIf="userService.isLoggedIn() && userService.getRole() === 'shelterAdmin'"></app-navbar-shelter>
 </ng-container>
