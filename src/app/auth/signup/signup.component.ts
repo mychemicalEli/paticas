@@ -64,6 +64,7 @@ export class SignupComponent implements OnInit {
       this.signupForm.markAllAsTouched();
       return;
     }
+    
 
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');

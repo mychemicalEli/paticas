@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { GetShelterPaticasListItemResponse } from '../models/get-shelter-paticas-list/get-shelter-paticas-list.response';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UpdatePaticaRequest } from '../models/update-patica/update-patica.request';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShelterPaticasService } from '../shelter-paticas-service/shelter-paticas.service';
@@ -40,21 +40,21 @@ export class EditPaticaComponent {
   //Inicializar formulario
   createForm() {
     this.form = this.formBuilder.group({
-      name: [''],
-      gender: [''],
-      birthDate: [''],
-      location: [''],
-      shelter: [''],
-      description: [''],
-      species: [''],
-      size: [''],
+      name: ['', Validators.required],
+      gender: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      location: ['', Validators.required],
+      shelter: ['', Validators.required],
+      description: ['', Validators.required],
+      species: ['', Validators.required],
+      size: ['', Validators.required],
       profileImage: [''],
       imageCarousel1: [null],
       imageCarousel2: [null],
       imageCarousel3: [null],
-      goodWithKids: [''],
-      goodWithDogs: [''],
-      goodWithCats: ['']
+      goodWithKids: ['', Validators.required],
+      goodWithDogs: ['', Validators.required],
+      goodWithCats: ['', Validators.required]
     });
   
     // Si no se proporciona el ID de la patica, recupera el ID de la ruta
@@ -203,6 +203,10 @@ export class EditPaticaComponent {
 
   //hacer submit de los datos
   submitForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;

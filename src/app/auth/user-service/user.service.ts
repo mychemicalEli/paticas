@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { sha256 } from 'js-sha256'; 
 
@@ -12,6 +12,7 @@ export class UserService {
     baseUrl = environment.baseApiUrl;
     private role: string = ''; // Variable para almacenar el rol
     private userEmail: string = ''; // Variable para almacenar el email
+    private isLoggedInSubject = new BehaviorSubject<boolean>(false); 
     private readonly roleSubject = new Subject<string>(); // Subject para emitir cambios en el rol
 
     constructor(private httpClient: HttpClient, private cookies: CookieService) { }
@@ -69,9 +70,14 @@ export class UserService {
         }
     }
 
-    isLoggedIn(): boolean {
+    isLoggedIn(): Observable<boolean> {
         const token = this.getToken();
-        return !!token; // Si hay un token, devuelve true; de lo contrario, devuelve false
+        const isLoggedIn = !!token; // Si hay un token, el usuario está conectado
+    
+        // Actualizar el estado de inicio de sesión en el BehaviorSubject
+        this.isLoggedInSubject.next(isLoggedIn);
+    
+        return this.isLoggedInSubject.asObservable(); // Devuelve el BehaviorSubject como Observable
     }
 
     getRoleSubject(): Subject<string> {

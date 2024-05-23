@@ -7,7 +7,9 @@
                 <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellido"
                     formControlName="fullName">
                 <label for="fullName">Nombre y apellido</label>
-                <div *ngIf="fieldErrors['fullName']" class="text-danger">Este es un campo obligatorio</div>
+                <div *ngIf="form.get('fullName')?.touched && form.get('fullName')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('fullName')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
             </div>
 
             <div class="form-floating mb-3">
@@ -18,7 +20,9 @@
                     <option value=3>Completa</option>
                 </select>
                 <label for="floatingSelect">Disponibilidad</label>
-                <div *ngIf="fieldErrors['availability']" class="text-danger">Este es un campo obligatorio</div>
+                <div *ngIf="form.get('availability')?.touched && form.get('availability')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('availability')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
             </div>
             
 
@@ -26,7 +30,10 @@
                 <input type="phone" class="form-control" id="phone" placeholder="Teléfono de contacto"
                     formControlName="phone">
                 <label for="phone">Teléfono de contacto</label>
-                <div *ngIf="fieldErrors['phone']" class="text-danger">Este es un campo obligatorio</div>
+                <div *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('phone')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    <div *ngIf="form.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
+                </div>
             </div>
         </div>
 
@@ -35,7 +42,10 @@
                 <input type="email" class="form-control" id="email" placeholder="name@example.com"
                     formControlName="email">
                 <label for="email">Email address</label>
-                <div *ngIf="fieldErrors['email']" class="text-danger">Este es un campo obligatorio</div>
+                <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('email')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    <div *ngIf="form.get('email')?.errors?.['email']">El email no es válido.</div>
+                </div>
             </div>
 
             <div class="containerForFile">
@@ -57,7 +67,7 @@
               <button class="btn btn-erase" *ngIf="url" (click)="delete()">Borrar</button>
             </div>
 
-            <button type="submit" class="btn" (click)="validateFields()">AÑADIR</button>
+            <button type="submit" class="btn" (click)="submitForm()">AÑADIR</button>
         </div>
     </form>
 </main>

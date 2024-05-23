@@ -12,15 +12,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   private userRoleSubscription: Subscription | undefined;
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { } // Cambiar a 'public'
 
   ngOnInit(): void {
-    this.isLoggedIn = this.userService.isLoggedIn();
-    this.getUserRole(); // Obtener el rol al inicio
-
-    // Suscribirse a los cambios en el rol
-    this.userRoleSubscription = this.userService.getRoleSubject().subscribe(role => {
-      this.userRole = role;
+    this.userService.isLoggedIn().subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
     });
   }
 

@@ -32,7 +32,7 @@ export class VolunteerService {
 
 
     public createVolunteer(request: CreateVolunteerRequest) {
-        return this.httpClient.post(`${this.baseUrl}/volunteers/create`, request)
+        return this.httpClient.post(`${this.baseUrl}/volunteers`, request)
     }
 
     public updateVolunteer(volunteerId: number, request: UpdateVolunteerRequest): Observable<GetVolunteerListItemResponse> {

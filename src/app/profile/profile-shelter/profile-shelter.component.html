@@ -30,12 +30,19 @@
                         <input type="text" class="form-control" id="floatingInputName"
                             placeholder="Nombre de la protectora" formControlName="name">
                         <label for="floatingInputName">Nombre de la protectora</label>
+                        <div *ngIf="profileForm.get('name')?.touched && profileForm.get('name')?.invalid" class="text-danger">
+                            <div *ngIf="profileForm.get('name')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        </div>
                     </div>
     
                     <div class="form-floating mb-4">
                         <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com"
                             formControlName="email">
                         <label for="floatingInputEmail">Email</label>
+                        <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid" class="text-danger">
+                            <div *ngIf="profileForm.get('email')?.errors?.['required']">Este es un campo obligatorio.</div>
+                            <div *ngIf="profileForm.get('email')?.errors?.['email']">El email no es válido.</div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="profileImage">Imagen de perfil</label>
@@ -64,6 +71,10 @@
                         <input type="phone" class="form-control" id="floatingInputPhone" placeholder="Teléfono de contacto"
                             formControlName="phone">
                         <label for="floatingInputPhone">Teléfono</label>
+                        <div *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid" class="text-danger">
+                            <div *ngIf="profileForm.get('phone')?.errors?.['required']">Este es un campo obligatorio.</div>
+                            <div *ngIf="profileForm.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
                         <select class="form-select" aria-label="Ubicación" >
@@ -117,8 +128,12 @@
                         <label for="floatingInput">Ubicación</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputCIF" placeholder="CIF de la protectora" formControlName="cif">
+                        <input type="text" class="form-control" id="floatingInputCIF" placeholder="CIF de la protectora" formControlName="cif" required>
                         <label for="floatingInputCIF">CIF</label>
+                        <div *ngIf="profileForm.get('cif')?.touched && profileForm.get('cif')?.invalid" class="text-danger">
+                            <div *ngIf="profileForm.get('cif')?.errors?.['required']">Este es un campo obligatorio.</div>
+                            <div *ngIf="profileForm.get('cif')?.errors?.['pattern']">El CIF no es válido.</div>
+                        </div>
                     </div>
                     
     
