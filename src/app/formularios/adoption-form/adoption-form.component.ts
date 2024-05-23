@@ -220,6 +220,7 @@ setFieldError(fieldName: string, hasError: boolean) {
   //luego hace el submit con el service
   //por último pasa a la pagina final
   submitForm() {
+    
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;

@@ -36,11 +36,11 @@ export class ProfileShelterComponent implements OnInit {
 
   createForm() {
     this.profileForm = this.formBuilder.group({
-      name: [''],
-      email: [''],
-      phone: [''],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^[9|6|7][0-9]{8}$')]],
       location: [''],
-      cif:[''],
+      cif:['',[Validators.required, Validators.pattern(/^(\d{8}[a-zA-Z]|\d{1}[a-zA-Z]\d{7}|[a-zA-Z]\d{8}|\d{8}-[a-zA-Z]|\d{1}-[a-zA-Z]\d{7}|[a-zA-Z]-\d{8})$/)]],
       profileImage: [null],
       backgroundImage: [null]
     });
@@ -131,6 +131,10 @@ deleteBackgroundImage() {
 }
 
 submitForm() {
+  if (this.profileForm.invalid) {
+    this.profileForm.markAllAsTouched();
+    return;
+  }
   if (!this.areAllStepsValid()) {
     console.log('Not all steps are valid');
     return;

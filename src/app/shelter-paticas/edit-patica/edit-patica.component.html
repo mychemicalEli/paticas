@@ -7,6 +7,9 @@
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="name" formControlName="name">
                 <label for="name">Nombre</label>
+                <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('name')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
             </div>
 
             <div class="form-floating mb-3">
@@ -23,6 +26,9 @@
                 <input type="date" class="form-control" id="birthDate" placeholder="birthDate"
                     formControlName="birthDate" max="{{ getMaxDate() }}">
                 <label for="birthDate">Fecha de nacimiento</label>
+                <div *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('birthDate')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
 
             </div>
 
@@ -77,6 +83,7 @@
                     <option value="Yecla">Yecla</option>
                 </select>
                 <label for="floatingInput">Ubicación</label>
+        
             </div>
         </div>
 
@@ -86,6 +93,9 @@
             <div class="form-floating mb-3">
                 <input type="species" class="form-control" id="species" placeholder="Especie" formControlName="species">
                 <label for="species">Raza</label>
+                <div *ngIf="form.get('species')?.touched && form.get('species')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('species')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
             </div>
 
             <div class="form-floating mb-3">
@@ -96,11 +106,15 @@
                     <option value=3>Grande</option>
                 </select>
                 <label for="floatingSelect">Tamaño</label>
+
             </div>
 
             <div class="form-floating mb-2">
                 <input type="shelter" class="form-control" id="shelter" placeholder="shelter" formControlName="shelter">
                 <label for="shelter">Protectora</label>
+                <div *ngIf="form.get('shelter')?.touched && form.get('shelter')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('shelter')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
             </div>
 
             <!--imagen-->
@@ -138,6 +152,9 @@
                 <textarea class="form-control" placeholder="Descripción" id="description" style="height: 120px"
                     formControlName="description"></textarea>
                 <label for="description">Descripción</label>
+                <div *ngIf="form.get('description')?.touched && form.get('description')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('description')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
             </div>
 
 

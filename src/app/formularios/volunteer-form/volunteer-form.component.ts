@@ -18,7 +18,7 @@ export class VolunteerFormComponent implements OnInit {
   request: CreateVolunteerFormRequest = {} as CreateVolunteerFormRequest;
   step2!: FormGroup;
   step3!: FormGroup;
-  fieldErrors: { [key: string]: boolean } = {};
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,23 +54,7 @@ export class VolunteerFormComponent implements OnInit {
     });
   }
 
-  checkErrors() {
-    return Object.values(this.fieldErrors).some(error => error);
-  }
 
-  setFieldError(fieldName: string, hasError: boolean) {
-    this.fieldErrors[fieldName] = hasError;
-  }
-
-  validateFields() {
-    Object.keys(this.step3.controls).forEach(controlName => {
-      const control = this.step3.get(controlName);
-      this.setFieldError(controlName, control?.invalid || false);
-    });
-    if (!this.checkErrors()) {
-      this.submitForm();
-    }
-  }
 
   nextPrev(step: number) {
     this.currentStep += step;
@@ -85,6 +69,11 @@ export class VolunteerFormComponent implements OnInit {
   }
 
   submitForm() {
+    if (this.step3.invalid) {
+      this.step3.markAllAsTouched();
+      return;
+    }
+
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;

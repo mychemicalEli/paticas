@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetUserProfileResponse } from '../models/get-user-profile/get-user-profile.response';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileService } from '../profile-service/profile.service';
 import { GetUserProfileRequest } from '../models/get-user-profile/get-user-profile-paticas.request';
 import { Router } from '@angular/router';
@@ -33,10 +33,10 @@ export class ProfileUserComponent implements OnInit {
 
   createForm() {
     this.profileForm = this.formBuilder.group({
-      name: [''],
-      email: [''],
-      phone: [''],
-      location: [''],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^[9|6|7][0-9]{8}$')]],
+      location: ['', Validators.required],
       profileImage: [null],
       backgroundImage: [null]
     });
@@ -122,6 +122,11 @@ deleteBackgroundImage() {
 }
 
   submitForm() {
+    if (this.profileForm.invalid) {
+      this.profileForm.markAllAsTouched();
+      return;
+    }
+
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;

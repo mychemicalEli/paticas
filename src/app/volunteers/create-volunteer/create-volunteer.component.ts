@@ -17,7 +17,6 @@ export class CreateVolunteerComponent {
   userRole:string='';
   imageSelected = false; // Indica si se ha seleccionado una imagen
   url: any = ''; // Almacena la URL de la imagen seleccionada
-  fieldErrors: { [key: string]: boolean } = {}; // Almacena los errores de los campos del formulario
   request: CreateVolunteerRequest = {} as CreateVolunteerRequest; // Almacena la información para la solicitud de creación
   form!: FormGroup; // Representa el formulario de creación de voluntarios
 
@@ -57,33 +56,7 @@ export class CreateVolunteerComponent {
     };
   }
 
-  // Verifica si hay errores en los campos del formulario
-  checkErrors() {
-    return Object.values(this.fieldErrors).some(error => error);
-  }
-
-  // Establece un error en un campo del formulario
-  setFieldError(fieldName: string, hasError: boolean) {
-    this.fieldErrors[fieldName] = hasError;
-  }
-
-  // Valida los campos del formulario antes de enviarlos
-  validateFields() {
-    Object.keys(this.form.controls).forEach(controlName => {
-      const control = this.form.get(controlName);
-      this.setFieldError(controlName, control?.invalid || false);
-    });
-
-    // Validar específicamente el campo de disponibilidad
-    if (!this.form.get('availability')?.value) {
-      this.setFieldError('availability', true);
-    }
-
-    if (!this.checkErrors()) {
-      this.submitForm();
-    }
-  }
-
+  
   // Establece los datos del formulario en la solicitud de voluntario
   stablishRequest() {
     this.request.fullName = this.form.get('fullName')?.value; // Establece el nombre completo
@@ -107,6 +80,10 @@ export class CreateVolunteerComponent {
 
   // Envia el formulario
   submitForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
@@ -118,7 +95,18 @@ export class CreateVolunteerComponent {
     console.log('Request object:', this.request); // Muestra la solicitud en la consola
     this.volunteerService.createVolunteer(this.request)
     .pipe()
-    .subscribe()
+    .subscribe({
+      next: () => {
+        console.log('Volunteer created...');
+        this.router.navigate(['/volunteers']);
+      },
+      error: (error) => {
+        console.error('Error occurred while adding volunteer:', error);
+      },
+      complete: () => {
+        console.log('volunteer added successfully');
+      }
+    })
     alert("Voluntario creado correctamente!");
    
     console.log('volunteer created...');

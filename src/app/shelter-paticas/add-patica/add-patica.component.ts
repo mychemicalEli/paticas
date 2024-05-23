@@ -16,7 +16,6 @@ export class AddPaticaComponent implements OnInit {
   userRole: string='';
   maxImages = 3;
   request: AddPaticaRequest = {} as AddPaticaRequest;
-  fieldErrors: { [key: string]: boolean } = {};
   form!: FormGroup;
 
   constructor(
@@ -51,23 +50,7 @@ export class AddPaticaComponent implements OnInit {
 
 
 
-  validateFields() {
-    Object.keys(this.form.controls).forEach((controlName) => {
-      const control = this.form.get(controlName);
-      this.setFieldError(controlName, control?.invalid || false);
-    });
-    if (!this.checkErrors()) {
-      this.submitForm();
-    }
-  }
 
-  checkErrors() {
-    return Object.values(this.fieldErrors).some(error => error);
-  }
-
-  setFieldError(fieldName: string, hasError: boolean) {
-    this.fieldErrors[fieldName] = hasError;
-  }
 
   areAllStepsValid(): boolean {
     return this.form.valid;
@@ -107,10 +90,15 @@ export class AddPaticaComponent implements OnInit {
 
 
   submitForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
     }
+    
     console.log('Submitting form...');
     console.log('Are all steps valid:', this.areAllStepsValid());
     this.stablishRequest(); 

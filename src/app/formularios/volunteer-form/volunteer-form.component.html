@@ -68,28 +68,37 @@
                     <label for="fullName" class="form-label">* Nombre y apellidos</label>
                     <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellidos"
                         formControlName="fullName" required>
-                        <div *ngIf="fieldErrors['fullName']" class="text-danger">Nombre es un campo obligatorio</div>
+                        <div *ngIf="step3.get('fullName')?.touched && step3.get('fullName')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('fullName')?.errors?.['required']">El nombre es obligatorio.</div>
+                        </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">* Correo Electrónico</label>
                     <input type="email" class="form-control" id="email" placeholder="Correo Electrónico"
                         formControlName="email" required>
-                    <div *ngIf="fieldErrors['email']" class="text-danger">Email es un campo obligatorio</div>
+                        <div *ngIf="step3.get('email')?.touched && step3.get('email')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('email')?.errors?.['required']">El email es obligatorio.</div>
+                            <div *ngIf="step3.get('email')?.errors?.['email']">El email no es válido.</div>
+                        </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="address" class="form-label">* Dirección</label>
                     <input type="text" class="form-control" id="address" placeholder="Dirección"
                         formControlName="address" required>
-                    <div *ngIf="fieldErrors['address']" class="text-danger">Dirección es un campo obligatorio</div>
+                        <div *ngIf="step3.get('address')?.touched && step3.get('address')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('address')?.errors?.['required']">La dirección es obligatoria.</div>
+                        </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="reason" class="form-label">¿Por qué te gustaría ser voluntario en nuestra
                         protectora?</label>
                     <textarea class="form-control" id="reason" rows="5" placeholder="Escribe aquí" formControlName="reason" required></textarea>
-                    <div *ngIf="fieldErrors['reason']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('reason')?.touched && step3.get('reason')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('reason')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
 
@@ -97,7 +106,9 @@
                     <label for="availability" class="form-label">¿Cuál es tu disponibilidad horaria para ser voluntario?
                         (días de la semana, horas por día)</label>
                     <textarea class="form-control" id="availability" rows="4" placeholder="Escribe aquí" formControlName="availability" required></textarea>
-                    <div *ngIf="fieldErrors['availability']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('availability')?.touched && step3.get('availability')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('availability')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
 
@@ -105,21 +116,27 @@
                     <label for="policies" class="form-label">¿Estás dispuesto a seguir las políticas y procedimientos
                         establecidos por la protectora?</label>
                     <textarea class="form-control" id="policies" rows="4" placeholder="Escribe aquí" formControlName="policies" required></textarea>
-                    <div *ngIf="fieldErrors['policies']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('policies')?.touched && step3.get('policies')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('policies')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="vehicle" class="form-label">¿Tienes vehículo propio y estás dispuesto a utilizarlo para
                         tareas relacionadas con la protectora?</label>
                     <textarea class="form-control" id="vehicle" rows="4" placeholder="Escribe aquí" formControlName="vehicle" required></textarea>
-                    <div *ngIf="fieldErrors['vehicle']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('vehicle')?.touched && step3.get('vehicle')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('vehicle')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="expectations" class="form-label">¿Cuál es tu expectativa principal como voluntario de
                         nuestra protectora?</label>
                     <textarea class="form-control" id="expectations" rows="6" placeholder="Escribe aquí" formControlName="expectations" required></textarea>
-                    <div *ngIf="fieldErrors['expectations']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('expectations')?.touched && step3.get('expectations')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('expectations')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
 
@@ -131,7 +148,10 @@
                     <label for="age" class="form-label">* Edad</label>
                     <input type="number" class="form-control" id="age" placeholder="Edad" formControlName="age"
                         required>
-                    <div *ngIf="fieldErrors['age']" class="text-danger">Edad es un campo obligatorio y debe ser mayor de 18</div>
+                        <div *ngIf="step3.get('age')?.touched && step3.get('age')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('age')?.errors?.['required']">La edad es obligatoria.</div>
+                            <div *ngIf="step3.get('age')?.errors?.['min']">Debes ser mayor de 18 años.</div>
+                        </div>
 
                 </div>
 
@@ -139,7 +159,10 @@
                     <label for="phone" class="form-label">* Teléfono de Contacto</label>
                     <input type="tel" class="form-control" id="phone" placeholder="Teléfono de Contacto"
                         formControlName="phone" required>
-                    <div *ngIf="fieldErrors['phone']" class="text-danger">Teléfono es un campo obligatorio</div>
+                        <div *ngIf="step3.get('phone')?.touched && step3.get('phone')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('phone')?.errors?.['required']">El teléfono es obligatorio.</div>
+                            <div *ngIf="step3.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
+                        </div>
                 </div>
 
 
@@ -147,14 +170,19 @@
                     <label for="postalCode" class="form-label">* Código Postal</label>
                     <input type="text" class="form-control" id="postalCode" placeholder="Código Postal"
                         formControlName="postalCode" required>
-                    <div *ngIf="fieldErrors['postalCode']" class="text-danger">Código postal es un campo obligatorio</div>
+                        <div *ngIf="step3.get('postalCode')?.touched && step3.get('postalCode')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('postalCode')?.errors?.['required']">El Código Postal es obligatorio.</div>
+                            <div *ngIf="step3.get('postalCode')?.errors?.['pattern']">El Código Postal no es válido.</div>
+                        </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="experience" class="form-label">¿Cuál es tu experiencia previa en trabajo voluntario o
                         cuidado de animales?</label>
                     <textarea class="form-control" id="experience" rows="4" placeholder="Escribe aquí" formControlName="experience" required></textarea>
-                    <div *ngIf="fieldErrors['experience']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('experience')?.touched && step3.get('experience')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('experience')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -162,7 +190,9 @@
                         gustaría utilizar como voluntario? (por ejemplo, atención al público, cuidado de animales,
                         eventos de recaudación de fondos, redes sociales, etc.)</label>
                     <textarea class="form-control" id="skills" rows="4" placeholder="Escribe aquí" formControlName="skills" required></textarea>
-                    <div *ngIf="fieldErrors['skills']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('skills')?.touched && step3.get('skills')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('skills')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -170,14 +200,18 @@
                         limitación de salud que pueda afectar tu capacidad para trabajar con ellos?</label>
                     <textarea class="form-control" id="healthLimitations" rows="4"
                         placeholder="Escribe aquí" formControlName="healthLimitations" required></textarea>
-                        <div *ngIf="fieldErrors['healthLimitations']" class="text-danger">Este es un campo obligatorio</div>
+                        <div *ngIf="step3.get('healthLimitations')?.touched && step3.get('healthLimitations')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('healthLimitations')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="trainingArea" class="form-label">¿Hay alguna área en particular en la que te gustaría
                         recibir capacitación adicional?</label>
                     <textarea class="form-control" id="trainingArea" rows="4" placeholder="Escribe aquí" formControlName="trainingArea" required></textarea>
-                    <div *ngIf="fieldErrors['trainingArea']" class="text-danger">Este es un campo obligatorio</div>
+                    <div *ngIf="step3.get('trainingArea')?.touched && step3.get('trainingArea')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('trainingArea')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -185,7 +219,9 @@
                         hacer o algún comentario que desees agregar?</label>
                     <textarea class="form-control" id="additionalQuestions" rows="4"
                         placeholder="Escribe aquí" formControlName="additionalQuestions" required></textarea>
-                        <div *ngIf="fieldErrors['additionalQuestions']" class="text-danger">Este es un campo obligatorio</div>
+                        <div *ngIf="step3.get('additionalQuestions')?.touched && step3.get('additionalQuestions')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('additionalQuestions')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        </div>
                 </div>
 
             </div>
@@ -199,7 +235,9 @@
                     Al marcar esta casilla, acepto que mis datos personales proporcionados en este formulario sean
                     tratados de acuerdo con la política de privacidad de la protectora de animales, con el fin de
                     gestionar mi participación como voluntario.
-                    <div *ngIf="fieldErrors['acceptTerms']" class="text-danger">Debes aceptar los términos y condiciones</div>
+                    <div *ngIf="step3.get('acceptTerms')?.touched && step3.get('acceptTerms')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('acceptTerms')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
                 </label>
 
 
@@ -210,7 +248,7 @@
 
         <div class="d-flex justify-content-center">
             <button class="btn" style="margin-right: 10px;" (click)="nextPrev(-1)">Anterior</button>
-            <button class="btn" style="margin-left: 10px;" (click)="validateFields()">Enviar Formulario</button>
+            <button class="btn" style="margin-left: 10px;" (click)="submitForm()">Enviar Formulario</button>
         </div>
     </div>
 
