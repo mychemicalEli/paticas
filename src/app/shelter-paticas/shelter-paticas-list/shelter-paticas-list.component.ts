@@ -13,22 +13,25 @@ import { GetPaticaByIdRequest } from '../../paticas/models/get-patica-by-id/get-
   styleUrls: ['./shelter-paticas-list.component.css']
 })
 export class ShelterPaticasListComponent {
-  userRole: string ='';
-  response?: GetShelterPaticasListResponse;
-  request: GetShelterPaticasListRequest = { page: 0, pageSize: 12, shelterId: 10 };
-  currentPaticaName: string = '';
-  currentPaticaId: number = 0;
-  
+  userRole: string = ''; // Variable para almacenar el rol del usuario actual
+  response?: GetShelterPaticasListResponse; // Variable para almacenar la respuesta de la lista de "paticas"
+  request: GetShelterPaticasListRequest = { page: 0, pageSize: 12, shelterId: 10 }; // Objeto de solicitud para obtener la lista de "paticas"
+  currentPaticaName: string = ''; // Nombre de la "patica" actual seleccionada
+  currentPaticaId: number = 0; // ID de la "patica" actual seleccionada
+
+
   constructor(private userService: UserService, private shelterPaticasService: ShelterPaticasService, private router: Router) { }
 
   ngOnInit(): void {
-    this.userRole = this.userService.getRole();
-    this.getShelterPaticasList();
+    this.userRole = this.userService.getRole(); // Obtiene el rol del usuario actual
+    this.getShelterPaticasList(); // Obtiene la lista de "paticas" del refugio
   }
 
+
+  // Llama al servicio para obtener la lista de "paticas" del refugio
   private getShelterPaticasList() {
     this.shelterPaticasService.getList(this.request)
-    .pipe()
+      .pipe()
       .subscribe({
         next: (response: GetShelterPaticasListResponse) => {
           this.response = response;
@@ -37,36 +40,42 @@ export class ShelterPaticasListComponent {
       });
   }
 
+  // Método para cambiar de página en la lista de "paticas"
   onPageChange(pageSize: number) {
+    // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
     this.request.page = pageSize;
     this.getShelterPaticasList();
   }
 
+  // Método para manejar el clic en el botón de eliminar una "patica"
   onDeleteClick(paticaName: string, paticaId: number) {
+    // Establece el nombre y el ID de la "patica" actual a eliminar
     this.currentPaticaName = paticaName;
     this.currentPaticaId = paticaId;
   }
 
 
+  // Método para eliminar una "patica"
   deletePatica(paticaId: number) {
-    const request: GetPaticaByIdRequest = { id: paticaId }; 
+    // Crea la solicitud para eliminar la "patica" y llama al servicio correspondiente
+    const request: GetPaticaByIdRequest = { id: paticaId };
     this.shelterPaticasService.deletePatica(request)
-    .pipe()
-    .subscribe({
-      next: () => {
-        console.log('Patica eliminada exitosamente');
-        const closeButton = document.getElementById('x');
-        closeButton?.click();
-        this.getShelterPaticasList();
-      },
-      error: (error) => {
-        console.error('Error al eliminar patica:', error);
-      }
-    });
+      .pipe()
+      .subscribe({
+        next: () => {
+          console.log('Patica eliminada exitosamente');
+          const closeButton = document.getElementById('x');
+          closeButton?.click();
+          this.getShelterPaticasList();
+        },
+        error: (error) => {
+          console.error('Error al eliminar patica:', error);
+        }
+      });
   }
-
+  // Navega a la página de detalles de la "patica" seleccionada
   onSelectPatica(patica: any): void {
     this.router.navigate(['/paticas', patica.id]);
-}
+  }
 
 }

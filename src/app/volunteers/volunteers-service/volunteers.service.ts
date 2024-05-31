@@ -1,3 +1,4 @@
+// Importar los módulos y servicios necesarios de Angular y otros paquetes
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
@@ -7,42 +8,47 @@ import { GetVolunteerListItemResponse, GetVolunteerListResponse } from "../model
 import { CreateVolunteerRequest } from "../models/create-volunteer/create-volunteer.request";
 import { UpdateVolunteerRequest } from "../models/update-volunteer/update-volunteer.request";
 
-
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root' // Proveedor de servicio a nivel raíz
 })
-
 export class VolunteerService {
-    baseUrl = environment.baseApiUrl;
+    baseUrl = environment.baseApiUrl; // Base URL para las solicitudes HTTP
 
+    // Constructor que inyecta el cliente HTTP
     constructor(private httpClient: HttpClient) { }
 
+    // Método para obtener la lista de voluntarios
     public getList(request: GetVolunteerListRequest): Observable<GetVolunteerListResponse> {
-
+        // Crear parámetros de consulta a partir de la solicitud
         let queryParams = new HttpParams();
-        queryParams.set("page", request.page)
-        queryParams.set("pageSize", request.pageSize)
+        queryParams = queryParams.set("page", request.page.toString())
+                                 .set("pageSize", request.pageSize.toString());
 
-        return this.httpClient.get<GetVolunteerListResponse>(`${this.baseUrl}volunteers`, { params: queryParams })
+        // Realizar la solicitud GET y devolver la respuesta como un observable
+        return this.httpClient.get<GetVolunteerListResponse>(`${this.baseUrl}volunteers`, { params: queryParams });
     }
 
+    // Método para obtener los detalles de un voluntario por ID
     public getId(volunteerId: number): Observable<GetVolunteerListItemResponse> {
+        // Realizar la solicitud GET y devolver la respuesta como un observable
         return this.httpClient.get<GetVolunteerListItemResponse>(`${this.baseUrl}volunteers/${volunteerId}`);
     }
 
-
-    public createVolunteer(request: CreateVolunteerRequest) {
-        return this.httpClient.post(`${this.baseUrl}/volunteers`, request)
+    // Método para crear un nuevo voluntario
+    public createVolunteer(request: CreateVolunteerRequest): Observable<any> {
+        // Realizar la solicitud POST para crear un nuevo voluntario
+        return this.httpClient.post(`${this.baseUrl}/volunteers`, request);
     }
 
+    // Método para actualizar los detalles de un voluntario
     public updateVolunteer(volunteerId: number, request: UpdateVolunteerRequest): Observable<GetVolunteerListItemResponse> {
+        // Realizar la solicitud PUT para actualizar un voluntario
         return this.httpClient.put<GetVolunteerListItemResponse>(`${this.baseUrl}volunteers/edit`, request);
     }
 
+    // Método para eliminar un voluntario
     public deleteVolunteer(volunteerId: number): Observable<any> {
-        return this.httpClient.delete(`${this.baseUrl}volunteers/${volunteerId}`); // Una sola barra
-      }
-
-      
-      
+        // Realizar la solicitud DELETE para eliminar un voluntario
+        return this.httpClient.delete(`${this.baseUrl}volunteers/${volunteerId}`);
+    }
 }

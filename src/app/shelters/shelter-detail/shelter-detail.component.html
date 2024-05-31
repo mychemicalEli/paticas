@@ -8,13 +8,14 @@
                 <div class="col-md-12 d-flex justify-content-center" style="max-height: 100%; max-width: 100%;">
                     <img [src]="shelter.profileImage" class="img-fluid-shelter" alt="image">
                 </div>
-                
+
             </div>
             <div class="col-md-8">
                 <div class="card-body-shelter">
                     <div class="header-shelter">
                         <h1 class="card-title-shelter">{{shelter.name}}</h1>
-                        <h5 class="card-subtitle-shelter"><i class="bi bi-geo-alt-fill fs-5"></i>{{shelter.location}}</h5>
+                        <h5 class="card-subtitle-shelter"><i class="bi bi-geo-alt-fill fs-5"></i>{{shelter.location}}
+                        </h5>
                     </div>
                     <p class="card-text-shelter">{{shelter.description}}</p>
                 </div>
@@ -27,21 +28,28 @@
     <div>
         <h3 class="our-paticas">Nuestras Paticas:</h3>
     </div>
-    <div *ngIf="paticas"> 
+    <div *ngIf="paticas">
         <div class="cards-container row row-cols-1 row-cols-md-3 g-4 justify-content-start">
-            <div class="col-4" *ngFor="let patica of (paticas | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })"> 
-                <div class="card h-100" style="height: 450px; position: relative;" >
-                    <i class="fa-solid" [ngClass]="{'fa-mars': patica.gender === 'male', 'fa-venus': patica.gender === 'female', 'fs-5':true}"></i> 
-                    <img [src]="patica.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer" (click)="onSelectPatica(patica)">
+            <div class="col-4"
+                *ngFor="let patica of (paticas | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
+                <div class="card h-100" style="height: 450px; position: relative;">
+                    <i class="fa-solid"
+                        [ngClass]="{'fa-mars': patica.gender === 'male', 'fa-venus': patica.gender === 'female', 'fs-5':true}"></i>
+                    <img [src]="patica.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer"
+                        (click)="onSelectPatica(patica)">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(patica)">{{ patica.name }}</h5> 
+                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer"
+                            (click)="onSelectPatica(patica)">{{ patica.name }}</h5>
                         <div class="icons">
-                            <i class="bi" [ngClass]="{'bi-heart': !patica.liked, 'bi-heart-fill': patica.liked, 'fs-4': true}" (click)="toggleLike(patica)"></i> 
+                            <i class="bi"
+                                [ngClass]="{'bi-heart': !patica.liked, 'bi-heart-fill': patica.liked, 'fs-4': true}"
+                                (click)="toggleLike(patica)"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" " nextLabel=" "></pagination-controls>
+    <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" "
+        nextLabel=" "></pagination-controls>
 </div>

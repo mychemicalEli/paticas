@@ -8,7 +8,7 @@
                     formControlName="fullName">
                 <label for="fullName">Nombre y apellido</label>
             </div>
-        
+
             <div class="form-floating mb-3">
                 <select class="form-select" id="floatingSelect" formControlName="availability">
                     <option value="" disabled selected>Selecciona disponibilidad</option>
@@ -19,26 +19,26 @@
                 <label for="floatingSelect">Disponibilidad</label>
             </div>
 
-            
-            
-            
-            
-            
-        
+
+
+
+
+
+
             <div class="form-floating mb-3">
                 <input type="phone" class="form-control" id="phone" placeholder="Teléfono de contacto"
                     formControlName="phone">
                 <label for="phone">Teléfono de contacto</label>
             </div>
         </div>
-        
+
         <div class="col-lg-6">
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="email" placeholder="name@example.com"
                     formControlName="email">
                 <label for="email">Email address</label>
             </div>
-        
+
             <div class="containerForFile">
                 <div class="mb-3 image-container">
                     <label class="hoverable" for="fileInput">
@@ -46,20 +46,15 @@
                         <div class="hover-text">Selecciona una foto</div>
                         <div class="background"></div>
                     </label>
-                    <input
-                        id="fileInput"
-                        type="file"
-                        class="select-profile-picture"
-                        (change)="onSelectFile($event)"
-                        accept="image/*"
-                    />
+                    <input id="fileInput" type="file" class="select-profile-picture" (change)="onSelectFile($event)"
+                        accept="image/*" />
                 </div>
                 <button class="btn btn-erase" (click)="delete()">Borrar</button>
             </div>
-            
-        
+
+
             <button type="submit" class="btn" (click)="submitForm()">GUARDAR CAMBIOS</button>
         </div>
-        
+
     </form>
 </main>

@@ -24,7 +24,7 @@
                     <div *ngIf="form.get('availability')?.errors?.['required']">Este es un campo obligatorio.</div>
                 </div>
             </div>
-            
+
 
             <div class="form-floating mb-3">
                 <input type="phone" class="form-control" id="phone" placeholder="Teléfono de contacto"
@@ -49,22 +49,17 @@
             </div>
 
             <div class="containerForFile">
-            <div class="mb-3 image-container">
-                <label class="hoverable" for="fileInput">
-                  <img [src]="url ? url : '/assets/img/volunteer/defaultIconProfile.png'" />
-                  <div class="hover-text">Selecciona una foto</div>
-                  <div class="background"></div>
-                </label>
-                <input
-                  id="fileInput"
-                  type="file"
-                  class="select-profile-picture"
-                  (change)="onSelectFile($event)"
-                  accept="image/*"
-                />
-                
-              </div>
-              <button class="btn btn-erase" *ngIf="url" (click)="delete()">Borrar</button>
+                <div class="mb-3 image-container">
+                    <label class="hoverable" for="fileInput">
+                        <img [src]="url ? url : '/assets/img/volunteer/defaultIconProfile.png'" />
+                        <div class="hover-text">Selecciona una foto</div>
+                        <div class="background"></div>
+                    </label>
+                    <input id="fileInput" type="file" class="select-profile-picture" (change)="onSelectFile($event)"
+                        accept="image/*" />
+
+                </div>
+                <button class="btn btn-erase" *ngIf="url" (click)="delete()">Borrar</button>
             </div>
 
             <button type="submit" class="btn" (click)="submitForm()">AÑADIR</button>
