@@ -120,6 +120,7 @@ export class AddPaticaComponent implements OnInit {
           console.log('Patica added successfully');
         }
       });
+      alert("Patica creada correctamente!");
   }
 
 
