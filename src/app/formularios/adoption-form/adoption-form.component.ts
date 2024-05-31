@@ -13,13 +13,13 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class AdoptionFormComponent implements OnInit {
 
-  userRole: string= '';
-  currentStep = 1;
+  userRole: string = ''; // Variable para almacenar el rol del usuario
+  currentStep = 1; // Variable para controlar el paso actual del formulario
 
-  //declaramos la request para que no salga como undefined
+  // Se declara la solicitud para evitar que aparezca como 'undefined'
   request: CreateAdoptionFormRequest = {} as CreateAdoptionFormRequest;
 
-  //steps
+  // Declaración de los FormGroup para cada paso del formulario
   step1!: FormGroup;
   step2!: FormGroup;
   step3!: FormGroup;
@@ -29,27 +29,24 @@ export class AdoptionFormComponent implements OnInit {
   step7!: FormGroup;
   step8!: FormGroup;
 
-  // Errores
+  // Objeto para manejar los errores de validación
   fieldErrors: { [key: string]: boolean } = {};
 
-
-  //necesitamos el formbuilder para validar, el adoption service para hacer el post y la ruta para redirigirnos al acabar el formulario
   constructor(private userService: UserService, private formBuilder: FormBuilder, private adoptionFormService: AdoptionFormService, private router: Router) {
   }
 
   ngOnInit(): void {
+    // Se obtiene el rol del usuario al inicializar el componente
     this.userRole = this.userService.getRole();
-    //step 1 validate checkbox with terms and conditions
+    // Configuración de validaciones para cada paso del formulario
     this.step1 = this.formBuilder.group({
       acceptConditions: [false, Validators.requiredTrue],
     });
 
-    //step 2 validate name
     this.step2 = this.formBuilder.group({
       petName: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]]
     });
 
-    //step 3 validation fields
     this.step3 = this.formBuilder.group({
       fullName: ['', Validators.required],
       age: ['', [Validators.required, Validators.min(18)]],
@@ -63,8 +60,6 @@ export class AdoptionFormComponent implements OnInit {
 
     });
 
-
-    //step4 validation
     this.step4 = this.formBuilder.group({
       previousPets: ['', Validators.required],
       vaccinatedRegularly: ['', Validators.required],
@@ -74,8 +69,6 @@ export class AdoptionFormComponent implements OnInit {
       opinionSterilization: ['', Validators.required],
     });
 
-
-    //step5 validation
     this.step5 = this.formBuilder.group({
       whoAdoptedAndWhy: ['', Validators.required],
       whoWillWalkTheDog: ['', Validators.required],
@@ -84,7 +77,6 @@ export class AdoptionFormComponent implements OnInit {
       pregnantSituation: ['', Validators.required],
     });
 
-    //step6 validation
     this.step6 = this.formBuilder.group({
       petBehaviorAwareness: ['', Validators.required],
       petReturnReason: ['', Validators.required],
@@ -95,7 +87,6 @@ export class AdoptionFormComponent implements OnInit {
       adoptionReason: ['', Validators.required],
     });
 
-    //step7 vaidation
     this.step7 = this.formBuilder.group({
       housingType: ['', Validators.required],
       garden: ['', Validators.required],
@@ -103,7 +94,6 @@ export class AdoptionFormComponent implements OnInit {
       opinionMove: ['', Validators.required],
     });
 
-    //step8 validation
     this.step8 = this.formBuilder.group({
       opinionMoreInfo: ['', Validators.required],
       consentCheckbox: [false, Validators.requiredTrue],
@@ -113,23 +103,23 @@ export class AdoptionFormComponent implements OnInit {
   }
 
 
-  //method to move forward to next page
+  // Método para avanzar o retroceder en el formulario
   nextPrev(step: number) {
     this.currentStep += step;
   }
 
-  
-  // Método para verificar si hay errores
-checkErrors() {
-  return Object.values(this.fieldErrors).some(error => error);
-}
 
-// Método para establecer un error
-setFieldError(fieldName: string, hasError: boolean) {
-  this.fieldErrors[fieldName] = hasError;
-}
+  // Método para verificar si hay errores en los campos del formulario
+  checkErrors() {
+    return Object.values(this.fieldErrors).some(error => error);
+  }
 
-//validamos los campos antes de hacer el submit
+  // Método para establecer un error en un campo específico del formulario
+  setFieldError(fieldName: string, hasError: boolean) {
+    this.fieldErrors[fieldName] = hasError;
+  }
+
+  // Método para validar los campos antes de avanzar al siguiente paso del formulario
   validateFields() {
     for (const controlName in this.step3.controls) {
       if (Object.prototype.hasOwnProperty.call(this.step3.controls, controlName)) {
@@ -146,8 +136,9 @@ setFieldError(fieldName: string, hasError: boolean) {
     }
   }
 
-  //recuperar los campos del formulario para hacer el submit
+  // Método para recoger los datos del formulario antes de enviarlo
   stablishRequest() {
+    // Se recogen los datos de cada paso del formulario y se asignan a la solicitud
     //step1
     this.request.acceptConditions = this.step1.get('acceptConditions')?.value;
     //step2
@@ -194,9 +185,7 @@ setFieldError(fieldName: string, hasError: boolean) {
 
   }
 
-
-  //Comprobar que todos los steps son validos antes de enviar el formulario
-
+  // Método para verificar si todos los pasos del formulario son válidos
   areAllStepsValid(): boolean {
     const isValid =
       this.step1.valid &&
@@ -213,14 +202,10 @@ setFieldError(fieldName: string, hasError: boolean) {
     return isValid;
   }
 
-
-  //hacer submit del formulario
-  //primero comprueba que sean validos todos los steps
-  //después recoge todos los datos
-  //luego hace el submit con el service
-  //por último pasa a la pagina final
+  // Método para enviar el formulario
   submitForm() {
-    
+
+    // Se verifica la validez de todos los pasos del formulario antes de enviarlo
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
@@ -228,16 +213,17 @@ setFieldError(fieldName: string, hasError: boolean) {
     console.log('Submitting form...');
     console.log('Are all steps valid:', this.areAllStepsValid());
 
+    // Se recogen los datos del formulario y se envían al servicio
     this.stablishRequest();
     console.log('request is valid...');
     this.adoptionFormService.createAdoptionForm(this.request)
-    .pipe()
-    .subscribe()
+      .pipe()
+      .subscribe()
     this.currentStep = 10; // Cambia al paso de formulario enviado correctamente
   }
 
+  // Método para redirigir al usuario a la página de inicio
   redirectToHome() {
-    // Redirigir al inicio
     this.router.navigate(['/home']);
   }
 }

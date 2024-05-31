@@ -7,6 +7,8 @@ import { GetShelterPaticasListRequest } from "../models/get-shelter-paticas-list
 import { GetShelterPaticasListItemResponse, GetShelterPaticasListResponse } from "../models/get-shelter-paticas-list/get-shelter-paticas-list.response";
 import { AddPaticaRequest } from "../models/add-patica/add-patica.request";
 import { UpdatePaticaRequest } from "../models/update-patica/update-patica.request";
+import { GetPaticaByIdResponse } from "../../paticas/models/get-patica-by-id/get-patica-by-id.response";
+import { GetPaticaByIdRequest } from "../../paticas/models/get-patica-by-id/get-patica-by-id.request";
 
 @Injectable({ 
   providedIn: 'root'
@@ -37,11 +39,11 @@ public addPatica(request: AddPaticaRequest) {
     return this.httpClient.post(`${this.baseUrl}paticas`, request)
 }
 
-public updatePatica(paticaId: number, request: UpdatePaticaRequest): Observable<GetShelterPaticasListItemResponse> {
-  return this.httpClient.put<GetShelterPaticasListItemResponse>(`${this.baseUrl}paticas/edit`, request);
+public updatePatica(request: UpdatePaticaRequest): Observable<GetPaticaByIdResponse> {
+  return this.httpClient.put<GetPaticaByIdResponse>(`${this.baseUrl}paticas/edit`, request);
 }
 
-public deletePatica(paticaId: number): Observable<any> {
-  return this.httpClient.delete(`${this.baseUrl}paticas/${paticaId}`); 
+public deletePatica(request: GetPaticaByIdRequest): Observable<GetPaticaByIdResponse> {
+  return this.httpClient.delete<GetPaticaByIdResponse>(`${this.baseUrl}paticas/${request.id}`); 
 }
 }

@@ -11,7 +11,7 @@ import { HomeContentComponent } from './home-content/home-content.component';
   declarations: [
     HomeComponent,
     CarouselComponent,
-    HomeContentComponent
+    HomeContentComponent,
   ],
   imports: [
     CommonModule,

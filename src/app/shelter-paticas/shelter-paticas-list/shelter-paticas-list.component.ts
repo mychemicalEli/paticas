@@ -5,6 +5,7 @@ import { ShelterPaticasService } from '../shelter-paticas-service/shelter-patica
 import { Router } from '@angular/router';
 import { PaticasListComponent } from '../../paticas/paticas-list/paticas-list.component';
 import { UserService } from '../../auth/user-service/user.service';
+import { GetPaticaByIdRequest } from '../../paticas/models/get-patica-by-id/get-patica-by-id.request';
 
 @Component({
   selector: 'app-shelter-paticas-list',
@@ -48,7 +49,8 @@ export class ShelterPaticasListComponent {
 
 
   deletePatica(paticaId: number) {
-    this.shelterPaticasService.deletePatica(paticaId)
+    const request: GetPaticaByIdRequest = { id: paticaId }; 
+    this.shelterPaticasService.deletePatica(request)
     .pipe()
     .subscribe({
       next: () => {

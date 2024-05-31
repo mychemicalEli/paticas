@@ -1,39 +1,48 @@
-<main class="container-fluid" *ngIf="userRole === 'shelterAdmin'">
+<main class="container-fluid" *ngIf="userRole === 'shelter'">
 
     <div class="filters">
-        <button type="button" class="btn add" [routerLink]="['add']">+ AÑADIR</button>
+        <button type="button" class="btn add" [routerLink]="['./','add']">+ AÑADIR</button>
     </div>
 
     <div *ngIf="response">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col-4" *ngFor="let paticas of (response?.paticas || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
-                <div class="card h-100" style="height: 450px; position: relative;" >
-                    <i class="fa-solid" [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
-                    <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer" (click)="onSelectPatica(paticas)">
+            <div class="col-4"
+                *ngFor="let paticas of (response?.paticas || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
+                <div class="card h-100" style="height: 450px; position: relative;">
+                    <i class="fa-solid"
+                        [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>
+                    <img [src]="paticas.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer"
+                        (click)="onSelectPatica(paticas)">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(paticas)">{{ paticas.name }}</h5>
+                        <h5 class="card-title text-wrap text-truncate" style="cursor:pointer"
+                            (click)="onSelectPatica(paticas)">{{ paticas.name }}</h5>
                         <div class="icons">
-                
+
                             <div class="edit">
-                                <a [routerLink]="['/shelterPaticas', paticas.id, 'edit']" style="color: #212121; text-decoration: none;"><i class="bi bi-pencil-square fs-4"></i></a>
+                                <a [routerLink]="['./', paticas.id, 'edit']"
+                                    style="color: #212121; text-decoration: none;"><i
+                                        class="bi bi-pencil-square fs-4"></i></a>
                             </div>
                             <div class="erase">
-                                <a (click)="onDeleteClick(paticas.name, paticas.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash3 fs-4"></i></a>
+                                <a (click)="onDeleteClick(paticas.name, paticas.id)" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop"><i class="bi bi-trash3 fs-4"></i></a>
                             </div>
-                        
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" " nextLabel=" "></pagination-controls>
+    <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" "
+        nextLabel=" "></pagination-controls>
 
 
 </main>
 
 <!-- modal para eliminar voluntario -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

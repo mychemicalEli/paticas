@@ -1,14 +1,6 @@
 import { paticaSize } from "../../../paticas/models/paticas-size.enum";
 
-export interface GetUserPaticasLikedResponse{
-    paticas: GetUserPaticasLikedItemResponse[];
-    totalElements: number;
-    page: number;
-    pageSize: number;
-    isLiked: boolean;
-}
-
-export interface GetUserPaticasLikedItemResponse{
+export interface GetShelterPaticasDetailResponse{
     id: number;
     profileImage: string;
     name: string;

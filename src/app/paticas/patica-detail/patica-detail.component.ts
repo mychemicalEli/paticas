@@ -4,6 +4,7 @@ import { paticaSize } from '../models/paticas-size.enum';
 import { ActivatedRoute } from '@angular/router';
 import { PaticasService } from '../paticas-service/paticas.service';
 import { UserService } from '../../auth/user-service/user.service';
+import { GetPaticaByIdResponse } from '../models/get-patica-by-id/get-patica-by-id.response';
 
 @Component({
   selector: 'app-patica-detail',
@@ -11,50 +12,32 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrls: ['./patica-detail.component.css']
 })
 export class PaticaDetailComponent implements OnInit {
-  // @Input() para recibir el ID de la patica desde otro componente
-  @Input() paticaId!: number;
-  
-  // Almacenar detalles de la patica
-  @Input () patica!: GetPaticasListItemResponse;
 
-  userRole: string ='';
-  // Enumeración para el tamaño de la patica
-  paticaSizeEnum = paticaSize;
-  
-  // Constructor para inyectar dependencias
-  constructor(private route: ActivatedRoute, private paticasService: PaticasService, public userService: UserService) {}
-  
-  // Se ejecuta al inicializar el componente
+  patica?: GetPaticaByIdResponse; // Variable para almacenar los detalles de la patica
+  userRole: string = ''; // Variable para almacenar el rol del usuario
+  paticaSizeEnum = paticaSize; // Enumeración de los tamaños de la patica
+
+  constructor(private route: ActivatedRoute, private paticasService: PaticasService, public userService: UserService) { }
+
   ngOnInit() {
-
-    this.userRole = this.userService.getRole();
-  
-    // Obtener el ID de la patica de la ruta si no se proporciona directamente
-    if (!this.paticaId) {
-      this.route.params.subscribe(params => {
-        const id = params['id'];
-        this.getPaticaDetails(id);
-      });
-    } else {
-      // Si se proporciona el ID directamente, cargar los detalles de la patica
-      this.getPaticaDetails(this.paticaId);
-    }
+    this.userRole = this.userService.getRole(); // Obtiene el rol del usuario
+    this.route.params // Obtiene los parámetros de la ruta
+      .subscribe(params => {
+        this.getPaticaDetails(params['id']); // Obtiene los detalles de la patica usando su ID
+      })
   }
 
-  // Método para cargar los detalles de la patica
+  // Método privado para obtener los detalles de una patica por su ID
   private getPaticaDetails(id: number) {
-    // Llamada al servicio para obtener los detalles de la patica con el ID proporcionado
-    this.paticasService.getDetail(id)
-    .pipe()
-    .subscribe({
-      // En caso de éxito, asignar la respuesta a la propiedad patica
-      next: (response: GetPaticasListItemResponse) => {
-        this.patica = response;
-      },
-      // En caso de error, mostrar un mensaje de error en la consola
-      error: (error) => {
-        console.error('Error al cargar los detalles de la patica:', error);
-      }
-    });
+    this.paticasService.getDetail({ id: id }) // Llama al servicio para obtener los detalles de la patica
+      .pipe()
+      .subscribe({
+        next: (response: GetPaticaByIdResponse) => { // Maneja la respuesta exitosa
+          this.patica = response; // Almacena los detalles de la patica
+        },
+        error: (error) => { // Maneja los errores
+          console.error('Error al cargar los detalles de la patica:', error);
+        }
+      });
   }
 }

@@ -6,6 +6,7 @@ import { GetPaticasListItemResponse, GetPaticasListResponse } from '../../patica
 import { GetPaticasListRequest } from '../../paticas/models/get-paticas-list/get-paticas-list.request';
 import { PaticasService } from '../../paticas/paticas-service/paticas.service';
 import { UserService } from '../../auth/user-service/user.service';
+import { GetShelterByIdResponse } from '../models/get-shelter-detail/get-shelter-detail.response';
 
 @Component({
   selector: 'app-shelter-detail',
@@ -16,7 +17,7 @@ export class ShelterDetailComponent implements OnInit {
   @Input() shelterId!: number;
 
   userRole: string='';
-  shelter!: GetShelterListItemResponse;
+  shelter?: GetShelterByIdResponse;
   paticas: GetPaticasListItemResponse[] = [];
   request: GetPaticasListRequest = { page: 0, pageSize: 9, shelterId: 0 }; // Inicializar shelterId en 0
 
@@ -38,10 +39,10 @@ export class ShelterDetailComponent implements OnInit {
   }
 
   private getShelterDetails(id: number): void {
-    this.shelterService.getDetail(id)
+    this.shelterService.getDetail({id:id})
     .pipe()
     .subscribe({
-      next: (response: GetShelterListItemResponse) => {
+      next: (response: GetShelterByIdResponse) => {
         this.shelter = response;
       },
       error: (error) => {

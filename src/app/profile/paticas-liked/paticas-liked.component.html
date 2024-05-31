@@ -1,25 +1,30 @@
-
 <div class="tab-content mt-3" id="myTabContent">
     <div class="tab-pane fade show active" id="paticas" role="tabpanel" aria-labelledby="paticas-tab">
         <div *ngIf="paticas">
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col-4" *ngFor="let patica of paticas | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }"> 
+                <div class="col-4"
+                    *ngFor="let patica of paticas | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }">
                     <div class="card h-100" style="height: 450px; position: relative;">
-                        <i class="fa-solid" [ngClass]="{'fa-mars': patica.gender === 'male', 'fa-venus': patica.gender === 'female', 'fs-5':true}"></i>
-                        <img [src]="patica.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer" (click)="onSelectPatica(patica)">
+                        <i class="fa-solid"
+                            [ngClass]="{'fa-mars': patica.gender === 'male', 'fa-venus': patica.gender === 'female', 'fs-5':true}"></i>
+                        <img [src]="patica.profileImage" class="card-img-top" alt="imagePaticas" style="cursor:pointer"
+                            (click)="onSelectPatica(patica)">
                         <div class="card-body">
-                            <h5 class="card-title text-wrap text-truncate" style="cursor:pointer" (click)="onSelectPatica(patica)">{{ patica.name }}</h5>
+                            <h5 class="card-title text-wrap text-truncate" style="cursor:pointer"
+                                (click)="onSelectPatica(patica)">{{ patica.name }}</h5>
                             <div class="icons">
-                                <i class="bi" [ngClass]="{'bi-heart': !patica.liked, 'bi-heart-fill': patica.liked, 'fs-4': true}" (click)="toggleLike(patica)"></i>
+                                <i class="bi"
+                                    [ngClass]="{'bi-heart': !patica.liked, 'bi-heart-fill': patica.liked, 'fs-4': true}"
+                                    (click)="toggleLike(patica)"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" " nextLabel=" "></pagination-controls>
-    
+
+        <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" "
+            nextLabel=" "></pagination-controls>
+
     </div>
 </div>
-

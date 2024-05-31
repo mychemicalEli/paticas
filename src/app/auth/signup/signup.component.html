@@ -4,74 +4,95 @@
             <div class="login-form">
                 <form [formGroup]="signupForm">
                     <div class="d-flex align-items-end mb-3">
-                        <select formControlName="role" class="form-select form-select-lg" aria-label="Large select example" (change)="onUserTypeChange($event)" required> 
+                        <select formControlName="role" class="form-select form-select-lg"
+                            aria-label="Large select example" (change)="onUserTypeChange($event)" required>
                             <option value="" selected>Selecciona tu tipo de usuario</option>
                             <option value="user">Quiero adoptar</option>
-                            <option value="shelterAdmin">Soy protectora</option>
+                            <option value="shelter">Soy protectora</option>
                         </select>
                     </div>
-                    
 
                     <!-- Campos para usuario -->
                     <div *ngIf="showUserFields">
                         <div class="form-floating mb-3">
-                            <input type="text" formControlName="name" class="form-control" placeholder="Nombre" required>
+                            <input type="text" formControlName="name" class="form-control" placeholder="Nombre"
+                                required>
                             <label for="name">Nombre</label>
-                            <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('name')?.errors?.['required']">El nombre es obligatorio.</div>
+                            <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('name')?.errors?.['required']">El nombre es obligatorio.
+                                </div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" formControlName="lastName" class="form-control" placeholder="Apellidos" required>
+                            <input type="text" formControlName="lastName" class="form-control" placeholder="Apellidos"
+                                required>
                             <label for="lastName">Apellidos</label>
-                            <div *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('lastName')?.errors?.['required']">Los apellidos son obligatorios.</div>
+                            <div *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('lastName')?.errors?.['required']">Los apellidos son
+                                    obligatorios.</div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" formControlName="email" class="form-control" placeholder="Email" required>
+                            <input type="email" formControlName="email" class="form-control" placeholder="Email"
+                                required>
                             <label for="email">Email</label>
-                            <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('email')?.errors?.['required']">El email es obligatorio.</div>
+                            <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('email')?.errors?.['required']">El email es obligatorio.
+                                </div>
                                 <div *ngIf="signupForm.get('email')?.errors?.['email']">El email no es válido.</div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" formControlName="password" class="form-control" placeholder="Contraseña" required>
+                            <input type="password" formControlName="password" class="form-control"
+                                placeholder="Contraseña" required>
                             <label for="password">Contraseña</label>
-                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</div>
+                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('password')?.errors?.['required']">La contraseña es
+                                    obligatoria.</div>
                             </div>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Repetir contraseña" required>
+                            <input type="password" formControlName="confirmPassword" class="form-control"
+                                placeholder="Repetir contraseña" required>
                             <label for="confirmPassword">Repite la contraseña</label>
-                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Las contraseñas son obligatorias.</div>
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['mismatch']">Las contraseñas no coinciden.</div>
+                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Las contraseñas son
+                                    obligatorias.</div>
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['mismatch']">Las contraseñas no
+                                    coinciden.</div>
                             </div>
                         </div>
-                        
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-dark" (click)="register()">Regístrate</button>
                         </div>
                     </div>
-                    
+
                     <!-- Campos para protectora -->
                     <div *ngIf="showShelterFields">
                         <div class="form-floating mb-3">
-                            <input type="text" formControlName="name" class="form-control" placeholder="Nombre protectora" required>
+                            <input type="text" formControlName="name" class="form-control"
+                                placeholder="Nombre protectora" required>
                             <label for="name">Nombre de la protectora</label>
-                            <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('name')?.errors?.['required']">El nombre es obligatorio.</div>
+                            <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('name')?.errors?.['required']">El nombre es obligatorio.
+                                </div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" formControlName="cif" class="form-control" placeholder="CIF" required>
                             <label for="cif">CIF</label>
-                            <div *ngIf="signupForm.get('cif')?.touched && signupForm.get('cif')?.invalid" class="text-danger">
+                            <div *ngIf="signupForm.get('cif')?.touched && signupForm.get('cif')?.invalid"
+                                class="text-danger">
                                 <div *ngIf="signupForm.get('cif')?.errors?.['required']">El CIF es obligatorio.</div>
-                                <div *ngIf="signupForm.get('cif')?.errors?.['pattern']">El CIF debe tener un formato válido.</div>
+                                <div *ngIf="signupForm.get('cif')?.errors?.['pattern']">El CIF debe tener un formato
+                                    válido.</div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
@@ -125,34 +146,46 @@
 
                             </select>
                             <label for="location">Ubicación</label>
-                            <div *ngIf="signupForm.get('location')?.touched && signupForm.get('location')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('location')?.errors?.['required']">La ubicación es obligatoria.</div>
+                            <div *ngIf="signupForm.get('location')?.touched && signupForm.get('location')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('location')?.errors?.['required']">La ubicación es
+                                    obligatoria.</div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" formControlName="email" class="form-control" placeholder="Email" required>
+                            <input type="email" formControlName="email" class="form-control" placeholder="Email"
+                                required>
                             <label for="email">Email</label>
-                            <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('email')?.errors?.['required']">El email es obligatorio.</div>
+                            <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('email')?.errors?.['required']">El email es obligatorio.
+                                </div>
                                 <div *ngIf="signupForm.get('email')?.errors?.['email']">El email no es válido.</div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" formControlName="password" class="form-control" placeholder="Contraseña" required>
+                            <input type="password" formControlName="password" class="form-control"
+                                placeholder="Contraseña" required>
                             <label for="password">Contraseña</label>
-                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</div>
+                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('password')?.errors?.['required']">La contraseña es
+                                    obligatoria.</div>
                             </div>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Repetir contraseña" required>
+                            <input type="password" formControlName="confirmPassword" class="form-control"
+                                placeholder="Repetir contraseña" required>
                             <label for="confirmPassword">Repite la contraseña</label>
-                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid" class="text-danger">
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Las contraseñas son obligatorias.</div>
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['mismatch']">Las contraseñas no coinciden.</div>
+                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Las contraseñas son
+                                    obligatorias.</div>
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['mismatch']">Las contraseñas no
+                                    coinciden.</div>
                             </div>
                         </div>
-                        
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-dark" (click)="register()">Regístrate</button>
                         </div>
@@ -163,6 +196,6 @@
     </div>
 
     <div class="sidenav">
-        <img src="/assets/img/login/rightSideLogin.png" alt="login form" class="img-fluid"/>
+        <img src="/assets/img/login/rightSideLogin.png" alt="login form" class="img-fluid" />
     </div>
 </main>
