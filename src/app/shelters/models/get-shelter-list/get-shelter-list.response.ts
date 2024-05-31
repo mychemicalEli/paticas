@@ -7,7 +7,7 @@ export interface GetShelterListResponse{
 
 export interface GetShelterListItemResponse{
     id: number;
-    image: string;
+    profileImage: string;
     name: string;
     location: string;
     liked: boolean;

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ShelterPaticasService } from '../shelter-paticas-service/shelter-paticas.service';
 import { PaticasService } from '../../paticas/paticas-service/paticas.service';
 import { UserService } from '../../auth/user-service/user.service';
+import { GetShelterPaticasDetailResponse } from '../models/get-shelter-paticas-detail/get-shelter-paticas-detail.response';
 
 @Component({
   selector: 'app-edit-patica',
@@ -13,14 +14,13 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrl: './edit-patica.component.css'
 })
 export class EditPaticaComponent {
-  @Input() paticaId!: number;
-  userRole: string='';
-  patica?: GetShelterPaticasListItemResponse;
-  imagePreview: string | FormData | null = null;
-  form!: FormGroup;
-  request: UpdatePaticaRequest = {} as UpdatePaticaRequest;
-  carouselImagePreviews: (string | FormData | null)[] = [];
-  defaultCarouselImage = '/assets/img/paticas/defaultIcon.png';
+  userRole: string = ''; // Variable para almacenar el rol del usuario actual
+  patica?: GetShelterPaticasDetailResponse; // Variable para almacenar los detalles de la patica a editar
+  imagePreview: string | FormData | null = null; // Vista previa de la imagen
+  form!: FormGroup; // Formulario de Angular
+  request: UpdatePaticaRequest = {} as UpdatePaticaRequest; // Objeto de solicitud para actualizar la patica
+  carouselImagePreviews: (string | FormData | null)[] = []; // Arreglo para almacenar las vistas previas de las imágenes del carrusel
+  defaultCarouselImage = '/assets/img/paticas/defaultIcon.png'; // Imagen por defecto del carrusel
 
 
   constructor(
@@ -33,12 +33,13 @@ export class EditPaticaComponent {
   ) { }
 
   ngOnInit() {
-    this.userRole = this.userService.getRole();
-    this.createForm();
+    this.userRole = this.userService.getRole(); // Obtiene el rol del usuario actual
+    this.createForm(); // Inicializa el formulario
   }
 
   //Inicializar formulario
   createForm() {
+    // Define los campos del formulario y establece las validaciones
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       gender: ['', Validators.required],
@@ -56,24 +57,21 @@ export class EditPaticaComponent {
       goodWithDogs: ['', Validators.required],
       goodWithCats: ['', Validators.required]
     });
-  
-    // Si no se proporciona el ID de la patica, recupera el ID de la ruta
-    if (!this.paticaId) {
-      this.route.params
-        .pipe()
-        .subscribe(params => {
-          const id = params['id'];
-          this.getPaticaDetail(id);
-        });
-    }
+
+    // Suscribe a los cambios en los parámetros de la ruta para obtener los detalles de la patica
+    this.route.params
+      .subscribe(params => {
+        this.getPaticaDetail(params['id']);
+      })
   }
 
   //Obtener los detalles de la patica que vamos a editar
   private getPaticaDetail(id: number) {
-    this.paticasService.getDetail(id)
+    // Llama al servicio para obtener los detalles de la patica por su ID
+    this.paticasService.getDetail({ id: id })
       .pipe()
       .subscribe({
-        next: (response: GetShelterPaticasListItemResponse) => {
+        next: (response: GetShelterPaticasDetailResponse) => {
           this.patica = response;
           this.updateFormWithPaticaData();
         },
@@ -85,6 +83,7 @@ export class EditPaticaComponent {
 
   // Método para actualizar el formulario con los datos de la patica
   updateFormWithPaticaData() {
+    // Actualiza los valores del formulario con los datos de la patica
     if (this.form && this.patica) {
       const formattedBirthDate = new Date(this.patica.birthDate).toISOString().split('T')[0];
       this.form.patchValue({
@@ -121,12 +120,12 @@ export class EditPaticaComponent {
     }
   }
 
-  //comprobar que son válidos los campos (la location)
+  // Método para verificar si todos los pasos del formulario son válidos
   areAllStepsValid(): boolean {
     return this.form.valid;
   }
 
-  //formateo de fecha para mostrarla en el formulario
+  // Método para obtener la fecha máxima para el campo de fecha de nacimiento en el formulario
   getMaxDate(): string {
     const today = new Date();
     const year = today.getFullYear();
@@ -134,11 +133,12 @@ export class EditPaticaComponent {
     let day: string | number = today.getDate();
     month = month < 10 ? '0' + month : month;
     day = day < 10 ? '0' + day : day;
+    // Retorna la fecha actual en el formato adecuado para el campo de fecha de nacimiento
     return `${year}-${month}-${day}`;
   }
 
 
-  //obtener las imagenes de perfil 
+  // Método para manejar la selección de un archivo de imagen para la imagen de perfil
   onSelectFile(event: any) {
     const file = event?.target?.files?.[0]; // Obtiene el archivo seleccionado
     if (file) {
@@ -152,8 +152,9 @@ export class EditPaticaComponent {
     }
   }
 
-  //obtener las imagenes del carousel 
+  // Método para manejar la selección de un archivo de imagen para el carrusel de imágenes
   onSelectCarouselFile(event: any, index: number) {
+    // Actualiza la vista previa de la imagen en el carrusel y el campo del formulario con el archivo seleccionado
     const file = event?.target?.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -165,7 +166,7 @@ export class EditPaticaComponent {
     };
   }
 
-  // Método para eliminar la imagen seleccionada
+  // Método para eliminar la imagen seleccionada de perfil
   public delete() {
     this.imagePreview = '/assets/img/paticas/defaultIcon.png'; // Establece la imagen por defecto
     this.form.get('profileImage')?.setValue(null); // Establece el valor de la imagen en null
@@ -181,7 +182,7 @@ export class EditPaticaComponent {
   }
 
 
-  //recoger valores para enviarlos en la request
+  // Método para establecer los valores de la solicitud de actualización
   stablishRequest() {
     this.request.name = this.form.get('name')?.value;
     this.request.gender = this.form.get('gender')?.value;
@@ -201,7 +202,7 @@ export class EditPaticaComponent {
   }
 
 
-  //hacer submit de los datos
+  // Método para enviar el formulario y actualizar la patica
   submitForm() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -211,17 +212,18 @@ export class EditPaticaComponent {
       console.log('Not all steps are valid');
       return;
     }
-    this.stablishRequest(); // Establece la solicitud de actualización con los datos del formulario
 
-    console.log('Request object:', this.request); // Muestra la solicitud en la consola
+    this.stablishRequest();
 
-    this.shelterPaticasService.updatePatica(this.paticaId, this.request)
+    console.log('Request object:', this.request);
+    // Realiza la solicitud de actualización al servicio y redirige al usuario a la página principal 
+    this.shelterPaticasService.updatePatica(this.request)
       .pipe()
       .subscribe()
 
     alert("¡Patica actualizada correctamente!");
 
-    console.log("Update made"); // Muestra un mensaje en la consola indicando que se realizó la actualización
-    this.router.navigate(['/shelterPaticas']); // Navega de regreso a la lista de voluntarios
+    console.log("Update made");
+    this.router.navigate(['/shelterPaticas']);
   }
 }

@@ -1,4 +1,6 @@
 <ng-container>
-    <app-profile-user *ngIf="userRole === 'user'"></app-profile-user>
-    <app-profile-shelter *ngIf="userRole === 'shelterAdmin'"></app-profile-shelter>
-  </ng-container>
+  <!-- Renderiza el componente app-profile-user si el usuario tiene el rol 'user' -->
+  <app-profile-user *ngIf="userRole === 'user'"></app-profile-user>
+  <!-- Renderiza el componente app-profile-shelter si el usuario tiene el rol 'shelter' -->
+  <app-profile-shelter *ngIf="userRole === 'shelter'"></app-profile-shelter>
+</ng-container>

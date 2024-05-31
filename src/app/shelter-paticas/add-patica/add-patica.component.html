@@ -1,4 +1,4 @@
-<main class="container-fluid" *ngIf="userRole === 'shelterAdmin'">
+<main class="container-fluid" *ngIf="userRole === 'shelter'">
     <form class="row justify-content-center" [formGroup]="form">
         <h3 class="title">AÑADIR PATICA</h3>
 
@@ -132,9 +132,9 @@
                 <label for="profileImage">Imagen de perfil</label>
                 <input type="file" class="form-control" id="profileImage" formControlName="profileImage"
                     accept="image/*">
-                    <div *ngIf="form.get('profileImage')?.touched && form.get('profileImage')?.invalid" class="text-danger">
-                        <div *ngIf="form.get('profileImage')?.errors?.['required']">Este es un campo obligatorio.</div>
-                    </div>
+                <div *ngIf="form.get('profileImage')?.touched && form.get('profileImage')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('profileImage')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
 
             </div>
         </div>
@@ -154,9 +154,10 @@
                 <label for="carouselImages">Sube más imágenes para completar la descripción (máx. 3)</label>
                 <input type="file" class="form-control" id="carouselImages" formControlName="carouselImages" multiple
                     accept="image/*" (change)="onFileChange($event)">
-                    <div *ngIf="form.get('carouselImages')?.touched && form.get('carouselImages')?.invalid" class="text-danger">
-                        <div *ngIf="form.get('carouselImages')?.errors?.['required']">Este es un campo obligatorio.</div>
-                    </div>
+                <div *ngIf="form.get('carouselImages')?.touched && form.get('carouselImages')?.invalid"
+                    class="text-danger">
+                    <div *ngIf="form.get('carouselImages')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
             </div>
 
             <div class="row mb-5" id="imagePreview"></div>
@@ -165,8 +166,10 @@
             <div class="row justify-content-center">
                 <div class="col-md-4 mb-3 text-center">
                     <div class="form-floating">
-                        <div *ngIf="form.get('goodWithKids')?.touched && form.get('goodWithKids')?.invalid" class="text-danger">
-                            <div *ngIf="form.get('goodWithKids')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="form.get('goodWithKids')?.touched && form.get('goodWithKids')?.invalid"
+                            class="text-danger">
+                            <div *ngIf="form.get('goodWithKids')?.errors?.['required']">Este es un campo obligatorio.
+                            </div>
                         </div>
                         <p class="form-label" style="font-weight: bold;">¿Buena relación con niños?</p>
 
@@ -187,8 +190,10 @@
 
                 <div class="col-md-4 mb-3 text-center">
                     <div class="form-floating">
-                        <div *ngIf="form.get('goodWithDogs')?.touched && form.get('goodWithDogs')?.invalid" class="text-danger">
-                            <div *ngIf="form.get('goodWithDogs')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="form.get('goodWithDogs')?.touched && form.get('goodWithDogs')?.invalid"
+                            class="text-danger">
+                            <div *ngIf="form.get('goodWithDogs')?.errors?.['required']">Este es un campo obligatorio.
+                            </div>
                         </div>
                         <p class="form-label" style="font-weight: bold;">¿Buena relación con perros?</p>
 
@@ -207,8 +212,10 @@
 
                 <div class="col-md-4 mb-3 text-center">
                     <div class="form-floating">
-                        <div *ngIf="form.get('goodWithCats')?.touched && form.get('goodWithCats')?.invalid" class="text-danger">
-                            <div *ngIf="form.get('goodWithCats')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="form.get('goodWithCats')?.touched && form.get('goodWithCats')?.invalid"
+                            class="text-danger">
+                            <div *ngIf="form.get('goodWithCats')?.errors?.['required']">Este es un campo obligatorio.
+                            </div>
                         </div>
                         <p class="form-label" style="font-weight: bold; ">¿Buena relación con gatos?</p>
 

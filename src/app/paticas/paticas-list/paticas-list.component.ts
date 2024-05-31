@@ -6,79 +6,64 @@ import { Router } from '@angular/router';
 import { UserService } from '../../auth/user-service/user.service';
 
 @Component({
- 
+
   selector: 'app-paticas-list',
   templateUrl: './paticas-list.component.html',
   styleUrl: './paticas-list.component.css'
 })
 export class PaticasListComponent {
-  userRole: string = '';
-  // Propiedades para almacenar la respuesta, solicitud y especies de paticas
-  response?: GetPaticasListResponse;
-  request: GetPaticasListRequest = { page: 0, pageSize: 12, shelterId:0 };
-  species: Set<string> = new Set();
-  // Propiedad para almacenar la patica seleccionada
-  selectedPatica!: GetPaticasListItemResponse;
+  userRole: string = ''; // Rol del usuario
+  response?: GetPaticasListResponse; // Respuesta del servicio para obtener la lista de paticas
+  request: GetPaticasListRequest = { page: 0, pageSize: 12, shelterId: 0 }; // Solicitud para obtener la lista de paticas
+  species: Set<string> = new Set(); // Conjunto para almacenar las especies de las paticas
 
-  // Constructor para inyectar dependencias
   constructor(private paticasService: PaticasService, private router: Router, public userService: UserService) { }
 
-  // Se ejecuta al inicializar el componente
   ngOnInit(): void {
-    this.userRole = this.userService.getRole();
-    // Obtener la lista de paticas al iniciar
-    this.getPaticasList();
+    this.userRole = this.userService.getRole(); // Obtiene el rol del usuario
+    this.getPaticasList(); // Obtiene la lista de paticas
   }
 
   // Método privado para obtener la lista de paticas
   private getPaticasList() {
-    // Llamada al servicio para obtener la lista de paticas
-    this.paticasService.getList(this.request)
-    .pipe()
+    this.paticasService.getList(this.request) // Llama al servicio para obtener la lista de paticas
+      .pipe()
       .subscribe({
-        // En caso de éxito, asignar la respuesta y actualizar la lista de especies
-        next: (response: GetPaticasListResponse) => {
-          this.response = response;
-          this.updateSpeciesList(response.paticas);
+        next: (response: GetPaticasListResponse) => { // Maneja la respuesta exitosa
+          this.response = response; // Almacena la respuesta
+          this.updateSpeciesList(response.paticas); // Actualiza la lista de especies
         }
       });
   }
 
-  // Método para actualizar la lista de especies de paticas
+  // Método privado para actualizar la lista de especies
   private updateSpeciesList(paticas: any[]) {
-    this.species.clear(); // Limpiar el conjunto de especies
-    // Iterar sobre las paticas y agregar sus especies al conjunto
+    this.species.clear(); // Limpia el conjunto de especies
     paticas.forEach(patica => {
-      this.species.add(patica.species);
+      this.species.add(patica.species); // Agrega la especie de cada patica al conjunto
     });
   }
 
-  // Método para cambiar el estado de "like" de una patica
+  // Método para cambiar el estado de "Me gusta" de una patica
   toggleLike(patica: GetPaticasListItemResponse): void {
-    patica.liked = !patica.liked;
-    this.paticasService.updatePaticaLike(patica.id, patica.liked)
-    .pipe()
-    .subscribe({
-      next: () => {
-        console.log(`Patica ${patica.id} updated: liked = ${patica.liked}`);
-      },
-      error: (error) => {
-        console.error(`Error updating like for Patica ${patica.id}:`, error);
-        // Revert the change if update fails
-        patica.liked = !patica.liked;
-      }
-    });
+    patica.liked = !patica.liked; // Cambia el estado de "Me gusta"
+    this.paticasService.updatePaticaLike(patica.id, patica.liked) // Llama al servicio para actualizar el estado de "Me gusta" de la patica
+      .pipe()
+      .subscribe({
+        next: () => {
+          console.log(`Patica ${patica.id} updated: liked = ${patica.liked}`); // Muestra un mensaje en la consola
+        },
+        error: (error) => {
+          console.error(`Error updating like for Patica ${patica.id}:`, error); // Maneja los errores y muestra un mensaje en la consola
+          patica.liked = !patica.liked; // Revierte el cambio de estado de "Me gusta"
+        }
+      });
   }
 
-  // Método para cambiar la página de la lista de paticas
+  // Método para cambiar de página en la lista de paticas
   onPageChange(pageSize: number) {
-    this.request.page = pageSize; // Actualizar el número de página en la solicitud
-    this.getPaticasList(); // Volver a obtener la lista de paticas con la nueva página
+    this.request.page = pageSize; // Actualiza el número de página en la solicitud
+    this.getPaticasList(); // Obtiene la lista de paticas para la página seleccionada
   }
 
-  // Método para navegar a los detalles de una patica seleccionada
-  onSelectPatica(patica: GetPaticasListItemResponse): void {
-    // Navegar a la página de detalles de la patica seleccionada
-    this.router.navigate(['/paticas', patica.id]);
-  }
 }

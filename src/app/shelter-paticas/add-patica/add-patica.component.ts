@@ -13,29 +13,31 @@ import { UserService } from '../../auth/user-service/user.service';
   styleUrls: ['./add-patica.component.css']
 })
 export class AddPaticaComponent implements OnInit {
-  userRole: string='';
-  maxImages = 3;
-  request: AddPaticaRequest = {} as AddPaticaRequest;
-  form!: FormGroup;
+  userRole: string = ''; // Variable para almacenar el rol del usuario
+  maxImages = 3; // Número máximo de imágenes permitidas
+  request: AddPaticaRequest = {} as AddPaticaRequest; // Objeto de solicitud para agregar una nueva "patica"
+  form!: FormGroup; // Formulario reactivo para agregar una nueva "patica"
 
   constructor(
     private shelterPaticasService: ShelterPaticasService,
     private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    // Al inicializar el componente, se obtiene el rol del usuario y se crea el formulario
     this.userRole = this.userService.getRole();
     this.createForm();
   }
 
+  // Método para crear el formulario reactivo con validaciones
   createForm(): void {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       gender: ['', Validators.required],
       birthDate: ['', Validators.required],
-      location: ['', Validators.required], 
+      location: ['', Validators.required],
       species: ['', Validators.required],
       size: ['', Validators.required],
       shelter: ['', Validators.required],
@@ -48,15 +50,13 @@ export class AddPaticaComponent implements OnInit {
     });
   }
 
-
-
-
-
+  // Verifica si todos los pasos del formulario son válidos
   areAllStepsValid(): boolean {
     return this.form.valid;
   }
 
-  stablishRequest(){
+  stablishRequest() {
+    // Prepara el objeto de solicitud para enviar los datos de la nueva "patica" al servidor
     const imagesData: FormData[] = [];
     // Obtener los archivos de la propiedad files del input file
     const files = (document.getElementById('carouselImages') as HTMLInputElement).files;
@@ -68,7 +68,7 @@ export class AddPaticaComponent implements OnInit {
         imagesData.push(formData);
       }
     }
-  
+
     this.request = {
       profileImage: this.form.get('profileImage')?.value,
       name: this.form.get('name')?.value,
@@ -88,7 +88,7 @@ export class AddPaticaComponent implements OnInit {
     };
   }
 
-
+  // Método para enviar el formulario al servidor
   submitForm() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -98,14 +98,16 @@ export class AddPaticaComponent implements OnInit {
       console.log('Not all steps are valid');
       return;
     }
-    
     console.log('Submitting form...');
     console.log('Are all steps valid:', this.areAllStepsValid());
-    this.stablishRequest(); 
+
+    this.stablishRequest();
     console.log('Request stablished...');
-    console.log('Request object:', this.request); 
+    console.log('Request object:', this.request);
+
+    // Envía la solicitud para agregar una nueva "patica" al servidor
     this.shelterPaticasService.addPatica(this.request)
-    .pipe()
+      .pipe()
       .subscribe({
         next: () => {
           console.log('Patica created...');
@@ -119,10 +121,9 @@ export class AddPaticaComponent implements OnInit {
         }
       });
   }
-  
 
-  
 
+  // Método para obtener la fecha máxima permitida en el campo de fecha de nacimiento
   getMaxDate(): string {
     const today = new Date();
     const year = today.getFullYear();
@@ -135,24 +136,25 @@ export class AddPaticaComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+  // Método para manejar el cambio de archivos en el input de imágenes
   onFileChange(event: Event) {
     const files = (event.target as HTMLInputElement).files;
-  
+    // Verifica si se excede el número máximo de imágenes permitidas
     if (files && files.length > 0) {
       if (files.length > this.maxImages) {
         alert(`Solo se permiten subir un máximo de ${this.maxImages} imágenes.`);
         return;
       }
-  
+
       const preview = document.getElementById('imagePreview');
       if (preview) {
         preview.innerHTML = ''; // Limpiamos cualquier previsualización anterior
       }
-  
+
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
-  
+
         reader.onload = (e: any) => {
           const img = new Image();
           img.onload = () => {
@@ -166,11 +168,11 @@ export class AddPaticaComponent implements OnInit {
             preview.appendChild(img);
           }
         };
-  
+
         reader.readAsDataURL(file);
       }
     }
   }
-  
+
 
 }

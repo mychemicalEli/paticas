@@ -14,7 +14,6 @@ export interface GetShelterPaticasListItemResponse{
     gender: string;
     liked: boolean;
     species: string;
-    isShelterAdmin: boolean;
     imageCarousel1: string,
     imageCarousel2: string,
     imageCarousel3: string,

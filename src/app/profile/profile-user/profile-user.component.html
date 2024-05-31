@@ -25,10 +25,11 @@
         <form class="row g-3" [formGroup]="profileForm">
             <div class="col-md-6">
                 <div class="form-floating mb-4">
-                    <input type="text" class="form-control" id="floatingInputName"
-                        placeholder="Nombre de la protectora" formControlName="name">
+                    <input type="text" class="form-control" id="floatingInputName" placeholder="Nombre de la protectora"
+                        formControlName="name">
                     <label for="floatingInputName">Nombre y apellidos</label>
-                    <div *ngIf="profileForm.get('name')?.touched && profileForm.get('name')?.invalid" class="text-danger">
+                    <div *ngIf="profileForm.get('name')?.touched && profileForm.get('name')?.invalid"
+                        class="text-danger">
                         <div *ngIf="profileForm.get('name')?.errors?.['required']">Este es un campo obligatorio.</div>
                     </div>
                 </div>
@@ -37,7 +38,8 @@
                     <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com"
                         formControlName="email">
                     <label for="floatingInputEmail">Email</label>
-                    <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid" class="text-danger">
+                    <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid"
+                        class="text-danger">
                         <div *ngIf="profileForm.get('email')?.errors?.['required']">Este es un campo obligatorio.</div>
                         <div *ngIf="profileForm.get('email')?.errors?.['email']">El teléfono no es válido.</div>
                     </div>
@@ -51,7 +53,7 @@
                                 <div class="background"></div>
                             </label>
                             <input id="profileImageInput" type="file" class="select-profile-picture"
-                            (change)="onSelectProfileImage($event)" accept="image/*" />
+                                (change)="onSelectProfileImage($event)" accept="image/*" />
                         </div>
                         <div class="col">
                             <button class="btn btn-erase" (click)="deleteProfileImage()">Borrar</button>
@@ -69,7 +71,8 @@
                     <input type="phone" class="form-control" id="floatingInputPhone" placeholder="Teléfono de contacto"
                         formControlName="phone">
                     <label for="floatingInputPhone">Teléfono</label>
-                    <div *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid" class="text-danger">
+                    <div *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid"
+                        class="text-danger">
                         <div *ngIf="profileForm.get('phone')?.errors?.['required']">Este es un campo obligatorio.</div>
                         <div *ngIf="profileForm.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
                     </div>
@@ -78,8 +81,10 @@
                     <input type="text" class="form-control" id="floatingInputLocation" placeholder="Localización"
                         formControlName="location">
                     <label for="floatingInputLocation">Localización</label>
-                    <div *ngIf="profileForm.get('location')?.touched && profileForm.get('location')?.invalid" class="text-danger">
-                        <div *ngIf="profileForm.get('location')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    <div *ngIf="profileForm.get('location')?.touched && profileForm.get('location')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('location')?.errors?.['required']">Este es un campo obligatorio.
+                        </div>
                     </div>
                 </div>
 
@@ -88,20 +93,21 @@
                     <div class="containerForFile mb-3 mt-2">
                         <div class="mb-3 image-container-background">
                             <label class="hoverable" for="backgroundImageInput">
-                                <img [src]="imagePreviewBackground ? imagePreviewBackground : response.backgroundImage" />
+                                <img
+                                    [src]="imagePreviewBackground ? imagePreviewBackground : response.backgroundImage" />
                                 <div class="background"></div>
                             </label>
                             <input id="backgroundImageInput" type="file" class="select-profile-picture"
-                            (change)="onSelectBackgroundImage($event)" accept="image/*" />
+                                (change)="onSelectBackgroundImage($event)" accept="image/*" />
                         </div>
                         <div class="col">
                             <button class="btn btn-erase" (click)="deleteBackgroundImage()">Borrar</button>
                         </div>
                     </div>
                 </div>
-              
+
             </div>
-            
+
         </form>
     </div>
     <div class="likes">

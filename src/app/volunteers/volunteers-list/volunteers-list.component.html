@@ -1,4 +1,4 @@
-<main class="container-fluid" *ngIf="userRole === 'shelterAdmin'">
+<main class="container-fluid" *ngIf="userRole === 'shelter'">
     <div class="filters">
         <!-- first block -->
         <div class="filter-options">
@@ -13,7 +13,7 @@
 
         <!-- second block -->
         <div class="add-button-container">
-            <button class="btn-add" type="button" [routerLink]="['create']"><b>+ AÑADIR</b></button>
+            <button class="btn-add" type="button" [routerLink]="['./','create']"><b>+ AÑADIR</b></button>
         </div>
     </div>
 
@@ -36,10 +36,12 @@
                         </div>
                         <div class="icons">
                             <div class="edit">
-                                <a [routerLink]="['/volunteers', volunteer.id, 'edit']"><i class="bi bi-pencil-square fs-4"></i></a>
+                                <a [routerLink]="['./', volunteer.id, 'edit']"><i
+                                        class="bi bi-pencil-square fs-4"></i></a>
                             </div>
                             <div class="erase">
-                                <a (click)="onDeleteClick(volunteer.fullName, volunteer.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash3 fs-4"></i></a>
+                                <a (click)="onDeleteClick(volunteer.fullName, volunteer.id)" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop"><i class="bi bi-trash3 fs-4"></i></a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +70,8 @@
 
 
 <!-- modal para eliminar voluntario -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,10 +83,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" (click)="deleteVolunteer(currentVolunteerId)">Eliminar</button>
+                <button type="button" class="btn btn-danger"
+                    (click)="deleteVolunteer(currentVolunteerId)">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
-
-  

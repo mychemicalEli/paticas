@@ -10,7 +10,8 @@
                 {{ location }}
             </option>
         </select>
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-search" style="padding-right: 10px;"></i>Buscar</button>
+        <button type="button" class="btn btn-outline-primary"><i class="bi bi-search"
+                style="padding-right: 10px;"></i>Buscar</button>
 
     </div>
 
@@ -18,11 +19,14 @@
 
     <div *ngIf="response">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col-4" *ngFor="let shelter of (response?.shelters || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
+            <div class="col-4"
+                *ngFor="let shelter of (response?.shelters || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
                 <div class="card h-100" style="height: 450px;">
-                    <img [src]="shelter.image" class="card-img-top" alt="imageShelter" [routerLink]="['/shelters', shelter.id]" style="cursor:pointer">
+                    <img [src]="shelter.profileImage" class="card-img-top" alt="imageShelter"
+                        [routerLink]="[shelter.id]" style="cursor:pointer">
                     <div class="card-body">
-                        <h5 class="card-title text-wrap text-truncate" [routerLink]="['/shelters', shelter.id]" style="cursor:pointer">{{ shelter.name }}</h5>
+                        <h5 class="card-title text-wrap text-truncate" [routerLink]="['./', shelter.id]"
+                            style="cursor:pointer">{{ shelter.name }}</h5>
 
                         <div class="card-content">
                             <button type="button" class="btn btn-light disabled mb-2 mb-md-0">
@@ -44,10 +48,7 @@
             </div>
         </div>
     </div>
-    <pagination-controls class="custom-pagination"
-    (pageChange)="onPageChange($event)" 
-    previousLabel=" " 
-    nextLabel=" ">
+    <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" " nextLabel=" ">
     </pagination-controls>
 
 

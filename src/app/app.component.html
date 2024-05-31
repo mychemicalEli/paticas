@@ -1,3 +1,8 @@
+<!-- Incluir el componente de la barra de navegación solo si no es la página de inicio de sesión -->
 <app-navbar *ngIf="!isLoginPage"></app-navbar>
+
+<!-- Salida del enrutador, donde se cargan los componentes según la ruta actual -->
 <router-outlet></router-outlet>
+
+<!-- Incluir el componente del pie de página solo si no es la página de inicio de sesión -->
 <app-footer *ngIf="!isLoginPage"></app-footer>

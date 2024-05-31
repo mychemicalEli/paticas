@@ -1,4 +1,4 @@
-<main class="container-fluid" *ngIf="patica && userRole === 'shelterAdmin'">
+<main class="container-fluid" *ngIf="patica && userRole === 'shelter'">
     <form class="row justify-content-center" [formGroup]="form">
         <h3 class="title">EDITAR PATICA</h3>
 
@@ -83,7 +83,7 @@
                     <option value="Yecla">Yecla</option>
                 </select>
                 <label for="floatingInput">Ubicación</label>
-        
+
             </div>
         </div>
 
@@ -126,18 +126,13 @@
                             <img [src]="imagePreview ? imagePreview : patica.profileImage" />
                             <div class="background"></div>
                         </label>
-                        <input
-                            id="fileInput"
-                            type="file"
-                            class="select-profile-picture"
-                            (change)="onSelectFile($event)"
-                            accept="image/*"
-                        />
+                        <input id="fileInput" type="file" class="select-profile-picture" (change)="onSelectFile($event)"
+                            accept="image/*" />
                     </div>
                     <button class="btn btn-erase" (click)="delete()">Borrar</button>
                 </div>
             </div>
-            
+
             <!--hasta aqui-->
 
         </div>
@@ -147,7 +142,7 @@
         <div class="col-lg-10">
 
 
-            
+
             <div class="form-floating mb-4">
                 <textarea class="form-control" placeholder="Descripción" id="description" style="height: 120px"
                     formControlName="description"></textarea>
@@ -167,21 +162,16 @@
                                 <img [src]="preview ? preview : defaultCarouselImage" />
                                 <div class="background"></div>
                             </label>
-                            <input
-                                [id]="'fileInput' + i"
-                                type="file"
-                                class="select-profile-picture"
-                                (change)="onSelectCarouselFile($event, i)"
-                                accept="image/*"
-                            />
+                            <input [id]="'fileInput' + i" type="file" class="select-profile-picture"
+                                (change)="onSelectCarouselFile($event, i)" accept="image/*" />
                         </div>
                         <button class="btn btn-erase" (click)="deleteAllCarousel()">Borrar</button>
                     </ng-container>
                 </div>
             </div>
-            
 
-        
+
+
 
 
             <div class="row justify-content-center">
@@ -213,8 +203,8 @@
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="goodWithDogs" id="goodWithDogsNo"
-                            formControlName="goodWithDogs" [value]="false">
-                        <label class="form-check-label" for="goodWithDogsNo">No</label>
+                                formControlName="goodWithDogs" [value]="false">
+                            <label class="form-check-label" for="goodWithDogsNo">No</label>
                         </div>
                     </div>
                 </div>
@@ -225,13 +215,13 @@
 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="goodWithCats" id="goodWithCatsYes"
-                            formControlName="goodWithCats" [value]="true">
-                        <label class="form-check-label" for="goodWithCatsYes">Sí</label>
+                                formControlName="goodWithCats" [value]="true">
+                            <label class="form-check-label" for="goodWithCatsYes">Sí</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="goodWithCats" id="goodWithCatsNo"
-                            formControlName="goodWithCats" [value]="false">
-                        <label class="form-check-label" for="goodWithCatsNo">No</label>
+                                formControlName="goodWithCats" [value]="false">
+                            <label class="form-check-label" for="goodWithCatsNo">No</label>
                         </div>
                     </div>
                 </div>

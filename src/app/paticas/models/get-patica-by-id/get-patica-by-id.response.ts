@@ -1,13 +1,6 @@
 import { paticaSize } from "../paticas-size.enum";
 
-export interface GetPaticasListResponse{
-    paticas: GetPaticasListItemResponse[];
-    totalElements: number;
-    page: number;
-    pageSize: number;
-}
-
-export interface GetPaticasListItemResponse{
+export interface GetPaticaByIdResponse {
     id: number;
     profileImage: string;
     imageCarousel1: string;

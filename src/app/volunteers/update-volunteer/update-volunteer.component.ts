@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router'; // Importa ActivatedRo
 import { volunteerAvailability } from '../models/volunteer-availability.enum'; // Importa el enum de disponibilidad de voluntarios
 import { UpdateVolunteerRequest } from '../models/update-volunteer/update-volunteer.request'; // Importa la interfaz de solicitud de actualización de voluntarios
 import { UserService } from '../../auth/user-service/user.service';
+import { GetVolunteerByIdResponse } from '../models/get-volunteer-by-id/get-volunteer-by-id.response';
 
 @Component({
   selector: 'app-update-volunteer',
@@ -15,7 +16,7 @@ import { UserService } from '../../auth/user-service/user.service';
 export class UpdateVolunteerComponent implements OnInit {
   @Input() volunteerId!: number; // Recibe el ID del voluntario como entrada
   userRole: string='';
-  volunteer?: GetVolunteerListItemResponse; // Almacena la información del voluntario
+  volunteer?: GetVolunteerByIdResponse; // Almacena la información del voluntario
   imagePreview: string | FormData | null = null; // Almacena la vista previa de la imagen
   form!: FormGroup; // Representa el formulario de actualización de voluntarios
   request: UpdateVolunteerRequest = {} as UpdateVolunteerRequest; // Almacena la información para la solicitud de actualización
@@ -40,20 +41,16 @@ export class UpdateVolunteerComponent implements OnInit {
     });
 
     // Si no se proporciona el ID del voluntario, recupera el ID de la ruta
-    if (!this.volunteerId) {
-      this.route.params.subscribe(params => {
-        const id = params['id']; // Obtiene el ID de los parámetros de la ruta
-        this.getVolunteerDetails(id); // Llama al método para obtener los detalles del voluntario
-      });
-    } else {
-      this.getVolunteerDetails(this.volunteerId); // Si se proporciona el ID del voluntario, obtiene los detalles del voluntario
-    }
+    this.route.params
+    .subscribe(params=>{
+      this.getVolunteerDetails(params['id']);
+    })
   }
 
   // Método para obtener los detalles del voluntario
   private getVolunteerDetails(id: number) {
     this.volunteerService.getId(id).subscribe({
-      next: (response: GetVolunteerListItemResponse) => {
+      next: (response: GetVolunteerByIdResponse) => {
         this.volunteer = response; // Almacena la respuesta en la variable volunteer
         this.updateFormWithVolunteerData(); // Actualiza el formulario con los datos del voluntario
       },

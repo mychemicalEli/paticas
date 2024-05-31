@@ -11,7 +11,8 @@ import { PaymentComponent } from './payment/payment.component';
   declarations: [
     ColaborateComponent,
     ColaborateContentComponent,
-    PaymentComponent
+    PaymentComponent,
+    
   ],
   imports: [
     CommonModule,
