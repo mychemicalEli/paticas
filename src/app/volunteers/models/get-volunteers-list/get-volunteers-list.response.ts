@@ -14,5 +14,6 @@ export interface GetVolunteerListItemResponse{
     phone: number;
     email: string;
     availability: volunteerAvailability;
+    shelterId: number;
     
 }

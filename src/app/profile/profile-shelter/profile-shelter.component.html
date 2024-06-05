@@ -16,6 +16,7 @@
                     <h5 class="card-email-shelter">{{ shelterProfile.email }}</h5>
                     <h5 class="card-location-shelter"><i class="bi bi-geo-alt-fill fs-5"></i>{{ shelterProfile.location
                         }}</h5>
+                    <h5 class="card-description-shelter">{{ shelterProfile.description }}</h5>   
                 </div>
                 <button type="button" class="btn btn-dark" (click)="showForm = !showForm"><i
                         class="bi bi-pencil-fill"></i></button>
@@ -38,7 +39,7 @@
                 </div>
 
                 <div class="form-floating mb-4">
-                    <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com"
+                    <input textarea class="form-control" id="floatingInputEmail" placeholder="name@example.com"
                         formControlName="email">
                     <label for="floatingInputEmail">Email</label>
                     <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid"
@@ -47,6 +48,17 @@
                         <div *ngIf="profileForm.get('email')?.errors?.['email']">El email no es válido.</div>
                     </div>
                 </div>
+
+                <div class="form-floating mb-4">
+                    <textarea class="form-control" id="floatingInputDescription" placeholder="description" style="height: 200px"
+                        formControlName="description"></textarea>
+                    <label for="floatingInputDescription">Descripción</label>
+                    <div *ngIf="profileForm.get('description')?.touched && profileForm.get('description')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('description')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="profileImage">Imagen de perfil</label>
                     <div class="containerForFile mb-3 mt-2">
@@ -63,11 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-save" (click)="submitForm()">GUARDAR CAMBIOS</button>
-                    </div>
-                </div>
+                
             </div>
             <div class="col-md-6">
                 <div class="form-floating mb-4">
@@ -157,6 +165,11 @@
                         <div class="col">
                             <button class="btn btn-erase" (click)="deleteBackgroundImage()">Borrar</button>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-save" (click)="submitForm()">GUARDAR CAMBIOS</button>
                     </div>
                 </div>
 

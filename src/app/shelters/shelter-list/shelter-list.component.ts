@@ -31,7 +31,7 @@ export class ShelterListComponent {
     this.shelterService.get(this.request) // Realiza la solicitud para obtener la lista de refugios
     .pipe() // Permite encadenar operadores de RxJS
     .subscribe({
-      next: (response: GetShelterListResponse) => { // Maneja la respuesta exitosa
+      next: (response: GetShelterListResponse) => { // Maneja la respuesta exitosa 
         this.response = response; // Asigna la respuesta a la variable response
         this.updateLocationsList(response.shelters); // Actualiza la lista de ubicaciones de refugios
       },

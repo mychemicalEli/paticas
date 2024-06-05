@@ -6,5 +6,6 @@ export interface GetShelterProfileResponse{
   email: string, 
   phone: number,
   location: string,
+  description: string,
   CIF: string
 }
