@@ -42,6 +42,7 @@ export class ProfileShelterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[9|6|7][0-9]{8}$')]],
       location: [''],
+      description: ['', Validators.required],
       cif: ['', [Validators.required, Validators.pattern(/^(\d{8}[a-zA-Z]|\d{1}[a-zA-Z]\d{7}|[a-zA-Z]\d{8}|\d{8}-[a-zA-Z]|\d{1}-[a-zA-Z]\d{7}|[a-zA-Z]-\d{8})$/)]],
       profileImage: [null],
       backgroundImage: [null]
@@ -55,6 +56,7 @@ export class ProfileShelterComponent implements OnInit {
       email: this.shelterProfile.email,
       phone: this.shelterProfile.phone,
       location: this.shelterProfile.location,
+      description: this.shelterProfile.description,
       cif: this.shelterProfile.CIF,
       profileImage: this.shelterProfile.profileImage,
       backgroundImage: this.shelterProfile.backgroundImage,
@@ -72,6 +74,7 @@ export class ProfileShelterComponent implements OnInit {
     this.update.email = this.profileForm.get('email')?.value;
     this.update.phone = this.profileForm.get('phone')?.value;
     this.update.location = this.profileForm.get('location')?.value;
+    this.update.description = this.profileForm.get('description')?.value;
     this.update.cif = this.profileForm.get('cif')?.value;
     this.update.profileImage = this.profileForm.get('profileImage')?.value;
     this.update.backgroundImage = this.profileForm.get('backgroundImage')?.value;
@@ -92,6 +95,7 @@ export class ProfileShelterComponent implements OnInit {
             email: this.shelterProfile.email,
             phone: this.shelterProfile.phone,
             location: this.shelterProfile.location,
+            description: this.shelterProfile.description,
             cif: this.shelterProfile.CIF,
             imagePreviewProfile: this.shelterProfile.profileImage,
             imagePreviewBackground: this.shelterProfile.backgroundImage,

@@ -7,4 +7,5 @@ export interface GetVolunteerByIdResponse{
     phone: number;
     email: string;
     availability: volunteerAvailability;
+    shelterId: number;
 }

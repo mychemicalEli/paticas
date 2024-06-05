@@ -4,6 +4,7 @@ export interface UpdateShelterUserRequest {
     cif:string;
     phone: number;
     location: string;
+    description: string;
     profileImage: FormData | null;
     backgroundImage:FormData | null;
 }
