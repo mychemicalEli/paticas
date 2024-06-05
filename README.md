@@ -1,27 +1,68 @@
-# PaticasFront
+# Paticas API
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+El FrontEnd de Paticas es una interfaz web diseñada para interactuar con la API de Paticas, un servicio RESTful que facilita la gestión de mascotas y refugios. Ofrece operaciones CRUD para mascotas, refugios y voluntarios, junto con la capacidad de cargar imágenes de mascotas.
 
-## Development server
+## Tabla de contenidos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Paticas](#paticas)
+  - [Tabla de contenidos](#tabla-de-contenidos)
+  - [Tecnologías Usadas](#tecnologías-usadas)
+  - [Getting Started](#getting-started)
+    - [Prerrequisitos](#prerrequisitos)
+    - [Setup](#setup)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tecnologías Usadas
 
-## Running unit tests
+- Angular
+- Node.js
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Getting Started
 
-## Running end-to-end tests
+### Prerrequisitos
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- nvm para gestionar versiones de Node.js
+- Angular CLI
+- Visual Studio Code (VSC)
+- Mockoon para simulación de APIs
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Setup
+
+1. Instalar Node.js:
+
+```bash
+nvm install 21.7.0
+nvm use 21.7.0
+```
+
+2. Instalar Angular CLI:
+
+```bash
+npm install -g @angular/cli
+```
+
+3. Instalar Visual Studio Code
+
+4. Clonar proyecto:
+
+```bash
+git clone https://github.com/mychemicalEli/paticas
+```
+
+5. Instalar dependencias:
+```bash
+npm install
+```
+
+5. Configurar Mockoon:
+- Descargar e instalar Mockoon.
+- Importar el archivo PaticasMockoon.json ubicado en API>paticas-api>external-resources.
+- En Mockoon, hacer clic en “Import/export” y seleccionar la opción para importar el archivo. Luego, hacer clic en “play”.
+
+5. Levantar la aplicación:
+```bash
+ng serve -o
+```
