@@ -1,0 +1,182 @@
+<main class="profile-container" id="profile-container" *ngIf="shelterProfile && userRole === 'shelter'">
+    <div class="card shelter mb-3"
+        [ngStyle]="{ 'background': shelterProfile.backgroundImage ? 'rgba(232, 192, 125, 0.6) url(' + shelterProfile.backgroundImage + ') no-repeat' : '#E8C07D', 'background-size': 'cover'}">
+        <div class="row g-0">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="img-container">
+                    <img [src]="shelterProfile.profileImage || '/assets/img/profile/defaultIconProfile.png'"
+                        class="img-fluid-shelter" alt="Shelter Image">
+                </div>
+            </div>
+
+            <div class="col-md-8 d-flex align-items-center">
+
+                <div class="card-body-shelter">
+                    <h1 class="card-title-shelter">{{ shelterProfile.name }}</h1>
+                    <h5 class="card-email-shelter">{{ shelterProfile.email }}</h5>
+                    <h5 class="card-location-shelter"><i class="bi bi-geo-alt-fill fs-5"></i>{{ shelterProfile.location
+                        }}</h5>
+                    <h5 class="card-description-shelter">{{ shelterProfile.description }}</h5>   
+                </div>
+                <button type="button" class="btn btn-dark" (click)="showForm = !showForm"><i
+                        class="bi bi-pencil-fill"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- Formulario -->
+    <!-- Formulario -->
+    <div *ngIf="showForm" class="container">
+        <form class="row g-3" [formGroup]="profileForm">
+            <div class="col-md-6">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="floatingInputName" placeholder="Nombre de la protectora"
+                        formControlName="name">
+                    <label for="floatingInputName">Nombre de la protectora</label>
+                    <div *ngIf="profileForm.get('name')?.touched && profileForm.get('name')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('name')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input textarea class="form-control" id="floatingInputEmail" placeholder="name@example.com"
+                        formControlName="email">
+                    <label for="floatingInputEmail">Email</label>
+                    <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('email')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="profileForm.get('email')?.errors?.['email']">El email no es válido.</div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <textarea class="form-control" id="floatingInputDescription" placeholder="description" style="height: 200px"
+                        formControlName="description"></textarea>
+                    <label for="floatingInputDescription">Descripción</label>
+                    <div *ngIf="profileForm.get('description')?.touched && profileForm.get('description')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('description')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="profileImage">Imagen de perfil</label>
+                    <div class="containerForFile mb-3 mt-2">
+                        <div class="mb-3 image-container-profile">
+                            <label class="hoverable" for="profileImageInput">
+                                <img [src]="imagePreviewProfile ? imagePreviewProfile : shelterProfile.profileImage" />
+                                <div class="background"></div>
+                            </label>
+                            <input id="profileImageInput" type="file" class="select-profile-picture"
+                                (change)="onSelectProfileImage($event)" accept="image/*" />
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-erase" (click)="deleteProfileImage()">Borrar</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating mb-4">
+                    <input type="phone" class="form-control" id="floatingInputPhone" placeholder="Teléfono de contacto"
+                        formControlName="phone">
+                    <label for="floatingInputPhone">Teléfono</label>
+                    <div *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('phone')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="profileForm.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" aria-label="Ubicación">
+                        <option value="{{shelterProfile.location}}" selected>{{shelterProfile.location}}</option>
+                        <option value="Abanilla">Abanilla</option>
+                        <option value="Abarán">Abarán</option>
+                        <option value="Águilas">Águilas</option>
+                        <option value="Albudeite">Albudeite</option>
+                        <option value="Alcantarilla">Alcantarilla</option>
+                        <option value="Los Alcázares">Los Alcázares</option>
+                        <option value="Aledo">Aledo</option>
+                        <option value="Alguazas">Alguazas</option>
+                        <option value="Alhama de Murcia">Alhama de Murcia</option>
+                        <option value="Archena">Archena</option>
+                        <option value="Beniel">Beniel</option>
+                        <option value="Blanca">Blanca</option>
+                        <option value="Bullas">Bullas</option>
+                        <option value="Calasparra">Calasparra</option>
+                        <option value="Campos del Río">Campos del Río</option>
+                        <option value="Caravaca de la Cruz">Caravaca de la Cruz</option>
+                        <option value="Cartagena">Cartagena</option>
+                        <option value="Cehegín">Cehegín</option>
+                        <option value="Ceutí">Ceutí</option>
+                        <option value="Cieza">Cieza</option>
+                        <option value="Fortuna">Fortuna</option>
+                        <option value="Fuente Álamo de Murcia">Fuente Álamo de Murcia</option>
+                        <option value="Jumilla">Jumilla</option>
+                        <option value="Librilla">Librilla</option>
+                        <option value="Lorca">Lorca</option>
+                        <option value="Lorquí">Lorquí</option>
+                        <option value="Mazarrón">Mazarrón</option>
+                        <option value="Molina de Segura">Molina de Segura</option>
+                        <option value="Moratalla">Moratalla</option>
+                        <option value="Mula">Mula</option>
+                        <option value="Murcia">Murcia</option>
+                        <option value="Ojós">Ojós</option>
+                        <option value="Pliego">Pliego</option>
+                        <option value="Puerto Lumbreras">Puerto Lumbreras</option>
+                        <option value="Ricote">Ricote</option>
+                        <option value="San Javier">San Javier</option>
+                        <option value="San Pedro del Pinatar">San Pedro del Pinatar</option>
+                        <option value="Santomera">Santomera</option>
+                        <option value="Torre-Pacheco">Torre-Pacheco</option>
+                        <option value="Las Torres de Cotillas">Las Torres de Cotillas</option>
+                        <option value="Totana">Totana</option>
+                        <option value="Ulea">Ulea</option>
+                        <option value="La Unión">La Unión</option>
+                        <option value="Villanueva del Río Segura">Villanueva del Río Segura</option>
+                        <option value="Yecla">Yecla</option>
+                    </select>
+                    <label for="floatingInput">Ubicación</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputCIF" placeholder="CIF de la protectora"
+                        formControlName="cif" required>
+                    <label for="floatingInputCIF">CIF</label>
+                    <div *ngIf="profileForm.get('cif')?.touched && profileForm.get('cif')?.invalid" class="text-danger">
+                        <div *ngIf="profileForm.get('cif')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="profileForm.get('cif')?.errors?.['pattern']">El CIF no es válido.</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="backgroundImage">Imagen de fondo</label>
+                    <div class="containerForFile mb-3 mt-2">
+                        <div class="mb-3 image-container-background">
+                            <label class="hoverable" for="backgroundImageInput">
+                                <img
+                                    [src]="imagePreviewBackground ? imagePreviewBackground : shelterProfile.backgroundImage" />
+                                <div class="background"></div>
+                            </label>
+                            <input id="backgroundImageInput" type="file" class="select-profile-picture"
+                                (change)="onSelectBackgroundImage($event)" accept="image/*" />
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-erase" (click)="deleteBackgroundImage()">Borrar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-save" (click)="submitForm()">GUARDAR CAMBIOS</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+
+</main>

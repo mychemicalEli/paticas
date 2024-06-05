@@ -1,0 +1,270 @@
+<div class="container-fluid"  *ngIf="userRole === 'user'">
+    <div class="row mb-4" id="step1" [hidden]="currentStep !== 1">
+        <!-- Step 1 content -->
+        <h1>Completa el cuestionario para futuros voluntarios</h1>
+        <p class="bg-orange">¡Gracias por tu interés en ser voluntario en nuestra protectora!
+            Estamos emocionados de que desees unirte a nuestro equipo y contribuir al bienestar de nuestros amigos
+            peludos. Antes de comenzar, te pedimos que completes este breve formulario para que podamos conocerte mejor
+            y asignarte tareas que se ajusten a tus habilidades e intereses. Tu dedicación y compromiso son
+            fundamentales para el éxito de nuestra misión. ¡Bienvenido a la familia!</p>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn" (click)="nextPrev(1)">Comenzar</button>
+        </div>
+    </div>
+
+    <div class="row mb-4 bg-justified" id="step2" [hidden]="currentStep !== 2" [formGroup]="step2">
+        <!-- Step 2 content -->
+        <h2>TÉRMINOS Y CONDICIONES DEL VOLUNTARIADO</h2>
+
+        <ul class="text-align-left" *ngIf="step2">
+            <li class="title">Para continuar, has de leer y aceptar las condiciones principales de voluntariado:</li>
+            <li>Acepto cumplir con todas las políticas y procedimientos establecidos por la protectora de animales
+                durante mi tiempo como voluntario.</li>
+            <li>Entiendo que como voluntario de la protectora, represento a la organización y me comprometo a actuar de
+                manera profesional y respetuosa en todo momento.</li>
+            <li>Acepto tratar a todos los animales bajo el cuidado de la protectora con compasión, respeto y cuidado
+                adecuado, siguiendo las instrucciones proporcionadas por el personal.
+            </li>
+            <li>Entiendo que cualquier información confidencial a la que tenga acceso durante mi voluntariado debe ser
+                tratada con la máxima confidencialidad y no debe ser compartida fuera de la organización.</li>
+            <li>Acepto informar a un miembro del personal de la protectora sobre cualquier problema o preocupación
+                relacionada con el bienestar de los animales o la seguridad en las instalaciones.</li>
+            <li>Acepto que mi voluntariado puede ser terminado en cualquier momento a discreción de la protectora si mi
+                comportamiento o acciones no cumplen con los estándares esperados de la organización.</li>
+            <li>Entiendo que mi voluntariado es una contribución no remunerada y que no tengo derecho a compensación
+                financiera o beneficios por mi servicio.</li>
+            <li>Acepto liberar a la protectora, sus directivos, empleados y otros voluntarios de cualquier
+                responsabilidad por lesiones personales o daños materiales que puedan surgir durante mi participación
+                como voluntario.</li>
+            <li>Entiendo que mi voluntariado puede requerir el uso de mis propios recursos, como vehículo, teléfono
+                móvil o computadora, y acepto asumir cualquier costo asociado con estas actividades voluntarias.</li>
+            <li>Acepto que mi participación como voluntario está sujeta a revisión y puede ser modificada o terminada en
+                cualquier momento según las necesidades de la protectora y mi disponibilidad y desempeño.</li>
+        </ul>
+
+        <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" formControlName="acceptConditions" required>
+            <label class="form-check-label" for="acceptConditions">
+                <span class="checkbox-icon"></span>
+                He leído y acepto las condiciones
+            </label>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button class="btn" style="margin-right: 10px;" (click)="nextPrev(-1)">Anterior</button>
+            <button class="btn" style="margin-left: 10px;" (click)="nextPrev(1)"
+                [disabled]="step2.invalid">Siguiente</button>
+        </div>
+    </div>
+
+
+
+    <div class="row mb-4" id="step3" [hidden]="currentStep !== 3" [formGroup]="step3">
+        <!-- Step 4 content -->
+
+        <h2>CUESTIONARIO</h2>
+        <div class="row bg-orange" *ngIf="step3">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">* Nombre y apellidos</label>
+                    <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellidos"
+                        formControlName="fullName" required>
+                        <div *ngIf="step3.get('fullName')?.touched && step3.get('fullName')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('fullName')?.errors?.['required']">El nombre es obligatorio.</div>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">* Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="Correo Electrónico"
+                        formControlName="email" required>
+                        <div *ngIf="step3.get('email')?.touched && step3.get('email')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('email')?.errors?.['required']">El email es obligatorio.</div>
+                            <div *ngIf="step3.get('email')?.errors?.['email']">El email no es válido.</div>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">* Dirección</label>
+                    <input type="text" class="form-control" id="address" placeholder="Dirección"
+                        formControlName="address" required>
+                        <div *ngIf="step3.get('address')?.touched && step3.get('address')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('address')?.errors?.['required']">La dirección es obligatoria.</div>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="reason" class="form-label">¿Por qué te gustaría ser voluntario en nuestra
+                        protectora?</label>
+                    <textarea class="form-control" id="reason" rows="5" placeholder="Escribe aquí" formControlName="reason" required></textarea>
+                    <div *ngIf="step3.get('reason')?.touched && step3.get('reason')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('reason')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="availability" class="form-label">¿Cuál es tu disponibilidad horaria para ser voluntario?
+                        (días de la semana, horas por día)</label>
+                    <textarea class="form-control" id="availability" rows="4" placeholder="Escribe aquí" formControlName="availability" required></textarea>
+                    <div *ngIf="step3.get('availability')?.touched && step3.get('availability')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('availability')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="policies" class="form-label">¿Estás dispuesto a seguir las políticas y procedimientos
+                        establecidos por la protectora?</label>
+                    <textarea class="form-control" id="policies" rows="4" placeholder="Escribe aquí" formControlName="policies" required></textarea>
+                    <div *ngIf="step3.get('policies')?.touched && step3.get('policies')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('policies')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="vehicle" class="form-label">¿Tienes vehículo propio y estás dispuesto a utilizarlo para
+                        tareas relacionadas con la protectora?</label>
+                    <textarea class="form-control" id="vehicle" rows="4" placeholder="Escribe aquí" formControlName="vehicle" required></textarea>
+                    <div *ngIf="step3.get('vehicle')?.touched && step3.get('vehicle')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('vehicle')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="expectations" class="form-label">¿Cuál es tu expectativa principal como voluntario de
+                        nuestra protectora?</label>
+                    <textarea class="form-control" id="expectations" rows="6" placeholder="Escribe aquí" formControlName="expectations" required></textarea>
+                    <div *ngIf="step3.get('expectations')?.touched && step3.get('expectations')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('expectations')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">* Edad</label>
+                    <input type="number" class="form-control" id="age" placeholder="Edad" formControlName="age"
+                        required>
+                        <div *ngIf="step3.get('age')?.touched && step3.get('age')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('age')?.errors?.['required']">La edad es obligatoria.</div>
+                            <div *ngIf="step3.get('age')?.errors?.['min']">Debes ser mayor de 18 años.</div>
+                        </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">* Teléfono de Contacto</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Teléfono de Contacto"
+                        formControlName="phone" required>
+                        <div *ngIf="step3.get('phone')?.touched && step3.get('phone')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('phone')?.errors?.['required']">El teléfono es obligatorio.</div>
+                            <div *ngIf="step3.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
+                        </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="postalCode" class="form-label">* Código Postal</label>
+                    <input type="text" class="form-control" id="postalCode" placeholder="Código Postal"
+                        formControlName="postalCode" required>
+                        <div *ngIf="step3.get('postalCode')?.touched && step3.get('postalCode')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('postalCode')?.errors?.['required']">El Código Postal es obligatorio.</div>
+                            <div *ngIf="step3.get('postalCode')?.errors?.['pattern']">El Código Postal no es válido.</div>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="experience" class="form-label">¿Cuál es tu experiencia previa en trabajo voluntario o
+                        cuidado de animales?</label>
+                    <textarea class="form-control" id="experience" rows="4" placeholder="Escribe aquí" formControlName="experience" required></textarea>
+                    <div *ngIf="step3.get('experience')?.touched && step3.get('experience')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('experience')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="skills" class="form-label">¿Tienes alguna preferencia o habilidad específica que te
+                        gustaría utilizar como voluntario? (por ejemplo, atención al público, cuidado de animales,
+                        eventos de recaudación de fondos, redes sociales, etc.)</label>
+                    <textarea class="form-control" id="skills" rows="4" placeholder="Escribe aquí" formControlName="skills" required></textarea>
+                    <div *ngIf="step3.get('skills')?.touched && step3.get('skills')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('skills')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="healthLimitations" class="form-label">¿Tienes algún tipo de alergia a los animales o
+                        limitación de salud que pueda afectar tu capacidad para trabajar con ellos?</label>
+                    <textarea class="form-control" id="healthLimitations" rows="4"
+                        placeholder="Escribe aquí" formControlName="healthLimitations" required></textarea>
+                        <div *ngIf="step3.get('healthLimitations')?.touched && step3.get('healthLimitations')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('healthLimitations')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="trainingArea" class="form-label">¿Hay alguna área en particular en la que te gustaría
+                        recibir capacitación adicional?</label>
+                    <textarea class="form-control" id="trainingArea" rows="4" placeholder="Escribe aquí" formControlName="trainingArea" required></textarea>
+                    <div *ngIf="step3.get('trainingArea')?.touched && step3.get('trainingArea')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('trainingArea')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="additionalQuestions" class="form-label">¿Hay alguna pregunta adicional que te gustaría
+                        hacer o algún comentario que desees agregar?</label>
+                    <textarea class="form-control" id="additionalQuestions" rows="4"
+                        placeholder="Escribe aquí" formControlName="additionalQuestions" required></textarea>
+                        <div *ngIf="step3.get('additionalQuestions')?.touched && step3.get('additionalQuestions')?.invalid" class="text-danger">
+                            <div *ngIf="step3.get('additionalQuestions')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        </div>
+                </div>
+
+            </div>
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="acceptTerms"
+                    formControlName="acceptTerms" required>
+
+                <label class="form-check-label" for="acceptTerms">
+
+                    <span class="checkbox-icon"></span>
+                    Al marcar esta casilla, acepto que mis datos personales proporcionados en este formulario sean
+                    tratados de acuerdo con la política de privacidad de la protectora de animales, con el fin de
+                    gestionar mi participación como voluntario.
+                    <div *ngIf="step3.get('acceptTerms')?.touched && step3.get('acceptTerms')?.invalid" class="text-danger">
+                        <div *ngIf="step3.get('acceptTerms')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </label>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button class="btn" style="margin-right: 10px;" (click)="nextPrev(-1)">Anterior</button>
+            <button class="btn" style="margin-left: 10px;" (click)="submitForm()">Enviar Formulario</button>
+        </div>
+    </div>
+
+
+
+<div class="row mb-4" id="step4" [hidden]="currentStep !== 4">
+    <!-- Step 4 content -->
+    <div class="text-center">
+        <i class="bi bi-check-circle-fill" style="font-size: 3rem;"></i>
+        <h3 style="padding-top: 20px;">SOLICITUD ENVIADA CON ÉXITO</h3>
+    </div>
+    <p class="text-center" style="max-width: 30%; padding: 20px;">La protectora se pondrá en contacto contigo cuando el formulario haya sido validado.</p>
+    <div class="text-center">
+        <button class="btn" (click)="redirectToHome()">Volver al inicio</button>
+    </div>
+</div>
+
+   
+</div>

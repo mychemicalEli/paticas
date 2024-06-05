@@ -1,0 +1,73 @@
+.container-fluid {
+    width: 90%;
+    padding-bottom: 200px;
+    padding-top: 100px;
+}
+
+.btn {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    color: #212121;
+    border-radius: 10px;
+    background: #F5F5F5;
+    box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    border: 1px solid #f5f5f5;
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn:hover{
+    background: #f5f5f594;
+    transform: scale(1.2);
+}
+
+.btn.btn-edit{
+    background-color: #212121;
+    color: #F5F5F5;
+    border: 1px solid #212121;
+    margin-right: 10px;
+}
+
+.btn.btn-erase{
+    background-color: #ED525B;
+    color: #F5F5F5;
+    border: 1px solid #ED525B;
+}
+
+.badge {
+    padding: 10px 15px;
+    margin-bottom: 5px;
+
+}
+
+i {
+    margin-right: 10px;
+}
+
+.card-body {
+    margin-left: 20px;
+}
+
+.card {
+    background: #E8C07D;
+    box-shadow: 0px 2px 4px 0px rgba(68, 84, 92, 0.25),
+        0px 2px 2px 0px rgba(68, 84, 92, 0.3),
+        0px 3px 1px -2px rgba(68, 84, 92, 0.4);
+}
+
+.header {
+    background: #212121;
+    color: #f5f5f5;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    text-align: justify;
+    padding-right: 20px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}

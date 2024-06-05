@@ -1,0 +1,7 @@
+<ng-container>
+  <!-- Renderiza el componente NavbarUserComponent si el usuario tiene el rol de 'user' -->
+  <app-navbar-user *ngIf="userRole === 'user'"></app-navbar-user>
+  
+  <!-- Renderiza el componente NavbarShelterComponent si el usuario tiene el rol de 'shelter' -->
+  <app-navbar-shelter *ngIf="userRole === 'shelter'"></app-navbar-shelter>
+</ng-container>

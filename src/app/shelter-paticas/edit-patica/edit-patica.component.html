@@ -1,0 +1,237 @@
+<main class="container-fluid" *ngIf="patica && userRole === 'shelter'">
+    <form class="row justify-content-center" [formGroup]="form">
+        <h3 class="title">EDITAR PATICA</h3>
+
+        <!--Primera columna-->
+        <div class="col-lg-5">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <label for="name">Nombre</label>
+                <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('name')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" formControlName="gender">
+                    <option value="" disabled selected>Selecciona un género</option>
+                    <option value="female">Hembra</option>
+                    <option value="male">Macho</option>
+                </select>
+                <label for="floatingSelect">Género</label>
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="birthDate" placeholder="birthDate"
+                    formControlName="birthDate" max="{{ getMaxDate() }}">
+                <label for="birthDate">Fecha de nacimiento</label>
+                <div *ngIf="form.get('birthDate')?.touched && form.get('birthDate')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('birthDate')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
+
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <select class="form-select" aria-label="Ubicación" formControlName="location">
+                    <option value="{{patica.location}}" selected>{{patica.location}}</option>
+                    <option value="Abanilla">Abanilla</option>
+                    <option value="Abarán">Abarán</option>
+                    <option value="Águilas">Águilas</option>
+                    <option value="Albudeite">Albudeite</option>
+                    <option value="Alcantarilla">Alcantarilla</option>
+                    <option value="Los Alcázares">Los Alcázares</option>
+                    <option value="Aledo">Aledo</option>
+                    <option value="Alguazas">Alguazas</option>
+                    <option value="Alhama de Murcia">Alhama de Murcia</option>
+                    <option value="Archena">Archena</option>
+                    <option value="Beniel">Beniel</option>
+                    <option value="Blanca">Blanca</option>
+                    <option value="Bullas">Bullas</option>
+                    <option value="Calasparra">Calasparra</option>
+                    <option value="Campos del Río">Campos del Río</option>
+                    <option value="Caravaca de la Cruz">Caravaca de la Cruz</option>
+                    <option value="Cartagena">Cartagena</option>
+                    <option value="Cehegín">Cehegín</option>
+                    <option value="Ceutí">Ceutí</option>
+                    <option value="Cieza">Cieza</option>
+                    <option value="Fortuna">Fortuna</option>
+                    <option value="Fuente Álamo de Murcia">Fuente Álamo de Murcia</option>
+                    <option value="Jumilla">Jumilla</option>
+                    <option value="Librilla">Librilla</option>
+                    <option value="Lorca">Lorca</option>
+                    <option value="Lorquí">Lorquí</option>
+                    <option value="Mazarrón">Mazarrón</option>
+                    <option value="Molina de Segura">Molina de Segura</option>
+                    <option value="Moratalla">Moratalla</option>
+                    <option value="Mula">Mula</option>
+                    <option value="Murcia">Murcia</option>
+                    <option value="Ojós">Ojós</option>
+                    <option value="Pliego">Pliego</option>
+                    <option value="Puerto Lumbreras">Puerto Lumbreras</option>
+                    <option value="Ricote">Ricote</option>
+                    <option value="San Javier">San Javier</option>
+                    <option value="San Pedro del Pinatar">San Pedro del Pinatar</option>
+                    <option value="Santomera">Santomera</option>
+                    <option value="Torre-Pacheco">Torre-Pacheco</option>
+                    <option value="Las Torres de Cotillas">Las Torres de Cotillas</option>
+                    <option value="Totana">Totana</option>
+                    <option value="Ulea">Ulea</option>
+                    <option value="La Unión">La Unión</option>
+                    <option value="Villanueva del Río Segura">Villanueva del Río Segura</option>
+                    <option value="Yecla">Yecla</option>
+                </select>
+                <label for="floatingInput">Ubicación</label>
+
+            </div>
+        </div>
+
+        <!--Primera columna-->
+
+        <div class="col-lg-5">
+            <div class="form-floating mb-3">
+                <input type="species" class="form-control" id="species" placeholder="Especie" formControlName="species">
+                <label for="species">Raza</label>
+                <div *ngIf="form.get('species')?.touched && form.get('species')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('species')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" formControlName="size">
+                    <option value="" disabled selected>Selecciona un tamaño</option>
+                    <option value=1>Pequeño</option>
+                    <option value=2>Mediano</option>
+                    <option value=3>Grande</option>
+                </select>
+                <label for="floatingSelect">Tamaño</label>
+
+            </div>
+
+            <div class="form-floating mb-2">
+                <input type="shelter" class="form-control" id="shelter" placeholder="shelter" formControlName="shelter">
+                <label for="shelter">Protectora</label>
+                <div *ngIf="form.get('shelter')?.touched && form.get('shelter')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('shelter')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
+            </div>
+
+            <!--imagen-->
+            <div class="form-group mb-3">
+                <label for="profileImage">Imagen de perfil</label>
+                <div class="containerForFile mb-3 mt-2">
+                    <div class="mb-3 image-container">
+                        <label class="hoverable" for="fileInput">
+                            <img [src]="imagePreview ? imagePreview : patica.profileImage" />
+                            <div class="background"></div>
+                        </label>
+                        <input id="fileInput" type="file" class="select-profile-picture" (change)="onSelectFile($event)"
+                            accept="image/*" />
+                    </div>
+                    <button class="btn btn-erase" (click)="delete()">Borrar</button>
+                </div>
+            </div>
+
+            <!--hasta aqui-->
+
+        </div>
+
+
+
+        <div class="col-lg-10">
+
+
+
+            <div class="form-floating mb-4">
+                <textarea class="form-control" placeholder="Descripción" id="description" style="height: 120px"
+                    formControlName="description"></textarea>
+                <label for="description">Descripción</label>
+                <div *ngIf="form.get('description')?.touched && form.get('description')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('description')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label for="carouselImages">Imágenes de la descripción (máx. 3)</label>
+                <div class="containerForFile mb-3 mt-2">
+                    <ng-container *ngIf="carouselImagePreviews.length > 0">
+                        <div *ngFor="let preview of carouselImagePreviews; let i = index" class="mb-3 image-container">
+                            <label class="hoverable" [for]="'fileInput' + i">
+                                <img [src]="preview ? preview : defaultCarouselImage" />
+                                <div class="background"></div>
+                            </label>
+                            <input [id]="'fileInput' + i" type="file" class="select-profile-picture"
+                                (change)="onSelectCarouselFile($event, i)" accept="image/*" />
+                        </div>
+                        <button class="btn btn-erase" (click)="deleteAllCarousel()">Borrar</button>
+                    </ng-container>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-3 text-center">
+                    <div class="form-floating">
+                        <p class="form-label" style="font-weight: bold;">¿Buena relación con niños?</p>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="goodWithKids" id="goodWithKidsYes"
+                                formControlName="goodWithKids" [value]="true">
+                            <label class="form-check-label" for="goodWithKidsYes">Sí</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="goodWithKids" id="goodWithKidsNo"
+                                formControlName="goodWithKids" [value]="false">
+                            <label class="form-check-label" for="goodWithKidsNo">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3 text-center">
+                    <div class="form-floating">
+                        <p class="form-label" style="font-weight: bold;">¿Buena relación con perros?</p>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="goodWithDogs" id="goodWithDogsYes"
+                                formControlName="goodWithDogs" [value]="true">
+                            <label class="form-check-label" for="goodWithDogsYes">Sí</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="goodWithDogs" id="goodWithDogsNo"
+                                formControlName="goodWithDogs" [value]="false">
+                            <label class="form-check-label" for="goodWithDogsNo">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3 text-center">
+                    <div class="form-floating">
+                        <p class="form-label" style="font-weight: bold; ">¿Buena relación con gatos?</p>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="goodWithCats" id="goodWithCatsYes"
+                                formControlName="goodWithCats" [value]="true">
+                            <label class="form-check-label" for="goodWithCatsYes">Sí</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="goodWithCats" id="goodWithCatsNo"
+                                formControlName="goodWithCats" [value]="false">
+                            <label class="form-check-label" for="goodWithCatsNo">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 text-center mt-3">
+            <button type="submit" class="btn" (click)="submitForm()">GUARDAR CAMBIOS</button>
+        </div>
+
+    </form>
+</main>

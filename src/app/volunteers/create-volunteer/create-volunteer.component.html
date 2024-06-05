@@ -1,0 +1,68 @@
+<main class="container-fluid" *ngIf="userRole === 'shelter'">
+    <form class="row justify-content-center" [formGroup]="form">
+        <h3 class="title">AÑADIR VOLUNTARIO</h3>
+
+        <div class="col-lg-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="fullName" placeholder="Nombre y apellido"
+                    formControlName="fullName">
+                <label for="fullName">Nombre y apellido</label>
+                <div *ngIf="form.get('fullName')?.touched && form.get('fullName')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('fullName')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" formControlName="availability">
+                    <option value="" disabled selected>Selecciona tu disponibilidad</option>
+                    <option value=1>Mañanas</option>
+                    <option value=2>Tardes</option>
+                    <option value=3>Completa</option>
+                </select>
+                <label for="floatingSelect">Disponibilidad</label>
+                <div *ngIf="form.get('availability')?.touched && form.get('availability')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('availability')?.errors?.['required']">Este es un campo obligatorio.</div>
+                </div>
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <input type="phone" class="form-control" id="phone" placeholder="Teléfono de contacto"
+                    formControlName="phone">
+                <label for="phone">Teléfono de contacto</label>
+                <div *ngIf="form.get('phone')?.touched && form.get('phone')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('phone')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    <div *ngIf="form.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com"
+                    formControlName="email">
+                <label for="email">Email address</label>
+                <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-danger">
+                    <div *ngIf="form.get('email')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    <div *ngIf="form.get('email')?.errors?.['email']">El email no es válido.</div>
+                </div>
+            </div>
+
+            <div class="containerForFile">
+                <div class="mb-3 image-container">
+                    <label class="hoverable" for="fileInput">
+                        <img [src]="url ? url : '/assets/img/volunteer/defaultIconProfile.png'" />
+                        <div class="hover-text">Selecciona una foto</div>
+                        <div class="background"></div>
+                    </label>
+                    <input id="fileInput" type="file" class="select-profile-picture" (change)="onSelectFile($event)"
+                        accept="image/*" />
+
+                </div>
+                <button class="btn btn-erase" *ngIf="url" (click)="delete()">Borrar</button>
+            </div>
+
+            <button type="submit" class="btn" (click)="submitForm()">AÑADIR</button>
+        </div>
+    </form>
+</main>

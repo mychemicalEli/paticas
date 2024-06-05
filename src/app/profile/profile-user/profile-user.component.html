@@ -1,0 +1,135 @@
+<main class="profile-container" id="profile-container" *ngIf="response && userRole === 'user'">
+    <div class="card user mb-3"
+        [ngStyle]="{ 'background': response.backgroundImage ? 'rgba(232, 192, 125, 0.6) url(' + response.backgroundImage + ') no-repeat' : '#E8C07D', 'background-size': 'cover'}">
+        <div class="row g-0">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <div class="img-container-top">
+                    <img [src]="response.profileImage || '/assets/img/profile/defaultIconProfile.png'"
+                        class="img-fluid-user" alt="Shelter Image">
+                </div>
+            </div>
+
+            <div class="col-md-8 d-flex align-items-center">
+                <div class="card-body-user">
+                    <h1 class="card-title-user">{{ response.name }}</h1>
+                    <h5 class="card-email-user">{{ response.email }}</h5>
+                    <h5 class="card-location-user"><i class="bi bi-geo-alt-fill fs-5"></i>{{ response.location }}</h5>
+                </div>
+                <button type="button" class="btn btn-dark" (click)="showForm = !showForm"><i
+                        class="bi bi-pencil-fill"></i></button>
+            </div>
+        </div>
+    </div>
+    <!-- Formulario -->
+    <div *ngIf="showForm" class="container">
+        <form class="row g-3" [formGroup]="profileForm">
+            <div class="col-md-6">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="floatingInputName" placeholder="Nombre de la protectora"
+                        formControlName="name">
+                    <label for="floatingInputName">Nombre y apellidos</label>
+                    <div *ngIf="profileForm.get('name')?.touched && profileForm.get('name')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('name')?.errors?.['required']">Este es un campo obligatorio.</div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com"
+                        formControlName="email">
+                    <label for="floatingInputEmail">Email</label>
+                    <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('email')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="profileForm.get('email')?.errors?.['email']">El teléfono no es válido.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profileImage">Imagen de perfil</label>
+                    <div class="containerForFile mb-3 mt-2">
+                        <div class="mb-3 image-container-profile">
+                            <label class="hoverable" for="profileImageInput">
+                                <img [src]="imagePreviewProfile ? imagePreviewProfile : response.profileImage" />
+                                <div class="background"></div>
+                            </label>
+                            <input id="profileImageInput" type="file" class="select-profile-picture"
+                                (change)="onSelectProfileImage($event)" accept="image/*" />
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-erase" (click)="deleteProfileImage()">Borrar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-save" (click)="submitForm()">GUARDAR CAMBIOS</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating mb-4">
+                    <input type="phone" class="form-control" id="floatingInputPhone" placeholder="Teléfono de contacto"
+                        formControlName="phone">
+                    <label for="floatingInputPhone">Teléfono</label>
+                    <div *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('phone')?.errors?.['required']">Este es un campo obligatorio.</div>
+                        <div *ngIf="profileForm.get('phone')?.errors?.['pattern']">El teléfono no es válido.</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="floatingInputLocation" placeholder="Localización"
+                        formControlName="location">
+                    <label for="floatingInputLocation">Localización</label>
+                    <div *ngIf="profileForm.get('location')?.touched && profileForm.get('location')?.invalid"
+                        class="text-danger">
+                        <div *ngIf="profileForm.get('location')?.errors?.['required']">Este es un campo obligatorio.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="backgroundImage">Imagen de fondo</label>
+                    <div class="containerForFile mb-3 mt-2">
+                        <div class="mb-3 image-container-background">
+                            <label class="hoverable" for="backgroundImageInput">
+                                <img
+                                    [src]="imagePreviewBackground ? imagePreviewBackground : response.backgroundImage" />
+                                <div class="background"></div>
+                            </label>
+                            <input id="backgroundImageInput" type="file" class="select-profile-picture"
+                                (change)="onSelectBackgroundImage($event)" accept="image/*" />
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-erase" (click)="deleteBackgroundImage()">Borrar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+    <div class="likes">
+        <div class="tab-container">
+            <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active btn-tab" id="home-tab" data-bs-toggle="tab" href="#paticas" role="tab"
+                        aria-controls="home" aria-selected="true">Paticas</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link btn-tab" id="profile-tab" data-bs-toggle="tab" href="#shelters" role="tab"
+                        aria-controls="profile" aria-selected="false">Protectoras</a>
+                </li>
+            </ul>
+            <div class="tab-content mt-3" id="myTabContent">
+                <div class="tab-pane fade show active" id="paticas" role="tabpanel" aria-labelledby="paticas-tab">
+                    <app-paticas-liked></app-paticas-liked>
+                </div>
+                <div class="tab-pane fade" id="shelters" role="tabpanel" aria-labelledby="shelters-tab">
+                    <app-shelters-liked></app-shelters-liked>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

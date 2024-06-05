@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="assets/img/logos/logoNavbar.png" alt="logoNavbar" width="157" height="44">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" [routerLink]="['/shelterPaticas']"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">PATICAS</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/volunteers']" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">VOLUNTARIOS</a></li>
+            </ul>
+
+            <div class="nav-item dropdown ms-auto">
+                <a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img [src]="shelterProfileImage || 'assets/img/logos/iconProfile.png'" alt="user" width="48"
+                        height="48" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" [routerLink]="['/profile/shelter']">Perfil</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" (click)="logOut()" style="cursor: pointer;">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
