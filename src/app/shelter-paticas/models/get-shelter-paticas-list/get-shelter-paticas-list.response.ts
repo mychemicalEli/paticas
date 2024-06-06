@@ -1,7 +1,7 @@
 import { paticaSize } from "../../../paticas/models/paticas-size.enum";
 
 export interface GetShelterPaticasListResponse{
-    paticas: GetShelterPaticasListItemResponse[];
+    content: GetShelterPaticasListItemResponse[];
     totalElements: number;
     page: number;
     pageSize: number;

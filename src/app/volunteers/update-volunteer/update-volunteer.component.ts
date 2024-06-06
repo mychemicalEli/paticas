@@ -19,7 +19,8 @@ export class UpdateVolunteerComponent implements OnInit {
   volunteer?: GetVolunteerByIdResponse; // Almacena la información del voluntario
   imagePreview: string | FormData | null = null; // Almacena la vista previa de la imagen
   form!: FormGroup; // Representa el formulario de actualización de voluntarios
-  request: UpdateVolunteerRequest = {} as UpdateVolunteerRequest; // Almacena la información para la solicitud de actualización
+  request!: FormData; // Almacena la información para la solicitud de actualización
+  id:number = 0;
 
   constructor(
     private router: Router, // Inyecta el enrutador
@@ -43,6 +44,7 @@ export class UpdateVolunteerComponent implements OnInit {
     // Si no se proporciona el ID del voluntario, recupera el ID de la ruta
     this.route.params
     .subscribe(params=>{
+      this.id=params['id'];
       this.getVolunteerDetails(params['id']);
     })
   }
@@ -98,13 +100,20 @@ export class UpdateVolunteerComponent implements OnInit {
 
 
   // Método para establecer la solicitud de actualización con los datos del formulario
-  stablishRequest(){
-    this.request.fullName = this.form.get('fullName')?.value; // Establece el nombre completo
-    this.request.availability = parseInt(this.form.get('availability')?.value); // Establece la disponibilidad
-    this.request.phone = this.form.get('phone')?.value; // Establece el teléfono
-    this.request.email = this.form.get('email')?.value; // Establece el correo electrónico
-    this.request.profileImage = this.form.get('profileImage')?.value; // Establece la imagen de perfil
+  stablishRequest() {
+    // Crear un objeto FormData
+    this.request = new FormData();
+  
+    // Agregar los campos al FormData
+    this.request.append('fullName', this.form.get('fullName')?.value); // Nombre completo
+    this.request.append('availability', this.form.get('availability')?.value); // Disponibilidad
+    this.request.append('phone', this.form.get('phone')?.value); // Teléfono
+    this.request.append('email', this.form.get('email')?.value); // Correo electrónico
+    this.request.append('profileImage', this.form.get('profileImage')?.value); // Imagen de perfil
+  
+  
   }
+  
 
   // Método para enviar el formulario de actualización
   submitForm() {
@@ -112,7 +121,7 @@ export class UpdateVolunteerComponent implements OnInit {
 
     console.log('Request object:', this.request); // Muestra la solicitud en la consola
 
-    this.volunteerService.updateVolunteer(this.volunteerId, this.request)
+    this.volunteerService.updateVolunteer(this.id, this.request)
     .pipe()
     .subscribe()
     alert("Voluntario actualizado correctamente!");

@@ -17,7 +17,7 @@ import { GetPaticaByIdRequest } from "../../paticas/models/get-patica-by-id/get-
   providedIn: 'root' // Esto hace que el servicio sea singleton y esté disponible en toda la aplicación
 })
 export class ShelterPaticasService {
-  baseUrl = environment.baseApiUrl; // Base URL de la API, configurada en el entorno
+  baseUrl = environment.api; // Base URL de la API, configurada en el entorno
 
   // El constructor inyecta el HttpClient para hacer peticiones HTTP
   constructor(private httpClient: HttpClient) {}
@@ -28,17 +28,16 @@ export class ShelterPaticasService {
     let params = new HttpParams()
       .set("page", request.page.toString()) // Establecer el número de página
       .set("pageSize", request.pageSize.toString()) // Establecer el tamaño de la página
-      .set("shelterId", request.shelterId.toString()); // Establecer el ID del refugio
-    
+      
     // Mostrar los parámetros de consulta en la consola para depuración
     console.log("Query Params:", params.toString());
     
     // Realizar la solicitud HTTP GET y procesar la respuesta
-    return this.httpClient.get<GetShelterPaticasListResponse>(`${this.baseUrl}shelterPaticas`, { params })
+    return this.httpClient.get<GetShelterPaticasListResponse>(`${this.baseUrl}pets/shelter/10`, { params })
       .pipe(
         map((response: GetShelterPaticasListResponse) => {
           // Filtrar las paticas para incluir solo las que tienen shelterId igual a 10
-          response.paticas = response.paticas.filter(patica => patica.shelterId === 10);
+          response.content = response.content.filter(patica => patica.shelterId === 10);
           return response; // Devolver la respuesta modificada
         })
       );
@@ -59,6 +58,6 @@ export class ShelterPaticasService {
   // Método para eliminar una patica por su ID
   public deletePatica(request: GetPaticaByIdRequest): Observable<GetPaticaByIdResponse> {
     // Realizar una solicitud HTTP DELETE para eliminar la patica
-    return this.httpClient.delete<GetPaticaByIdResponse>(`${this.baseUrl}paticas/${request.id}`);
+    return this.httpClient.delete<GetPaticaByIdResponse>(`${this.baseUrl}pets/${request.id}`);
   }
 }
