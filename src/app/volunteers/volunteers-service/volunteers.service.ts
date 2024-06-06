@@ -12,7 +12,7 @@ import { UpdateVolunteerRequest } from "../models/update-volunteer/update-volunt
     providedIn: 'root' // Proveedor de servicio a nivel raíz
 })
 export class VolunteerService {
-    baseUrl = environment.baseApiUrl; // Base URL para las solicitudes HTTP
+    baseUrl = environment.api; // Base URL para las solicitudes HTTP
 
     // Constructor que inyecta el cliente HTTP
     constructor(private httpClient: HttpClient) { }
@@ -25,7 +25,7 @@ export class VolunteerService {
                                  .set("pageSize", request.pageSize.toString());
 
         // Realizar la solicitud GET y devolver la respuesta como un observable
-        return this.httpClient.get<GetVolunteerListResponse>(`${this.baseUrl}volunteers`, { params: queryParams });
+        return this.httpClient.get<GetVolunteerListResponse>(`${this.baseUrl}volunteers/shelter/10`, { params: queryParams });
     }
 
     // Método para obtener los detalles de un voluntario por ID
@@ -41,9 +41,9 @@ export class VolunteerService {
     }
 
     // Método para actualizar los detalles de un voluntario
-    public updateVolunteer(volunteerId: number, request: UpdateVolunteerRequest): Observable<GetVolunteerListItemResponse> {
+    public updateVolunteer(volunteerId: number, request: FormData): Observable<GetVolunteerListItemResponse> {
         // Realizar la solicitud PUT para actualizar un voluntario
-        return this.httpClient.put<GetVolunteerListItemResponse>(`${this.baseUrl}volunteers/edit`, request);
+        return this.httpClient.put<GetVolunteerListItemResponse>(`${this.baseUrl}volunteers/${volunteerId}`, request);
     }
 
     // Método para eliminar un voluntario

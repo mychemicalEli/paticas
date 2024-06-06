@@ -1,7 +1,7 @@
 import { volunteerAvailability } from "../volunteer-availability.enum";
 
 export interface GetVolunteerListResponse{
-    volunteers: GetVolunteerListItemResponse[];
+    content: GetVolunteerListItemResponse[];
     totalElements: number;
     page: number;
     pageSize: number;

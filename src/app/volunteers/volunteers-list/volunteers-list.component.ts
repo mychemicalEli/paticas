@@ -36,7 +36,7 @@ export class VolunteersListComponent {
     .subscribe({
       next: (response: GetVolunteerListResponse) => { // Maneja la respuesta exitosa
         this.response = response; // Asigna la respuesta a la variable response
-        this.getAvailabilities(response.volunteers); // Actualiza la lista de disponibilidades de voluntarios
+        this.getAvailabilities(response.content); // Actualiza la lista de disponibilidades de voluntarios
       },
       error: (error) => {
         console.error('Error al obtener la lista de voluntarios:', error); // Maneja el error
