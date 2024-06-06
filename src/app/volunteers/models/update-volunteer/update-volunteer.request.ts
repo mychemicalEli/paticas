@@ -4,7 +4,7 @@ export interface UpdateVolunteerRequest {
     id: number;
     fullName: string;
     availability: volunteerAvailability;
-    phone: number;
+    phone: string;
     email: string;
     profileImage: FormData;
 }
