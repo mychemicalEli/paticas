@@ -56,7 +56,7 @@ export class VolunteersListComponent {
 
   // Función para manejar el cambio de página
   onPageChange(pageSize: number): void {
-    this.request.page = pageSize; // Actualiza el número de página en la solicitud
+    this.request.page = this.request.page == 0 ? 1 : this.request.page; // Actualiza el número de página en la solicitud
     this.getVolunteersList(); // Obtiene la lista de voluntarios con la nueva configuración
   }
 

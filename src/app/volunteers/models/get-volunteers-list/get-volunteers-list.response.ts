@@ -5,6 +5,7 @@ export interface GetVolunteerListResponse{
     totalElements: number;
     page: number;
     pageSize: number;
+    pageable: Pageable;
 }
 
 export interface GetVolunteerListItemResponse{
@@ -16,4 +17,9 @@ export interface GetVolunteerListItemResponse{
     availability: volunteerAvailability;
     shelterId: number;
     
+}
+
+export interface Pageable{
+    pageNumber: number;
+    pageSize: number;
 }

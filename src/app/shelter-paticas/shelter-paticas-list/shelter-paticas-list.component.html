@@ -7,7 +7,7 @@
     <div *ngIf="response">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col-4"
-                *ngFor="let paticas of (response?.paticas || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
+                *ngFor="let paticas of (response?.content || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page })">
                 <div class="card h-100" style="height: 450px; position: relative;">
                     <i class="fa-solid"
                         [ngClass]="{'fa-mars': paticas.gender === 'male', 'fa-venus': paticas.gender === 'female', 'fs-5':true}"></i>

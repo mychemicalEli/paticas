@@ -15,7 +15,7 @@ import { GetPaticaByIdRequest } from '../../paticas/models/get-patica-by-id/get-
 export class ShelterPaticasListComponent {
   userRole: string = ''; // Variable para almacenar el rol del usuario actual
   response?: GetShelterPaticasListResponse; // Variable para almacenar la respuesta de la lista de "paticas"
-  request: GetShelterPaticasListRequest = { page: 0, pageSize: 12, shelterId: 10 }; // Objeto de solicitud para obtener la lista de "paticas"
+  request: GetShelterPaticasListRequest = { page: 0, pageSize: 12}; // Objeto de solicitud para obtener la lista de "paticas"
   currentPaticaName: string = ''; // Nombre de la "patica" actual seleccionada
   currentPaticaId: number = 0; // ID de la "patica" actual seleccionada
 
