@@ -31,7 +31,7 @@ export class PaticasListComponent {
       .subscribe({
         next: (response: GetPaticasListResponse) => { // Maneja la respuesta exitosa
           this.response = response; // Almacena la respuesta
-          this.updateSpeciesList(response.paticas); // Actualiza la lista de especies
+          this.updateSpeciesList(response.content); // Actualiza la lista de especies
         }
       });
   }

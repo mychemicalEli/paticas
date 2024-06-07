@@ -1,7 +1,7 @@
 import { paticaSize } from "../paticas-size.enum";
 
 export interface GetPaticasListResponse{
-    paticas: GetPaticasListItemResponse[];
+    content: GetPaticasListItemResponse[];
     totalElements: number;
     page: number;
     pageSize: number;
