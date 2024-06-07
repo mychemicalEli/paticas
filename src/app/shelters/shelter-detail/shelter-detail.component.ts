@@ -64,7 +64,7 @@ export class ShelterDetailComponent implements OnInit {
     .subscribe({
       next: (response: GetPaticasListResponse) => {
         // Filtrar las paticas con el shelterId proporcionado
-        this.paticas = response.paticas.filter(patica => patica.shelterId === this.request.shelterId);
+        this.paticas = response.content.filter(patica => patica.shelterId === this.request.shelterId);
       },
       error: (error) => {
         console.error('Error al obtener la lista de paticas:', error); // Manejar el error

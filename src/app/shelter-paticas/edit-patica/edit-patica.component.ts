@@ -90,10 +90,10 @@ export class EditPaticaComponent {
         name: this.patica.name,
         gender: this.patica.gender,
         birthDate: formattedBirthDate,
-        location: this.patica.location,
+        location: this.patica.shelter.location,
         species: this.patica.species,
         size: this.patica.size,
-        shelter: this.patica.shelter,
+        shelter: this.patica.shelter.name,
         description: this.patica.description,
         profileImage: this.patica.profileImage,
         goodWithKids: this.patica.goodWithKids,
@@ -187,10 +187,10 @@ export class EditPaticaComponent {
     this.request.name = this.form.get('name')?.value;
     this.request.gender = this.form.get('gender')?.value;
     this.request.birthDate = this.form.get('birthDate')?.value;
-    this.request.location = this.form.get('location')?.value;
+    this.request.shelter.location = this.form.get('location')?.value;
     this.request.species = this.form.get('species')?.value;
     this.request.size = parseInt(this.form.get('size')?.value);
-    this.request.shelter = this.form.get('shelter')?.value;
+    this.request.shelter.name = this.form.get('shelter')?.value;
     this.request.description = this.form.get('description')?.value;
     this.request.profileImage = this.form.get('profileImage')?.value;
     this.request.goodWithKids = this.form.get('goodWithKids')?.value;

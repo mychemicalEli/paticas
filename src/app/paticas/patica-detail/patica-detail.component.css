@@ -48,6 +48,12 @@ i {
     margin-left: 20px;
 }
 
+img{
+    max-height: 400px;
+    object-fit: cover;
+    object-position: top;
+}
+
 .card {
     background: #E8C07D;
     box-shadow: 0px 2px 4px 0px rgba(68, 84, 92, 0.25),

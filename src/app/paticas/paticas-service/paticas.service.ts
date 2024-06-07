@@ -16,6 +16,7 @@ import { GetPaticaByIdResponse } from "../models/get-patica-by-id/get-patica-by-
 
 export class PaticasService {
   baseUrl = environment.baseApiUrl;
+  baseUrl2 = environment.api;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,12 +26,12 @@ export class PaticasService {
       .set("page", request.page.toString())
       .set("pageSize", request.pageSize.toString());
     console.log("Query Params:", params.toString()); // Mostrar parámetros de consulta en la consola
-    return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, { params });
+    return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl2}pets/shelter/10`, { params });
   }
 
   // Método para obtener los detalles de una patica por su ID
   public getDetail(request: GetPaticaByIdRequest): Observable<GetPaticaByIdResponse> {
-    return this.httpClient.get<GetPaticaByIdResponse>(`${this.baseUrl}paticas/${request.id}`);
+    return this.httpClient.get<GetPaticaByIdResponse>(`${this.baseUrl2}pets/${request.id}`);
   }
 
   // Método para obtener la lista de paticas filtrada por refugio
