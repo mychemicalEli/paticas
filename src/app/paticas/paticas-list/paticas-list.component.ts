@@ -61,9 +61,9 @@ export class PaticasListComponent {
   }
 
   // Método para cambiar de página en la lista de paticas
-  onPageChange(pageSize: number) {
-    this.request.page = pageSize; // Actualiza el número de página en la solicitud
-    this.getPaticasList(); // Obtiene la lista de paticas para la página seleccionada
+  onPageChange(page: number) {
+    // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
+    this.request.page = page;
   }
 
 }

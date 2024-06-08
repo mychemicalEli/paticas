@@ -64,7 +64,7 @@ export class ShelterDetailComponent implements OnInit {
     .subscribe({
       next: (response: GetPaticasListResponse) => {
         // Filtrar las paticas con el shelterId proporcionado
-        this.paticas = response.content.filter(patica => patica.shelterId === this.request.shelterId);
+        this.paticas = response.content.filter(patica => patica.shelterId === 10);
       },
       error: (error) => {
         console.error('Error al obtener la lista de paticas:', error); // Manejar el error
@@ -89,9 +89,9 @@ export class ShelterDetailComponent implements OnInit {
   }
 
   // Método para manejar el cambio de página
-  onPageChange(pageSize: number): void {
-    this.request.page = pageSize; // Actualizar el tamaño de la página en la solicitud
-    this.getPaticasList(); // Obtener la lista de paticas con la nueva configuración
+  onPageChange(page: number) {
+    // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
+    this.request.page = page;
   }
 
   // Método para manejar la selección de una patica

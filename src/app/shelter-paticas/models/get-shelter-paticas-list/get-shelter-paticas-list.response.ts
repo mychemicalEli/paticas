@@ -5,6 +5,7 @@ export interface GetShelterPaticasListResponse{
     totalElements: number;
     page: number;
     pageSize: number;
+    pageable: Pageable;
 }
 
 export interface GetShelterPaticasListItemResponse{
@@ -26,4 +27,9 @@ export interface GetShelterPaticasListItemResponse{
     goodWithDogs: boolean,
     goodWithCats: boolean,
     shelterId:number,
+}
+
+export interface Pageable{
+    pageNumber: number;
+    pageSize: number;
 }

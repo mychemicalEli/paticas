@@ -40,11 +40,9 @@ export class ShelterPaticasListComponent {
       });
   }
 
-  // Método para cambiar de página en la lista de "paticas"
-  onPageChange(pageSize: number) {
+  onPageChange(page: number) {
     // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
-    this.request.page = pageSize;
-    this.getShelterPaticasList();
+    this.request.page = page;
   }
 
   // Método para manejar el clic en el botón de eliminar una "patica"

@@ -21,6 +21,9 @@
     transform: scale(1.02);
 }
 
+.card-img-top {
+    object-fit: cover;
+}
 
 .card-body-shelter {
     margin-left: 20px;
