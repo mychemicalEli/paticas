@@ -13,7 +13,7 @@ import { UserService } from '../../auth/user-service/user.service';
 })
 export class VolunteersListComponent {
   userRole: string = ''; // Variable para almacenar el rol del usuario
-  request: GetVolunteerListRequest = { page: 0, pageSize: 6 }; // Objeto de solicitud de lista de voluntarios con valores predeterminados
+  request: GetVolunteerListRequest = { page: 0, pageSize: 5 }; // Objeto de solicitud de lista de voluntarios con valores predeterminados
   response?: GetVolunteerListResponse; // Variable para almacenar la respuesta de la solicitud de lista de voluntarios
   availabilities: string[] = []; // Array para almacenar las disponibilidades de los voluntarios
   availability = volunteerAvailability; // Enum para la disponibilidad de voluntarios
@@ -55,9 +55,10 @@ export class VolunteersListComponent {
   }
 
   // Función para manejar el cambio de página
-  onPageChange(pageSize: number): void {
-    this.request.page = this.request.page == 0 ? 1 : this.request.page; // Actualiza el número de página en la solicitud
-    this.getVolunteersList(); // Obtiene la lista de voluntarios con la nueva configuración
+  onPageChange(page: number) {
+    // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
+    this.request.page = page;
+    //this.getVolunteersList();
   }
 
   // Función para manejar el clic en el botón de eliminar

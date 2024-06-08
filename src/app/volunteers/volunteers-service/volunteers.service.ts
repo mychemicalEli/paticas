@@ -22,7 +22,7 @@ export class VolunteerService {
         // Crear parámetros de consulta a partir de la solicitud
         let queryParams = new HttpParams();
         queryParams = queryParams.set("page", request.page.toString())
-                                 .set("size", request.pageSize.toString());
+                                 .set("PageSize", request.pageSize.toString());
 
         // Realizar la solicitud GET y devolver la respuesta como un observable
         return this.httpClient.get<GetVolunteerListResponse>(`${this.baseUrl}volunteers/shelter/10`, { params: queryParams });

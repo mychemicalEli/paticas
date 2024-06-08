@@ -39,14 +39,13 @@ export class PaticasService {
     let params = new HttpParams()
       .set("page", request.page.toString())
       .set("pageSize", request.pageSize.toString())
-      .set("shelterId", shelterId.toString());
     console.log("Query Params:", params.toString()); // Mostrar parámetros de consulta en la consola
-    return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl}paticas`, { params });
+    return this.httpClient.get<GetPaticasListResponse>(`${this.baseUrl2}pets/shelter/10`, { params });
   }
 
   // Método para actualizar el estado de "Me gusta" de una patica
   updatePaticaLike(paticaId: number, liked: boolean): Observable<GetPaticasListItemResponse> {
-    return this.httpClient.put<GetPaticasListItemResponse>(`${this.baseUrl}/paticas/${paticaId}/like`, { liked });
+    return this.httpClient.put<GetPaticasListItemResponse>(`${this.baseUrl}paticas/${paticaId}/like`, { liked });
   }
 
 
