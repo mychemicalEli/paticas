@@ -33,21 +33,17 @@ export class ShelterPaticasService {
     console.log("Query Params:", params.toString());
     
     // Realizar la solicitud HTTP GET y procesar la respuesta
-    return this.httpClient.get<GetShelterPaticasListResponse>(`${this.baseUrl}pets/shelter/10`, { params })
-      .pipe(
-        map((response: GetShelterPaticasListResponse) => {
-          // Filtrar las paticas para incluir solo las que tienen shelterId igual a 10
-          response.content = response.content.filter(patica => patica.shelterId === 10);
-          return response; // Devolver la respuesta modificada
-        })
-      );
+    return this.httpClient.get<GetShelterPaticasListResponse>(`${this.baseUrl}pets/shelter/10`, { params });
   }
 
+
+
   // Método para agregar una nueva patica
-  public addPatica(request: AddPaticaRequest) {
+  public addPatica(request: FormData): Observable<any> {
     // Realizar una solicitud HTTP POST para agregar la patica
-    return this.httpClient.post(`${this.baseUrl}pets/`, request);
+    return this.httpClient.post(`${this.baseUrl}pets`, request);
   }
+
 
   // Método para actualizar una patica existente
   public updatePatica(request: UpdatePaticaRequest): Observable<GetPaticaByIdResponse> {

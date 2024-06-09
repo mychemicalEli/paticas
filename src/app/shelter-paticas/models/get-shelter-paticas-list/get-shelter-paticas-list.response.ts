@@ -11,22 +11,26 @@ export interface GetShelterPaticasListResponse{
 export interface GetShelterPaticasListItemResponse{
     id: number;
     profileImage: string;
+    imageCarousel1: string;
+    imageCarousel2: string;
+    imageCarousel3: string;
     name: string;
+    shelter: {
+        id: number;
+        profileImage: string;
+        name: string;
+        location: string;
+        description: string;
+    };
     gender: string;
-    liked: boolean;
+    size: paticaSize;
+    birthDate: Date;
     species: string;
-    imageCarousel1: string,
-    imageCarousel2: string,
-    imageCarousel3: string,
-    shelter: string,
-    location: string,
-    size: paticaSize,
-    birthDate: Date,
-    description: string,
-    goodWithKids: boolean,
-    goodWithDogs: boolean,
-    goodWithCats: boolean,
-    shelterId:number,
+    description: string;
+    goodWithKids: boolean;
+    goodWithDogs: boolean;
+    goodWithCats: boolean;
+    liked: boolean;
 }
 
 export interface Pageable{

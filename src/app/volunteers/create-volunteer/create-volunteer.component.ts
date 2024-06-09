@@ -70,6 +70,9 @@ export class CreateVolunteerComponent {
     if (file) {
       formData.append('profileImage', file);
     }
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
     
     return formData;
   }
