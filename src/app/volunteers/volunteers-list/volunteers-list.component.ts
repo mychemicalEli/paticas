@@ -58,7 +58,6 @@ export class VolunteersListComponent {
   onPageChange(page: number) {
     // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
     this.request.page = page;
-    //this.getVolunteersList();
   }
 
   // Función para manejar el clic en el botón de eliminar

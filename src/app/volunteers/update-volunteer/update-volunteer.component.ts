@@ -66,16 +66,19 @@ export class UpdateVolunteerComponent implements OnInit {
   updateFormWithVolunteerData() {
     if (this.form && this.volunteer) {
       this.form.patchValue({
-        fullName: this.volunteer.fullName, // Actualiza el control del nombre completo
-        phone: this.volunteer.phone, // Actualiza el control del teléfono
-        email: this.volunteer.email, // Actualiza el control del correo electrónico
-        profileImage: this.volunteer.profileImage, // Actualiza el control de la imagen de perfil
+        fullName: this.volunteer.fullName,
+        phone: this.volunteer.phone,
+        email: this.volunteer.email,
         availability: this.volunteer.availability
       });
-
-      this.imagePreview = this.volunteer.profileImage; // Actualiza la vista previa de la imagen con la imagen del voluntario
+  
+      // Asignamos la imagen de la respuesta a imagePreview para mostrarla en la página
+      this.imagePreview = this.volunteer.profileImage;
     }
   }
+  
+  
+  
 
   // Método para manejar la selección de un archivo de imagen
   onSelectFile(event: any) {
@@ -101,32 +104,67 @@ export class UpdateVolunteerComponent implements OnInit {
 
   // Método para establecer la solicitud de actualización con los datos del formulario
   stablishRequest() {
-    // Crear un objeto FormData
     this.request = new FormData();
   
-    // Agregar los campos al FormData
-    this.request.append('fullName', this.form.get('fullName')?.value); // Nombre completo
-    this.request.append('availability', this.form.get('availability')?.value); // Disponibilidad
-    this.request.append('phone', this.form.get('phone')?.value); // Teléfono
-    this.request.append('email', this.form.get('email')?.value); // Correo electrónico
-    this.request.append('profileImage', this.form.get('profileImage')?.value); // Imagen de perfil
+    this.request.append('fullName', this.form.get('fullName')?.value);
+    this.request.append('availability', this.form.get('availability')?.value);
+    this.request.append('phone', this.form.get('phone')?.value);
+    this.request.append('email', this.form.get('email')?.value);
+
+    // Verificamos si se ha seleccionado un nuevo archivo de imagen
+    const selectedFile = this.form.get('profileImage')?.value as File;
+    if (selectedFile) {
+      // Si se ha seleccionado un nuevo archivo, lo agregamos al FormData
+      this.request.append('profileImage', selectedFile, selectedFile.name);
+    } else {
+      // Si no se ha seleccionado un nuevo archivo, usamos la imagen existente
+      const existingImage = this.volunteer?.profileImage;
+      if (existingImage && typeof existingImage === 'string') {
+        // Verificamos que existingImage sea una cadena antes de agregarla al FormData
+        this.request.append('profileImage', existingImage);
+      }
+    }
+}
+
+  
+
   
   
-  }
+  
+  
   
 
   // Método para enviar el formulario de actualización
   submitForm() {
-    this.stablishRequest(); // Establece la solicitud de actualización con los datos del formulario
-
-    console.log('Request object:', this.request); // Muestra la solicitud en la consola
-
-    this.volunteerService.updateVolunteer(this.id, this.request)
-    .pipe()
-    .subscribe()
-    alert("Voluntario actualizado correctamente!");
+    this.stablishRequest();
     
-    console.log("Update made"); // Muestra un mensaje en la consola indicando que se realizó la actualización
-    this.router.navigate(['/volunteers']); // Navega de regreso a la lista de voluntarios
+    if (this.volunteer && this.volunteer.id && this.volunteer.shelterId) {
+      const updateRequest = new FormData();
+    
+      updateRequest.append('id', this.volunteer.id.toString());
+      updateRequest.append('shelterId', this.volunteer.shelterId.toString());
+      updateRequest.append('fullName', this.form.get('fullName')?.value);
+      updateRequest.append('availability', this.form.get('availability')?.value);
+      updateRequest.append('phone', this.form.get('phone')?.value);
+      updateRequest.append('email', this.form.get('email')?.value);
+    
+      // Usa la imagen recuperada de la respuesta del servidor en lugar de la imagen del formulario
+      const profileImage = this.form.get('profileImage')?.value;
+      if (profileImage) {
+        updateRequest.append('profileImage', profileImage);
+      }
+    
+      this.volunteerService.updateVolunteer(this.id, updateRequest)
+        .subscribe(() => {
+          alert("¡Voluntario actualizado correctamente!");
+          console.log("Update made");
+          this.router.navigate(['/volunteers']);
+        });
+    } else {
+      console.error('No se puede actualizar el voluntario: ID o shelterId indefinidos.');
+      // Puedes mostrar un mensaje de error o manejar esta situación de otra manera
+    }
   }
+  
+  
 }
