@@ -58,20 +58,27 @@ export class CreateVolunteerComponent {
 
   
   // Establece los datos del formulario en la solicitud de voluntario
-  stablishRequest() {
-    this.request.fullName = this.form.get('fullName')?.value; // Establece el nombre completo
-    this.request.email = this.form.get('email')?.value; // Establece el correo electrónico
-    this.request.phone = this.form.get('phone')?.value; // Establece el teléfono
-    this.request.availability = parseInt(this.form.get('availability')?.value); // Establece la disponibilidad
-
-    // Si se ha seleccionado una imagen, se recoge su valor
+  stablishRequest(): FormData {
+    const formData = new FormData();  
+    formData.append('fullName', this.form.get('fullName')?.value);
+    formData.append('email', this.form.get('email')?.value);
+    formData.append('phone', this.form.get('phone')?.value);
+    formData.append('availability', this.form.get('availability')?.value);
+    formData.append('shelterId', '10'); 
+  
     const file = this.form.get('profileImage')?.value;
     if (file) {
-      const formData = new FormData();
       formData.append('profileImage', file);
-      this.request.profileImage = formData;
     }
+    
+    return formData;
   }
+  
+  
+  
+  
+  
+
 
   // Verifica si todos los pasos del formulario son válidos
   areAllStepsValid(): boolean {
@@ -84,34 +91,30 @@ export class CreateVolunteerComponent {
       this.form.markAllAsTouched();
       return;
     }
+    
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
     }
-    console.log('Submitting form...');
-    console.log('Are all steps valid:', this.areAllStepsValid());
-    this.stablishRequest(); // Establece la solicitud de creación con los datos del formulario
-    console.log('Request stablished...');
-    console.log('Request object:', this.request); // Muestra la solicitud en la consola
-    this.volunteerService.createVolunteer(this.request)
-    .pipe()
-    .subscribe({
-      next: () => {
-        console.log('Volunteer created...');
-        this.router.navigate(['/volunteers']);
-      },
-      error: (error) => {
-        console.error('Error occurred while adding volunteer:', error);
-      },
-      complete: () => {
-        console.log('volunteer added successfully');
-      }
-    })
-    alert("Voluntario creado correctamente!");
-   
-    console.log('volunteer created...');
-    this.router.navigate(['/volunteers']); // Navega a la lista de voluntarios
+  
+    const formData = this.stablishRequest(); 
+  
+    this.volunteerService.createVolunteer(formData)
+      .subscribe({
+        next: () => {
+          console.log('Volunteer created...');
+          this.router.navigate(['/volunteers']);
+        },
+        error: (error) => {
+          console.error('Error occurred while adding volunteer:', error);
+        },
+        complete: () => {
+          console.log('volunteer added successfully');
+        }
+      });
   }
+  
+
 
   // Maneja el evento de selección de archivo (para poner bonito el input file)
   onSelectFile(event: any) {

@@ -35,10 +35,14 @@ export class VolunteerService {
     }
 
     // Método para crear un nuevo voluntario
-    public createVolunteer(request: CreateVolunteerRequest): Observable<any> {
-        // Realizar la solicitud POST para crear un nuevo voluntario
-        return this.httpClient.post(`${this.baseUrl}/volunteers`, request);
+    public createVolunteer(request: FormData): Observable<any> {
+        return this.httpClient.post(`${this.baseUrl}volunteers`, request, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
     }
+    
 
     // Método para actualizar los detalles de un voluntario
     public updateVolunteer(volunteerId: number, request: FormData): Observable<GetVolunteerListItemResponse> {

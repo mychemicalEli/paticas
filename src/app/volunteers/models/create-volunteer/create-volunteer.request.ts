@@ -7,4 +7,5 @@ export interface CreateVolunteerRequest {
     phone: number;
     email: string;
     profileImage: FormData;
+    shelterId: number;
 }
