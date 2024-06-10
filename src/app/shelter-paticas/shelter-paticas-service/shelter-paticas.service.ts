@@ -37,6 +37,7 @@ export class ShelterPaticasService {
   }
 
 
+  
 
   // Método para agregar una nueva patica
   public addPatica(request: FormData): Observable<any> {
@@ -45,11 +46,13 @@ export class ShelterPaticasService {
   }
 
 
-  // Método para actualizar una patica existente
-  public updatePatica(request: UpdatePaticaRequest): Observable<GetPaticaByIdResponse> {
-    // Realizar una solicitud HTTP PUT para actualizar la patica
-    return this.httpClient.put<GetPaticaByIdResponse>(`${this.baseUrl}pets/`, request);
-  }
+// Método para actualizar una patica existente
+public updatePatica(paticaId: number, request: FormData): Observable<GetPaticaByIdResponse> {
+  // Realizar una solicitud HTTP PUT para actualizar la patica usando FormData
+  return this.httpClient.put<GetPaticaByIdResponse>(`${this.baseUrl}pets/${paticaId}`, request);
+}
+
+
 
   // Método para eliminar una patica por su ID
   public deletePatica(request: GetPaticaByIdRequest): Observable<GetPaticaByIdResponse> {

@@ -44,7 +44,6 @@ export class EditPaticaComponent {
       name: ['', Validators.required],
       gender: ['', Validators.required],
       birthDate: ['', Validators.required],
-  
       description: ['', Validators.required],
       species: ['', Validators.required],
       size: ['', Validators.required],
@@ -89,10 +88,10 @@ export class EditPaticaComponent {
         name: this.patica.name,
         gender: this.patica.gender,
         birthDate: formattedBirthDate,
-      
+  
         species: this.patica.species,
         size: this.patica.size,
-      
+     
         description: this.patica.description,
         profileImage: this.patica.profileImage,
         goodWithKids: this.patica.goodWithKids,
@@ -182,24 +181,53 @@ export class EditPaticaComponent {
 
 
   // Método para establecer los valores de la solicitud de actualización
-  stablishRequest() {
-    this.request.name = this.form.get('name')?.value;
-    this.request.gender = this.form.get('gender')?.value;
-    this.request.birthDate = this.form.get('birthDate')?.value;
- 
-    this.request.species = this.form.get('species')?.value;
-    this.request.size = parseInt(this.form.get('size')?.value);
-
-    this.request.description = this.form.get('description')?.value;
-    this.request.profileImage = this.form.get('profileImage')?.value;
-    this.request.goodWithKids = this.form.get('goodWithKids')?.value;
-    this.request.goodWithDogs = this.form.get('goodWithDogs')?.value;
-    this.request.goodWithCats = this.form.get('goodWithCats')?.value;
-    this.request.imageCarousel1 = this.carouselImagePreviews[0] !== null ? this.carouselImagePreviews[0] as FormData : null;
-    this.request.imageCarousel2 = this.carouselImagePreviews[1] !== null ? this.carouselImagePreviews[1] as FormData : null;
-    this.request.imageCarousel3 = this.carouselImagePreviews[2] !== null ? this.carouselImagePreviews[2] as FormData : null;
+  stablishRequestAsFormData(): FormData {
+    const formData = new FormData();
+    formData.append('id', this.patica?.id.toString() || '');
+    formData.append('shelterId', '10');
+    formData.append('name', this.form.get('name')?.value);
+    formData.append('gender', this.form.get('gender')?.value);
+    const birthDate = this.form.get('birthDate')?.value;
+    const formattedDate = this.formatDate(birthDate);
+    formData.append('birthDate', formattedDate);
+  
+    formData.append('species', this.form.get('species')?.value);
+    formData.append('size', this.form.get('size')?.value.toString());
+    formData.append('description', this.form.get('description')?.value);
+    formData.append('goodWithKids', this.form.get('goodWithKids')?.value.toString());
+    formData.append('goodWithDogs', this.form.get('goodWithDogs')?.value.toString());
+    formData.append('goodWithCats', this.form.get('goodWithCats')?.value.toString());
+  
+    const profileImage = this.form.get('profileImage')?.value;
+    if (profileImage) {
+      formData.append('profileImage', profileImage);
+    }
+  
+    const imageCarousel1 = this.form.get('imageCarousel1')?.value;
+    if (imageCarousel1) {
+      formData.append('imageCarousel1', imageCarousel1);
+    }
+  
+    const imageCarousel2 = this.form.get('imageCarousel2')?.value;
+    if (imageCarousel2) {
+      formData.append('imageCarousel2', imageCarousel2);
+    }
+  
+    const imageCarousel3 = this.form.get('imageCarousel3')?.value;
+    if (imageCarousel3) {
+      formData.append('imageCarousel3', imageCarousel3);
+    }
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+    return formData;
   }
 
+  formatDate(dateString: string): string {
+    const [day, month, year] = dateString.split('-');
+    return `${year}-${month}-${day}`;
+  }
+  
 
   // Método para enviar el formulario y actualizar la patica
   submitForm() {
@@ -211,18 +239,25 @@ export class EditPaticaComponent {
       console.log('Not all steps are valid');
       return;
     }
-
-    this.stablishRequest();
-
-    console.log('Request object:', this.request);
-    // Realiza la solicitud de actualización al servicio y redirige al usuario a la página principal 
-    this.shelterPaticasService.updatePatica(this.request)
-      .pipe()
-      .subscribe()
-
-    alert("¡Patica actualizada correctamente!");
-
-    console.log("Update made");
-    this.router.navigate(['/shelterPaticas']);
+  
+    const formData = this.stablishRequestAsFormData();
+    const paticaId = this.patica?.id;
+  
+    if (paticaId) {
+      console.log('FormData object:', formData);
+      this.shelterPaticasService.updatePatica(paticaId, formData)
+        .pipe()
+        .subscribe({
+          next: () => {
+            alert("¡Patica actualizada correctamente!");
+            this.router.navigate(['/shelterPaticas']);
+          },
+          error: (error) => {
+            console.error('Error al actualizar la patica:', error);
+          }
+        });
+    } else {
+      console.error('Error: patica ID is missing');
+    }
   }
 }

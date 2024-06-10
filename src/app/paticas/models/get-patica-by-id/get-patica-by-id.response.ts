@@ -23,6 +23,7 @@ export interface GetPaticaByIdResponse {
     goodWithDogs: boolean;
     goodWithCats: boolean;
     liked: boolean;
+    shelterId:number;
 
     
 }

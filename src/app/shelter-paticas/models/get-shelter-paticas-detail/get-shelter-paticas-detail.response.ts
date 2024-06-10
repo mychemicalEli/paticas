@@ -23,4 +23,5 @@ export interface GetShelterPaticasDetailResponse{
     goodWithDogs: boolean;
     goodWithCats: boolean;
     liked: boolean;
+    shelterId:number;
 }
