@@ -64,6 +64,7 @@ export class ShelterPaticasListComponent {
           console.log('Patica eliminada exitosamente');
           const closeButton = document.getElementById('x');
           closeButton?.click();
+          this.request.page = 0; 
           this.getShelterPaticasList();
         },
         error: (error) => {

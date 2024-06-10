@@ -19,14 +19,13 @@ export class VolunteerService {
 
     // Método para obtener la lista de voluntarios
     public getList(request: GetVolunteerListRequest): Observable<GetVolunteerListResponse> {
-        // Crear parámetros de consulta a partir de la solicitud
         let queryParams = new HttpParams();
         queryParams = queryParams.set("page", request.page.toString())
-                                 .set("PageSize", request.pageSize.toString());
-
-        // Realizar la solicitud GET y devolver la respuesta como un observable
+                                 .set("pageSize", request.pageSize.toString());
+      
         return this.httpClient.get<GetVolunteerListResponse>(`${this.baseUrl}volunteers/shelter/10`, { params: queryParams });
-    }
+      }
+      
 
     // Método para obtener los detalles de un voluntario por ID
     public getId(volunteerId: number): Observable<GetVolunteerListItemResponse> {
