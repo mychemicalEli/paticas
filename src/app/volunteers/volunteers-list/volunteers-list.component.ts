@@ -31,28 +31,38 @@ export class VolunteersListComponent {
 
   // Función para obtener la lista de voluntarios
   private getVolunteersList(): void {
-    this.volunteerService.getList(this.request) // Realizar la solicitud para obtener la lista de voluntarios
-    .pipe() // Permite encadenar operadores de RxJS
-    .subscribe({
-      next: (response: GetVolunteerListResponse) => { // Maneja la respuesta exitosa
-        this.response = response; // Asigna la respuesta a la variable response
-        this.getAvailabilities(response.content); // Actualiza la lista de disponibilidades de voluntarios
-      },
-      error: (error) => {
-        console.error('Error al obtener la lista de voluntarios:', error); // Maneja el error
-      }
-    });
+    console.log('Requesting volunteers with page:', this.request.page);
+    this.volunteerService.getList(this.request)
+      .subscribe({
+        next: (response: GetVolunteerListResponse) => {
+          console.log('Response received:', response);
+          this.response = response;
+          if (response.content && response.content.length > 0) {
+            this.getAvailabilities(response.content);
+          } else {
+            console.warn('No volunteers found');
+          }
+        },
+        error: (error) => {
+          console.error('Error al obtener la lista de voluntarios:', error);
+        }
+      });
   }
+  
+  
 
   // Función para actualizar la lista de disponibilidades de voluntarios
   private getAvailabilities(volunteers: any[]): void {
-    const availabilitiesSet = new Set<string>(); // Crear un conjunto para almacenar disponibilidades únicas
-    volunteers.forEach(volunteer => { // Itera sobre cada voluntario en la lista
-      const availabilityString = volunteerAvailability[volunteer.availability].toLowerCase(); // Convierte la disponibilidad a minúsculas
-      availabilitiesSet.add(availabilityString); // Agrega la disponibilidad al conjunto
+    const availabilitiesSet = new Set<string>();
+    volunteers.forEach(volunteer => {
+      if (volunteer && volunteer.availability) { // Asegúrate de que volunteer y volunteer.availability no son null o undefined
+        const availabilityString = volunteerAvailability[volunteer.availability].toLowerCase();
+        availabilitiesSet.add(availabilityString);
+      }
     });
-    this.availabilities = Array.from(availabilitiesSet); // Convierte el conjunto a un array
+    this.availabilities = Array.from(availabilitiesSet);
   }
+  
 
   // Función para manejar el cambio de página
   onPageChange(page: number) {
@@ -68,18 +78,20 @@ export class VolunteersListComponent {
 
   // Función para eliminar un voluntario
   deleteVolunteer(volunteerId: number): void {
-    this.volunteerService.deleteVolunteer(volunteerId) // Realiza la solicitud para eliminar el voluntario
-    .pipe()
-    .subscribe({
-      next: () => {
-        console.log('Voluntario eliminado exitosamente'); // Confirmar la eliminación
-        const closeButton = document.getElementById('x'); // Obtener el botón de cierre del modal
-        closeButton?.click(); // Cerrar el modal
-        this.getVolunteersList(); // Actualizar la lista de voluntarios
-      },
-      error: (error) => {
-        console.error('Error al eliminar el voluntario:', error); // Maneja el error
-      }
-    });
+    this.volunteerService.deleteVolunteer(volunteerId)
+      .subscribe({
+        next: () => {
+          console.log('Voluntario eliminado exitosamente');
+          const closeButton = document.getElementById('x');
+          closeButton?.click();
+          this.request.page = 0; // Resetear la página a 0 si es necesario
+          this.getVolunteersList(); // Actualizar la lista de voluntarios
+        },
+        error: (error) => {
+          console.error('Error al eliminar el voluntario:', error);
+        }
+      });
   }
+  
+  
 }
