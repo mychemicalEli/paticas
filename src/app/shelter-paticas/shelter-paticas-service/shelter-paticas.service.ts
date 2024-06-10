@@ -33,27 +33,26 @@ export class ShelterPaticasService {
     console.log("Query Params:", params.toString());
     
     // Realizar la solicitud HTTP GET y procesar la respuesta
-    return this.httpClient.get<GetShelterPaticasListResponse>(`${this.baseUrl}pets/shelter/10`, { params })
-      .pipe(
-        map((response: GetShelterPaticasListResponse) => {
-          // Filtrar las paticas para incluir solo las que tienen shelterId igual a 10
-          response.content = response.content.filter(patica => patica.shelterId === 10);
-          return response; // Devolver la respuesta modificada
-        })
-      );
+    return this.httpClient.get<GetShelterPaticasListResponse>(`${this.baseUrl}pets/shelter/10`, { params });
   }
+
+
+  
 
   // Método para agregar una nueva patica
-  public addPatica(request: AddPaticaRequest) {
+  public addPatica(request: FormData): Observable<any> {
     // Realizar una solicitud HTTP POST para agregar la patica
-    return this.httpClient.post(`${this.baseUrl}pets/`, request);
+    return this.httpClient.post(`${this.baseUrl}pets`, request);
   }
 
-  // Método para actualizar una patica existente
-  public updatePatica(request: UpdatePaticaRequest): Observable<GetPaticaByIdResponse> {
-    // Realizar una solicitud HTTP PUT para actualizar la patica
-    return this.httpClient.put<GetPaticaByIdResponse>(`${this.baseUrl}pets/`, request);
-  }
+
+// Método para actualizar una patica existente
+public updatePatica(paticaId: number, request: FormData): Observable<GetPaticaByIdResponse> {
+  // Realizar una solicitud HTTP PUT para actualizar la patica usando FormData
+  return this.httpClient.put<GetPaticaByIdResponse>(`${this.baseUrl}pets/${paticaId}`, request);
+}
+
+
 
   // Método para eliminar una patica por su ID
   public deletePatica(request: GetPaticaByIdRequest): Observable<GetPaticaByIdResponse> {

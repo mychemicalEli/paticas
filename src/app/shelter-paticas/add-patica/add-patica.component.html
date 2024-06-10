@@ -16,8 +16,8 @@
             <div class="form-floating mb-3">
                 <select class="form-select" id="floatingSelect" formControlName="gender">
                     <option value="" disabled selected>Selecciona un género</option>
-                    <option value="Hembra">Hembra</option>
-                    <option value="Macho">Macho</option>
+                    <option value="female">Hembra</option>
+                    <option value="male">Macho</option>
                 </select>
                 <label for="floatingSelect">Género</label>
                 <div *ngIf="form.get('gender')?.touched && form.get('gender')?.invalid" class="text-danger">
@@ -38,7 +38,7 @@
 
 
 
-
+<!-- 
             <div class="form-floating mb-3">
                 <select class="form-select" aria-label="Ubicación" formControlName="location">
                     <option value="" selected>Selecciona una ubicación</option>
@@ -92,7 +92,7 @@
                 <div *ngIf="form.get('location')?.touched && form.get('location')?.invalid" class="text-danger">
                     <div *ngIf="form.get('location')?.errors?.['required']">Este es un campo obligatorio.</div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
         <!--Primera columna-->
@@ -118,7 +118,7 @@
                     <div *ngIf="form.get('size')?.errors?.['required']">Este es un campo obligatorio.</div>
                 </div>
             </div>
-
+<!-- 
             <div class="form-floating mb-2">
                 <input type="shelter" class="form-control" id="shelter" placeholder="Protectora"
                     formControlName="shelter">
@@ -126,23 +126,28 @@
                 <div *ngIf="form.get('shelter')?.touched && form.get('shelter')?.invalid" class="text-danger">
                     <div *ngIf="form.get('shelter')?.errors?.['required']">Este es un campo obligatorio.</div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="form-group mb-3">
-                <label for="profileImage">Imagen de perfil</label>
-                <input type="file" class="form-control" id="profileImage" formControlName="profileImage"
-                    accept="image/*">
-                <div *ngIf="form.get('profileImage')?.touched && form.get('profileImage')?.invalid" class="text-danger">
-                    <div *ngIf="form.get('profileImage')?.errors?.['required']">Este es un campo obligatorio.</div>
+            <div class="containerForFile">
+                <div class="mb-3 image-container">
+                    <label class="hoverable" for="fileInput">
+                        <img [src]="url ? url : '/assets/img/volunteer/defaultIconProfile.png'" />
+                        <div class="hover-text">Selecciona una foto</div>
+                        <div class="background"></div>
+                    </label>
+                    <input id="fileInput" type="file" class="select-profile-picture"  (change)="onSelectFile($event)"
+                        accept="image/*" />
+                        
+
                 </div>
-
+                <button class="btn btn-erase" *ngIf="url" (click)="delete()">Borrar</button>
             </div>
         </div>
         <div class="col-lg-10">
 
             <div class="form-floating mb-4">
                 <textarea class="form-control" placeholder="Descripción" id="description" style="height: 100px"
-                    formControlName="description"></textarea>
+                    formControlName="description" style="margin-top: 10px;"></textarea>
                 <label for="description">Descripción</label>
                 <div *ngIf="form.get('description')?.touched && form.get('description')?.invalid" class="text-danger">
                     <div *ngIf="form.get('description')?.errors?.['required']">Este es un campo obligatorio.</div>

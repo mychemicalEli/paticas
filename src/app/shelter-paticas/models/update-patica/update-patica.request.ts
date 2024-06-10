@@ -7,13 +7,6 @@ export interface UpdatePaticaRequest {
   imageCarousel2: FormData | null;
   imageCarousel3: FormData | null;
   name: string;
-  shelter: {
-      id: number;
-      profileImage: string;
-      name: string;
-      location: string;
-      description: string;
-  };
   gender: string;
   size: paticaSize;
   birthDate: Date;
@@ -22,5 +15,6 @@ export interface UpdatePaticaRequest {
   goodWithKids: boolean;
   goodWithDogs: boolean;
   goodWithCats: boolean;
+  shelterId: number;
   liked: boolean;
 }
