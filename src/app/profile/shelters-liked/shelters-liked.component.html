@@ -2,9 +2,9 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col-4"
             *ngFor="let shelter of shelters || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }">
-            <div class="card h-100" style="height: 450px;">
+            <div class="card h-100" style="height: 450px; position: relative;">
                 <img [src]="shelter.profileImage" class="card-img-top" alt="imageShelter"
-                    [routerLink]="['/shelters', shelter.id]" style="cursor:pointer">
+                    [routerLink]="['/shelters', shelter.id]" style="cursor:pointer; height: 350px; max-width: auto;">
                 <div class="card-body">
                     <h5 class="card-title text-wrap text-truncate" [routerLink]="['/shelters', shelter.id]"
                         style="cursor:pointer">{{ shelter.name }}</h5>
